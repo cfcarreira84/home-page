@@ -20,6 +20,9 @@
 # production
 /build
 
+# recovery
+recovery-codes-vercel.txt
+
 # misc
 .DS_Store
 *.pem
