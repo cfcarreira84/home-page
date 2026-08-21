@@ -1,77 +1,168 @@
-'use client'; // Necessário para o Framer Motion funcionar no Next.js
+'use client';
 
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { useEffect } from 'react';
+import { motion } from 'framer-motion';
+import Image from 'next/image';
 
 export default function SplashScreen({ onComplete }: { onComplete: () => void }) {
-    const [currentSubtitle, setCurrentSubtitle] = useState(0);
-    const subtitles = [
-        "Revenue Engineer",
-        "Data Intelligence",
-        "AI Operations",
-        "Menos slides. Mais vendas."
-    ];
-
-    // Lógica para alternar as legendas dinamicamente
     useEffect(() => {
-        if (currentSubtitle < subtitles.length - 1) {
-            const timer = setTimeout(() => setCurrentSubtitle(prev => prev + 1), 1200);
-            return () => clearTimeout(timer);
-        } else {
-            // Quando chegar na última frase, aciona o fim da Splash Screen após 1.5s
-            const finishTimer = setTimeout(onComplete, 1500);
-            return () => clearTimeout(finishTimer);
+        const finishTimer = setTimeout(onComplete, 6500);
+        return () => clearTimeout(finishTimer);
+    }, [onComplete]);
+
+    // Variantes para o efeito Blur-in Cascade do Google Labs
+    const textContainer = {
+        hidden: { opacity: 0 },
+        show: {
+            opacity: 1,
+            transition: { staggerChildren: 0.15, delayChildren: 0.3 }
+        },
+        exit: { opacity: 1 }
+    };
+
+    const textItem = {
+        hidden: { opacity: 0, y: 20, filter: "blur(12px)" },
+        show: { 
+            opacity: 1, 
+            y: 0, 
+            filter: "blur(0px)", 
+            transition: { duration: 1.2, ease: [0.16, 1, 0.3, 1] } 
         }
-    }, [currentSubtitle, onComplete]);
+    };
 
     return (
-        <motion.div
-            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-cosmos-base overflow-hidden"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }} // A máscara de saída elegante
-            transition={{ duration: 0.8, ease: "easeInOut" }}
-        >
-            {/* O nome em destaque */}
-            <motion.h1
-                className="font-display text-5xl md:text-7xl font-bold text-cosmos-title tracking-tight mb-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
-            >
-                CARLOS F. CARREIRA
-            </motion.h1>
+        <>
+            {/* Definição da Máscara (O "buraco" que cresce e revela o site) */}
+            <svg width="0" height="0" className="absolute pointer-events-none">
+                <defs>
+                    <mask id="holeMask">
+                        <rect x="-50vw" y="-50vh" width="200vw" height="200vh" fill="white" />
+                        <motion.g
+                            initial={{ scale: 0, rotate: 0, x: "50vw", y: "50vh" }}
+                            animate={{ scale: 0, rotate: 0, x: "50vw", y: "50vh" }}
+                            exit={{ scale: 150, rotate: 180, x: "50vw", y: "50vh" }}
+                            transition={{ duration: 4.5, ease: [0.65, 0, 0.35, 1] }}
+                        >
+                            <path 
+                                d="M 35.480469 251.566406 C 52.933594 272.554688 52.96875 328.246094 35.613281 349.316406 C 13.789062 375.808594 0.71875 409.699219 0.71875 446.546875 C 0.71875 531.640625 69.648438 600 153.8125 600 C 190.851562 600 224.75 586.972656 251.226562 565.214844 C 272.347656 547.855469 328.375 547.855469 349.496094 565.210938 C 375.972656 586.972656 409.875 600 446.921875 600 C 531.085938 600 600 531.640625 600 446.546875 C 600 409.425781 586.523438 375.304688 564.332031 348.726562 C 546.894531 327.847656 546.894531 272.867188 564.304688 251.964844 C 586.511719 225.300781 600 190.988281 600 153.453125 C 600 69.09375 531.085938 0 446.921875 0 C 410.195312 0 376.691406 12.738281 350.351562 34.0625 C 328.910156 51.421875 270.746094 51.226562 249.304688 33.871094 C 223.105469 12.664062 189.695312 0 153.078125 0 C 68.914062 0 0 69.09375 0 153.453125 C 0 190.796875 13.355469 224.960938 35.480469 251.566406 Z M 35.480469 251.566406"
+                                fill="black"
+                                transform="translate(-300, -300)"
+                            />
+                        </motion.g>
+                    </mask>
+                </defs>
+            </svg>
 
-            {/* O Subtítulo Dinâmico (Text Swap) */}
-            <div className="h-10 relative overflow-hidden flex items-center justify-center min-w-[300px]">
-                <AnimatePresence mode="wait">
-                    <motion.p
-                        key={currentSubtitle}
-                        className={`font-sans text-xl font-semibold tracking-wider uppercase ${currentSubtitle === subtitles.length - 1 ? 'text-cosmos-cyan' : 'text-cosmos-muted'
-                            }`}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -20 }}
-                        transition={{ duration: 0.4 }}
-                    >
-                        {subtitles[currentSubtitle]}
-                    </motion.p>
-                </AnimatePresence>
-            </div>
-
-            {/* Indicador de carregamento simulado (Acento Magenta) */}
             <motion.div
-                className="absolute bottom-12 w-48 h-1 bg-cosmos-surface rounded-full overflow-hidden"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
+                className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#F8F9FA] overflow-hidden"
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.1, delay: 4.4, ease: "easeOut" }}
+                style={{ WebkitMask: "url(#holeMask)", mask: "url(#holeMask)" }}
+            >
+
+            {/* 1. Laranja (Top-Left) */}
+            <motion.div
+                className="absolute -top-[28%] -left-[12%] w-[28vw] h-[28vw] opacity-90 pointer-events-none"
+                initial={{ x: "-50vw", y: "-50vh", scale: 0, rotate: -45 }}
+                animate={{ x: 0, y: 0, scale: 1, rotate: -8 }}
+                transition={{ type: "spring", bounce: 0.3, duration: 2 }}
             >
                 <motion.div
-                    className="h-full bg-cosmos-magenta"
-                    initial={{ width: "0%" }}
-                    animate={{ width: "100%" }}
-                    transition={{ duration: 3.5, ease: "easeInOut" }}
-                />
+                    className="relative w-full h-full"
+                    animate={{ x: [0, 15, -10, 5, 0], y: [0, -10, 15, -5, 0], rotate: [0, -10, 5, -5, 0] }}
+                    transition={{ 
+                        x: { duration: 16, repeat: Infinity, ease: "easeInOut" },
+                        y: { duration: 14, repeat: Infinity, ease: "easeInOut" },
+                        rotate: { duration: 15, repeat: Infinity, ease: "easeInOut" }
+                    }}
+                >
+                    <Image src="/shapes/shape-orange.svg" alt="" fill className="object-contain" priority />
+                </motion.div>
             </motion.div>
+
+            {/* 2. Ciano (Top-Right) */}
+            <motion.div
+                className="absolute -top-[22%] -right-[12%] w-[45vw] h-[45vw] opacity-90 pointer-events-none"
+                initial={{ x: "50vw", y: "-50vh", scale: 0, rotate: 45 }}
+                animate={{ x: 0, y: 0, scale: 1, rotate: 12 }}
+                transition={{ type: "spring", bounce: 0.3, duration: 2.2, delay: 0.1 }}
+            >
+                <motion.div
+                    className="relative w-full h-full"
+                    animate={{ x: [0, -20, 15, -10, 0], y: [0, 18, -12, 8, 0], rotate: [0, 15, -8, 5, 0] }}
+                    transition={{ 
+                        x: { duration: 20, repeat: Infinity, ease: "easeInOut" },
+                        y: { duration: 18, repeat: Infinity, ease: "easeInOut" },
+                        rotate: { duration: 22, repeat: Infinity, ease: "easeInOut" }
+                    }}
+                >
+                    <Image src="/shapes/shape-cyan.svg" alt="" fill className="object-contain" priority />
+                </motion.div>
+            </motion.div>
+
+            {/* 3. Magenta (Bottom-Left) */}
+            <motion.div
+                className="absolute -bottom-[22%] -left-[10%] w-[30vw] h-[30vw] opacity-90 pointer-events-none"
+                initial={{ x: "-50vw", y: "50vh", scale: 0, rotate: -45 }}
+                animate={{ x: 0, y: 0, scale: 1, rotate: -18 }}
+                transition={{ type: "spring", bounce: 0.3, duration: 2.1, delay: 0.2 }}
+            >
+                <motion.div
+                    className="relative w-full h-full"
+                    animate={{ x: [0, 18, -15, 10, 0], y: [0, 12, -20, 15, 0], rotate: [0, -12, 8, -5, 0] }}
+                    transition={{ 
+                        x: { duration: 22, repeat: Infinity, ease: "easeInOut" },
+                        y: { duration: 15, repeat: Infinity, ease: "easeInOut" },
+                        rotate: { duration: 18, repeat: Infinity, ease: "easeInOut" }
+                    }}
+                >
+                    <Image src="/shapes/shape-magenta.svg" alt="" fill className="object-contain" priority />
+                </motion.div>
+            </motion.div>
+
+            {/* 4. Esmeralda (Bottom-Right) */}
+            <motion.div
+                className="absolute -bottom-[25%] -right-[8%] w-[38vw] h-[38vw] opacity-90 pointer-events-none"
+                initial={{ x: "50vw", y: "50vh", scale: 0, rotate: 45 }}
+                animate={{ x: 0, y: 0, scale: 1, rotate: 8 }}
+                transition={{ type: "spring", bounce: 0.3, duration: 2.4, delay: 0.15 }}
+            >
+                <motion.div
+                    className="relative w-full h-full"
+                    animate={{ x: [0, -15, 20, -10, 0], y: [0, -25, 18, -12, 0], rotate: [0, 10, -15, 8, 0] }}
+                    transition={{ 
+                        x: { duration: 19, repeat: Infinity, ease: "easeInOut" },
+                        y: { duration: 21, repeat: Infinity, ease: "easeInOut" },
+                        rotate: { duration: 17, repeat: Infinity, ease: "easeInOut" }
+                    }}
+                >
+                    <Image src="/shapes/shape-emerald.svg" alt="" fill className="object-contain" priority />
+                </motion.div>
+            </motion.div>
+
+            {/* Bloco Central com Efeito Blur-in Cascade */}
+            <motion.div
+                variants={textContainer}
+                initial="hidden"
+                animate="show"
+                exit="exit"
+                className="relative z-10 flex flex-col items-stretch w-fit mx-auto px-4"
+            >
+                <motion.h1 
+                    variants={textItem}
+                    className="text-[#202124] text-[10vw] md:text-8xl lg:text-9xl tracking-tighter uppercase mb-4 leading-none whitespace-nowrap"
+                >
+                    <span className="font-light">CF</span><span className="font-black">CARREIRA</span>
+                </motion.h1>
+                <motion.div 
+                    variants={textItem}
+                    className="text-[2.2vw] md:text-xs lg:text-sm text-[#202124] flex items-center justify-center font-medium uppercase tracking-normal md:tracking-[0.06em] lg:tracking-[0.08em] w-full px-1 text-center"
+                >
+                    <span className="font-light">REVENUE ENGINEER ● DATA INTELLIGENCE ● AI OPERATIONS // <span className="font-black">MENOS SLIDES. MAIS VENDAS.</span></span>
+                </motion.div>
+            </motion.div>
+
         </motion.div>
+        </>
     );
 }

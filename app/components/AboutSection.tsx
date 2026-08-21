@@ -1,86 +1,185 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Image from 'next/image';
 
-const academicChangelog = [
-    { version: "v5.0", title: "MBA: AI, Data Science e Big Data", institution: "PUCRS" },
-    { version: "v4.0", title: "MBA: Transformação Digital", institution: "PUCRS" },
-    { version: "v3.0", title: "Especialização: Gerenciamento de Projetos (PMBoK)", institution: "SENAC SP" },
-    { version: "v2.0", title: "Pós-Graduação: Propaganda e Marketing", institution: "USJT" },
-    { version: "v1.0", title: "Bacharelado: Design de Mídia Digital", institution: "Impacta" },
+interface AboutSectionProps {
+    theme?: { bg: string, shape1: string, shape2: string };
+}
+
+const formations = [
+    { id: 1, title: "MBA: AI, Data Science e Big Data", local: "PUCRS", period: "2023 - 2024", text: "Especialização corporativa com foco em modelagem de dados avançada, algoritmos preditivos de Machine Learning e arquitetura escalável de Big Data.", image: "/images/ai-sdr.jpg" },
+    { id: 2, title: "MBA: Transformação Digital", local: "PUCRS", period: "2021 - 2022", text: "Visão estratégica focada em inovação disruptiva, adoção de metodologias ágeis e digitalização profunda de processos operacionais e modelos de negócio.", image: "/images/executive-bi.jpg" },
+    { id: 3, title: "Gerenciamento de Projetos (PMBoK)", local: "SENAC SP", period: "2018 - 2019", text: "Aprofundamento nas práticas e processos do guia PMBoK para planejamento de alto nível, controle de riscos e execução eficiente de projetos.", image: "/images/lean-ops.jpg" },
+    { id: 4, title: "Propaganda e Marketing", local: "USJT", period: "2014 - 2015", text: "Desenvolvimento técnico de estratégias de mercado, análise de comportamento do consumidor e estruturação de campanhas comerciais 360º.", image: "/images/hight-tickets.jpg" },
+    { id: 5, title: "Tecnólogo: Design de Mídia Digital", local: "Impacta", period: "2008 - 2012", text: "Formação acadêmica multidisciplinar em design de interfaces, experiência do usuário (UX) e desenvolvimento web front-end de alta performance.", image: "/images/ai-sdr.jpg" }
 ];
 
-export default function AboutSection() {
-    return (
-        <section className="relative w-full bg-cosmos-base py-32 flex flex-col items-center overflow-hidden">
+export default function AboutSection({ theme }: AboutSectionProps) {
+    const [currentIndex, setCurrentIndex] = useState(0);
 
-            {/* 1. O RESPIRO TIPOGRÁFICO (O Manifesto) */}
-            <div className="max-w-5xl w-full px-6 text-center mb-40 relative z-10">
+    const nextCard = () => setCurrentIndex((prev) => Math.min(prev + 1, formations.length - 1));
+    const prevCard = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
+
+    return (
+        <section className="relative w-full py-32 flex flex-col items-center overflow-hidden">
+            {/* Fundo com SVGs Flutuantes específicos desta seção */}
+            {theme && (
+                <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-0">
+                    <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                        className="absolute w-[600px] h-[600px] opacity-40 mix-blend-multiply"
+                        style={{ right: "-10%", top: "10%", transformOrigin: "center" }}
+                    >
+                        <Image src={theme.shape1} alt="Shape 1" fill className="object-contain" />
+                    </motion.div>
+                    
+                    <motion.div
+                        animate={{ rotate: -360 }}
+                        transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+                        className="absolute w-[500px] h-[500px] opacity-30 mix-blend-multiply"
+                        style={{ left: "-5%", bottom: "20%", transformOrigin: "center" }}
+                    >
+                        <Image src={theme.shape2} alt="Shape 2" fill className="object-contain" />
+                    </motion.div>
+                </div>
+            )}
+
+            {/* Bloco 1: Manifesto Tipográfico */}
+            <div className="max-w-5xl w-full px-6 text-center mb-32 relative z-10 mt-12">
+                <span className="font-sans text-sm font-bold uppercase tracking-widest text-black/60 mb-6 block">
+                    Área Acadêmica
+                </span>
                 <motion.h2
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.8 }}
-                    className="font-display text-5xl md:text-7xl lg:text-8xl font-black text-cosmos-title tracking-tighter leading-[1.1] mb-12"
+                    className="font-display text-5xl md:text-6xl lg:text-[72px] font-medium text-black tracking-tight leading-[1.1]"
                 >
-                    IA não é chatbot.<br />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-cosmos-cyan via-cosmos-magenta to-cosmos-orange">
-                        É caixa.
-                    </span>
+                    Construindo bases sólidas de conhecimento para sustentar inovações práticas no dia a dia.
                 </motion.h2>
+            </div>
 
-                <motion.p
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1, delay: 0.2 }}
-                    className="font-sans text-xl md:text-2xl text-cosmos-muted font-light max-w-4xl mx-auto leading-relaxed"
+            {/* Bloco 2: Apoio (Life beyond the lab style) */}
+            <div className="max-w-3xl w-full px-6 text-center mb-24 relative z-10">
+                <motion.h3
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.1 }}
+                    className="font-display text-4xl md:text-5xl font-medium text-black mb-6"
                 >
-                    Utilizando inteligência artificial, orquestro processos através da engenharia de dados. Dispenso estruturas engessadas. <strong className="text-cosmos-title font-semibold">Testar rápido, errar pequeno, corrigir e lançar.</strong> Essa é a minha receita para criar fontes virtuosas de receita operáveis de imediato.
+                    Evolução Contínua
+                </motion.h3>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-100px" }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="font-sans text-lg md:text-xl text-black/70 font-normal leading-relaxed"
+                >
+                    Cada diploma e certificação representa um compromisso com a excelência técnica. 
+                    Combinando teoria avançada com aplicação prática, moldamos o futuro da tecnologia e dos negócios.
                 </motion.p>
             </div>
 
-            {/* 2. LIFE BEYOND THE LAB (A Changelog Acadêmica) */}
-            <div className="max-w-4xl w-full px-6 relative z-10">
-                <div className="mb-12 border-b border-cosmos-border pb-6 flex justify-between items-end">
-                    <h3 className="font-display text-3xl font-bold text-cosmos-title">System Changelog</h3>
-                    <span className="font-sans text-sm text-cosmos-muted uppercase tracking-widest">Base Acadêmica</span>
-                </div>
+            {/* Bloco 3: Carrossel Linear (Cartões Bento Acadêmicos) */}
+            <div className="relative w-full max-w-[1400px] h-[550px] mx-auto flex items-center justify-center z-20">
+                <div className="absolute inset-0 flex items-center justify-center">
+                    <AnimatePresence mode="popLayout">
+                        {formations.map((item, index) => {
+                            const offset = index - currentIndex;
+                            const x = offset * 370; // Espaçamento linear entre os cartões
+                            
+                            return (
+                                <motion.div
+                                    key={item.id}
+                                    layout
+                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    animate={{ 
+                                        x, 
+                                        scale: 1,
+                                        opacity: Math.abs(offset) > 2 ? 0 : 1,
+                                        zIndex: 50 - Math.abs(offset)
+                                    }}
+                                    transition={{ type: "spring", stiffness: 300, damping: 30 }}
+                                    className="absolute w-[340px] h-[480px] bg-black rounded-[2.5rem] shadow-2xl overflow-hidden cursor-pointer group border border-white/10"
+                                    drag="x"
+                                    dragConstraints={{ left: 0, right: 0 }}
+                                    onDragEnd={(e, { offset, velocity }) => {
+                                        const swipe = offset.x;
+                                        if (swipe < -50) nextCard();
+                                        else if (swipe > 50) prevCard();
+                                    }}
+                                >
+                                    {/* Fundo da Imagem */}
+                                    <Image 
+                                        src={item.image} 
+                                        alt={item.title} 
+                                        fill 
+                                        className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out z-0" 
+                                    />
+                                    
+                                    {/* Gradiente de fundo escuro para leitura, escurece mais no hover */}
+                                    <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10 group-hover:bg-black/70 transition-colors duration-[600ms] ease-out z-10" />
 
-                <div className="flex flex-col gap-4">
-                    {academicChangelog.map((item, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true, margin: "-50px" }}
-                            transition={{ duration: 0.5, delay: index * 0.1 }}
-                            className="group relative p-6 bg-cosmos-surface border border-cosmos-border rounded-2xl flex flex-col md:flex-row md:items-center justify-between overflow-hidden hover:border-cosmos-emerald/50 transition-colors"
-                        >
-                            {/* O Efeito "Pong" animado no fundo ao passar o mouse */}
-                            <div className="absolute inset-0 bg-cosmos-emerald/5 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out" />
+                                    {/* Conteúdo Dinâmico Inferior */}
+                                    <div className="absolute inset-x-0 bottom-0 p-8 flex flex-col justify-end z-20">
+                                        
+                                        {/* Container que Sobe no Hover */}
+                                        <div className="flex flex-col transform translate-y-[100px] group-hover:translate-y-0 transition-transform duration-[600ms] ease-[cubic-bezier(0.34,1.56,0.64,1)]">
+                                            
+                                            {/* Cabeçalho do Cartão (Título, Local, Período) */}
+                                            <div className="mb-4">
+                                                <span className="px-3 py-1 bg-white/20 backdrop-blur-md rounded-full font-sans text-xs font-bold uppercase tracking-widest text-white border border-white/10">
+                                                    {item.local}
+                                                </span>
+                                            </div>
+                                            <h4 className="font-display font-semibold text-2xl text-white mb-2 leading-snug">
+                                                {item.title}
+                                            </h4>
+                                            <p className="font-sans text-sm text-white/80 font-medium mb-6">
+                                                {item.period}
+                                            </p>
 
-                            <div className="relative z-10 flex items-center gap-6 mb-4 md:mb-0">
-                                <span className="px-3 py-1 font-sans text-xs font-bold text-cosmos-base bg-cosmos-emerald rounded-full">
-                                    {item.version}
-                                </span>
-                                <h4 className="font-display text-xl md:text-2xl font-bold text-cosmos-title group-hover:text-cosmos-emerald transition-colors">
-                                    {item.title}
-                                </h4>
-                            </div>
+                                            {/* Conteúdo de Apoio (Fade In) */}
+                                            <div className="h-[100px] flex flex-col opacity-0 group-hover:opacity-100 transition-opacity duration-[600ms] ease-out delay-100">
+                                                <p className="font-sans text-sm text-white/70 font-normal leading-relaxed">
+                                                    {item.text}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
 
-                            <div className="relative z-10">
-                                <span className="font-sans text-sm uppercase tracking-widest text-cosmos-muted">
-                                    {item.institution}
-                                </span>
-                            </div>
-                        </motion.div>
-                    ))}
+                                </motion.div>
+                            );
+                        })}
+                    </AnimatePresence>
                 </div>
             </div>
 
-            {/* Elementos visuais de profundidade */}
-            <div className="absolute top-1/4 left-0 w-1/3 h-1/2 bg-cosmos-magenta/5 blur-[150px] pointer-events-none rounded-full" />
+            {/* Controles de Navegação */}
+            <div className="relative z-30 mt-12 flex items-center gap-6">
+                <button
+                    onClick={prevCard}
+                    disabled={currentIndex === 0}
+                    className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center text-black hover:bg-white bg-white/50 backdrop-blur-sm transition-all disabled:opacity-30 disabled:cursor-not-allowed shadow-sm"
+                >
+                    <ChevronLeft size={20} strokeWidth={2} />
+                </button>
+                
+                <button
+                    onClick={nextCard}
+                    disabled={currentIndex === formations.length - 1}
+                    className="w-12 h-12 rounded-full border border-black/10 flex items-center justify-center text-black hover:bg-white bg-white/50 backdrop-blur-sm transition-all disabled:opacity-30 disabled:cursor-not-allowed shadow-sm"
+                >
+                    <ChevronRight size={20} strokeWidth={2} />
+                </button>
+            </div>
         </section>
     );
 }
