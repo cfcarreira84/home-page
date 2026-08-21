@@ -66,6 +66,7 @@ export default function FilterGrid({ activeFilter, setActiveFilter, theme }: Fil
             {/* Formas Flutuantes no Fundo orbitando nas extremidades */}
             <div className="absolute inset-0 pointer-events-none flex items-center justify-center">
                 <motion.div
+                    initial={{ rotate: 0 }}
                     animate={{ rotate: 360 }}
                     transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
                     className="absolute w-[450px] h-[450px] opacity-70 mix-blend-multiply"
@@ -75,6 +76,7 @@ export default function FilterGrid({ activeFilter, setActiveFilter, theme }: Fil
                 </motion.div>
                 
                 <motion.div
+                    initial={{ rotate: 0 }}
                     animate={{ rotate: -360 }}
                     transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
                     className="absolute w-[450px] h-[450px] opacity-60 mix-blend-multiply"

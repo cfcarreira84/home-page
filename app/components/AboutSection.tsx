@@ -29,6 +29,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
             {theme && (
                 <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-0">
                     <motion.div
+                        initial={{ rotate: 0 }}
                         animate={{ rotate: 360 }}
                         transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
                         className="absolute w-[600px] h-[600px] opacity-40 mix-blend-multiply"
@@ -38,6 +39,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
                     </motion.div>
                     
                     <motion.div
+                        initial={{ rotate: 0 }}
                         animate={{ rotate: -360 }}
                         transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
                         className="absolute w-[500px] h-[500px] opacity-30 mix-blend-multiply"

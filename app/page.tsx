@@ -30,6 +30,7 @@ export default function Home() {
         
         {/* Fundo Global Controlado pelo Filtro */}
         <motion.div 
+            initial={{ backgroundColor: theme.bg }}
             animate={{ backgroundColor: theme.bg }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
             className="flex flex-col w-full"
