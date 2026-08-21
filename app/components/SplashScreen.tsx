@@ -20,7 +20,7 @@ export default function SplashScreen({ onComplete }: { onComplete: () => void })
         exit: { opacity: 1 }
     };
 
-    const textItem = {
+    const textItem: any = {
         hidden: { opacity: 0, y: 20, filter: "blur(12px)" },
         show: { 
             opacity: 1, 

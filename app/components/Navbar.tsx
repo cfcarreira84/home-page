@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
-import { Twitter, Disc, Github } from 'lucide-react';
 
 export default function Navbar() {
     const { scrollY } = useScroll();
