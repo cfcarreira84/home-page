@@ -2,13 +2,17 @@
 
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import Navbar from './components/Navbar';
 import SplashScreen from './components/SplashScreen';
 import HeroSlider from './components/HeroSlider';
-import FilterGrid, { categoryTheme } from './components/FilterGrid';
-import AboutSection from './components/AboutSection';
-import AgentTerminal from './components/AgentTerminal';
-import Footer from './components/Footer';
+import { categoryTheme } from './components/FilterGrid';
+
+// Lazy loading the heavy components below the fold
+const FilterGrid = dynamic(() => import('./components/FilterGrid'), { ssr: false });
+const AboutSection = dynamic(() => import('./components/AboutSection'), { ssr: false });
+const AgentTerminal = dynamic(() => import('./components/AgentTerminal'), { ssr: false });
+const Footer = dynamic(() => import('./components/Footer'), { ssr: false });
 
 export default function Home() {
   const [showSplash, setShowSplash] = useState(true);
