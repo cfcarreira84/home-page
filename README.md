@@ -11,8 +11,16 @@ O foco principal não foi a digitação manual de código, mas sim a capacidade 
 - **Ícones:** SVGs nativos 
 - **Deploy:** Vercel
 
-## 🧠 Metodologia: AI Orchestration & Tech Leadership
-Ao invés de codificar de forma tradicional, este projeto foi construído através de **Prompt Engineering, Orquestração e Direção Técnica Avançada**. O processo envolveu:
+## 🧠 Metodologia: O Engenheiro de Receita ("One-Person Agency")
+Ao invés de codificar e criar de forma tradicional, este projeto foi concebido e executado de ponta a ponta por **apenas 1 profissional**, sem nenhum apoio de times de DevOps, programadores, designers ou agências de comunicação. 
+
+Todo o ecossistema foi construído através de **Prompt Engineering, Orquestração e Direção Técnica Avançada**, utilizando uma suíte completa de Inteligência Artificial:
+- **Código & Arquitetura:** Gemini Pro 3.1 (Antigravity IDE)
+- **Redação & Copywriting:** Gemini Flash 3.7
+- **Geração de Imagens:** Nano Banana
+- **Geração de Vídeos:** Omni Flash
+
+O processo envolveu:
 
 1. **Design System & Prototipação:** Criação e validação de referências visuais estáticas (Vanilla HTML/CSS) para balizar a inteligência artificial.
 2. **Arquitetura de Componentes:** Direcionamento estratégico para fragmentar a UI em componentes React altamente reutilizáveis, gerenciando estados complexos.
