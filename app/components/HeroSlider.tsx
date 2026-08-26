@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Image from 'next/image';
 
 const SLIDE_DURATION = 8000; // 8 seconds per slide
 
@@ -11,7 +10,7 @@ const slides = [
     {
         id: 1,
         title: "AI SDR",
-        description: "Vendas autônomas via WhatsApp a custo < 0,1% da receita gerada",
+        description: "Vendas autônomas via WhatsApp a custo < 1% da receita gerada",
         buttonText: "Explorar Case",
         image: "/images/ai-sdr.jpg",
         video: "/footages/sdr-ai-1080p-202608242215.webm",
@@ -70,7 +69,7 @@ export default function HeroSlider({ isSplashActive = false }: { isSplashActive?
 
     return (
         <section id="experimentos" className="relative w-full h-screen bg-[#0b0b0b] overflow-hidden flex flex-col justify-end pb-12">
-            
+
             <AnimatePresence initial={false}>
                 {slides.map((slide, index) => (
                     index === currentIndex && (
@@ -93,40 +92,33 @@ export default function HeroSlider({ isSplashActive = false }: { isSplashActive?
                                         <motion.g
                                             variants={{
                                                 enter: { scale: 0, rotate: 0, x: "50vw", y: "50vh" },
-                                                exit: { 
-                                                    scale: 150, 
-                                                    rotate: 180, 
-                                                    x: "50vw", 
+                                                exit: {
+                                                    scale: 150,
+                                                    rotate: 180,
+                                                    x: "50vw",
                                                     y: "50vh",
                                                     transition: { duration: 4.5, ease: [0.65, 0, 0.35, 1] }
                                                 }
                                             }}
                                         >
-                                            <path 
-                                                d={slide.maskPath} 
-                                                fill="black" 
-                                                transform="translate(-300, -300)" 
+                                            <path
+                                                d={slide.maskPath}
+                                                fill="black"
+                                                transform="translate(-300, -300)"
                                             />
                                         </motion.g>
                                     </mask>
                                 </defs>
                             </svg>
 
-                            <div className="absolute inset-0 -z-10">
-                                <Image 
-                                    src={slide.image} 
-                                    alt={slide.title} 
-                                    fill 
-                                    className="object-cover" 
-                                    priority 
-                                />
+                            <div className="absolute inset-0 -z-10 bg-black">
                                 {slide.video && (
-                                    <video 
-                                        src={slide.video} 
-                                        autoPlay 
-                                        loop 
-                                        muted 
-                                        playsInline 
+                                    <video
+                                        src={slide.video}
+                                        autoPlay
+                                        loop
+                                        muted
+                                        playsInline
                                         className="absolute inset-0 w-full h-full object-cover"
                                     />
                                 )}
@@ -134,14 +126,14 @@ export default function HeroSlider({ isSplashActive = false }: { isSplashActive?
                             </div>
 
                             <div className="relative z-10 w-full flex flex-col items-center px-[4vw]">
-                                <h1 
-                                    className="text-white font-display font-normal tracking-[-0.03em] leading-[1.05] mb-[12px] text-center" 
+                                <h1
+                                    className="text-white font-display font-normal tracking-[-0.03em] leading-[1.05] mb-[12px] text-center"
                                     style={{ fontSize: 'clamp(56px, 12vw, 110px)' }}
                                 >
                                     {slide.title}
                                 </h1>
-                                <p 
-                                    className="text-white/90 font-sans font-normal mb-[56px] max-md:mb-[40px] text-center whitespace-normal max-w-[90%] max-md:max-w-[95vw] leading-[1.4]" 
+                                <p
+                                    className="text-white/90 font-sans font-normal mb-[56px] max-md:mb-[40px] text-center whitespace-normal max-w-[90%] max-md:max-w-[95vw] leading-[1.4]"
                                     style={{ fontSize: 'clamp(16px, 2vw, 20px)' }}
                                 >
                                     {slide.description}
@@ -170,9 +162,8 @@ export default function HeroSlider({ isSplashActive = false }: { isSplashActive?
                         <div
                             key={i}
                             onClick={() => goToSlide(i)}
-                            className={`relative h-[6px] rounded-full overflow-hidden transition-all duration-500 cursor-pointer ${
-                                i === currentIndex ? 'w-16 bg-white/20' : 'w-2 bg-white/40 hover:bg-white/60'
-                            }`}
+                            className={`relative h-[6px] rounded-full overflow-hidden transition-all duration-500 cursor-pointer ${i === currentIndex ? 'w-16 bg-white/20' : 'w-2 bg-white/40 hover:bg-white/60'
+                                }`}
                         >
                             {i === currentIndex && !isSplashActive && (
                                 <motion.div
