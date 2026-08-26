@@ -71,10 +71,10 @@ export default function Footer({ theme }: FooterProps) {
 
                 {/* Centro (Redes Sociais) */}
                 <div className="flex gap-6 flex-wrap justify-center">
-                    <a href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = theme?.text || '#000'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>LinkedIn</a>
-                    <a href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = theme?.text || '#000'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Discord</a>
-                    <a href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = theme?.text || '#000'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>GitHub</a>
-                    <a href="#" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = theme?.text || '#000'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>WhatsApp</a>
+                    <a href="https://github.com/cfcarreira84" target="_blank" rel="noreferrer" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = theme?.text || '#000'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>GitHub</a>
+                    <a href="https://discordapp.com/users/cf.carreira" target="_blank" rel="noreferrer" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = theme?.text || '#000'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Discord</a>
+                    <a href="https://www.linkedin.com/in/cfcarreira/" target="_blank" rel="noreferrer" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = theme?.text || '#000'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>LinkedIn</a>
+                    <a href="https://wa.me/5511994787501" target="_blank" rel="noreferrer" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = theme?.text || '#000'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>WhatsApp</a>
                 </div>
 
                 {/* Direita (Botão Text-Swap) */}

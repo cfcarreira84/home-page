@@ -42,7 +42,7 @@ export default function AgentTerminal({ theme }: AgentTerminalProps) {
     };
 
     return (
-        <section id="sandbox" className="relative w-full py-[80px] px-[4vw] pb-[160px] max-md:pb-[100px] max-md:px-0 flex flex-col items-center bg-[#F5F3ED] light-section">
+        <section id="sandbox" className="relative w-full py-[80px] px-[4vw] pb-[160px] max-md:pb-[100px] max-md:px-0 flex flex-col items-center light-section transition-colors duration-500" style={{ backgroundColor: theme?.bg || '#F5F3ED' }}>
             
             <div className="max-w-[900px] w-full text-center mx-auto mb-[48px] max-md:px-[6vw]">
                 <p className="font-sans text-[13px] font-bold text-[#111111] uppercase tracking-[0.05em] mb-[32px]">
@@ -64,10 +64,13 @@ export default function AgentTerminal({ theme }: AgentTerminalProps) {
                     <button
                         key={chip.id}
                         onClick={() => handleChipClick(chip.id, chip.text)}
-                        className={`shrink-0 rounded-[100px] text-[16px] max-md:text-[13px] max-md:px-[20px] max-md:py-[10px] font-medium uppercase transition-all duration-200 border px-[24px] py-[12px] ${
+                        style={
                             activeChipId === chip.id
-                                ? 'bg-[#111111] text-white border-[#111111]'
-                                : 'bg-transparent text-[#111111] border-[#111111] hover:bg-black/5'
+                                ? { backgroundColor: theme?.text || '#111111', color: '#fff', borderColor: theme?.text || '#111111' }
+                                : { color: '#111111', borderColor: '#111111' }
+                        }
+                        className={`shrink-0 rounded-[100px] text-[16px] max-md:text-[13px] max-md:px-[20px] max-md:py-[10px] font-medium uppercase transition-all duration-200 border px-[24px] py-[12px] ${
+                            activeChipId !== chip.id ? 'bg-transparent hover:bg-black/5' : ''
                         }`}
                     >
                         {chip.label}
@@ -136,10 +139,6 @@ export default function AgentTerminal({ theme }: AgentTerminalProps) {
                 </AnimatePresence>
             </div>
 
-            <div className="mt-[32px] max-md:mt-[24px] max-md:px-[6vw] flex items-center gap-[8px] text-[13px] text-[#666666] font-mono w-full max-w-[900px] justify-start">
-                <span className="w-[8px] h-[8px] rounded-full bg-[#00875A] animate-[pulse_2s_infinite]"></span>
-                Agente Ativo // Grounding: Carlos F. Carreira Architecture & Case History v2.6
-            </div>
 
         </section>
     );

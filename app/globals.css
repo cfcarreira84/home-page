@@ -23,6 +23,9 @@
     background-color: var(--color-cosmos-base);
     color: var(--color-cosmos-title);
   }
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Oculta a barra de rolagem mantendo a funcionalidade (Estética Labs) */

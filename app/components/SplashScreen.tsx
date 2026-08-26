@@ -3,10 +3,11 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { FlaskConical } from 'lucide-react';
 
 export default function SplashScreen({ onComplete }: { onComplete: () => void }) {
     useEffect(() => {
-        const finishTimer = setTimeout(onComplete, 6500);
+        const finishTimer = setTimeout(onComplete, 8500);
         return () => clearTimeout(finishTimer);
     }, [onComplete]);
 
@@ -54,7 +55,7 @@ export default function SplashScreen({ onComplete }: { onComplete: () => void })
             </svg>
 
             <motion.div
-                className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#F8F9FA] overflow-hidden"
+                className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#F5F3ED] overflow-hidden"
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.1, delay: 4.4, ease: "easeOut" }}
                 style={{ WebkitMask: "url(#holeMask)", mask: "url(#holeMask)" }}
@@ -146,20 +147,24 @@ export default function SplashScreen({ onComplete }: { onComplete: () => void })
                 initial="hidden"
                 animate="show"
                 exit="exit"
-                className="relative z-10 flex flex-col items-stretch w-fit mx-auto px-4"
+                className="relative z-10 flex flex-col items-center w-full max-w-[1200px] mx-auto px-[4vw]"
             >
-                <motion.h1 
-                    variants={textItem}
-                    className="text-[#202124] text-[10vw] md:text-8xl lg:text-9xl tracking-tighter uppercase mb-4 leading-none whitespace-nowrap"
-                >
-                    <span className="font-light">CF</span><span className="font-black">CARREIRA</span>
-                </motion.h1>
                 <motion.div 
                     variants={textItem}
-                    className="text-[2.2vw] md:text-xs lg:text-sm text-[#202124] flex items-center justify-center font-medium uppercase tracking-normal md:tracking-[0.06em] lg:tracking-[0.08em] w-full px-1 text-center"
+                    className="flex items-center gap-3 md:gap-4 mb-[16px] md:mb-[20px]"
                 >
-                    <span className="font-light">REVENUE ENGINEER ● DATA INTELLIGENCE ● AI OPERATIONS // <span className="font-black">MENOS SLIDES. MAIS VENDAS.</span></span>
+                    <FlaskConical className="w-[28px] h-[28px] md:w-[48px] md:h-[48px] text-[#202124]" strokeWidth={2.5} />
+                    <h1 className="text-[28px] md:text-[48px] font-sans tracking-tight leading-none text-[#202124]">
+                        <span className="font-light">CF</span><span className="font-bold">CARREIRA // LABS</span>
+                    </h1>
                 </motion.div>
+                
+                <motion.p 
+                    variants={textItem}
+                    className="text-[18px] md:text-[32px] font-sans font-normal text-[#202124] tracking-tight text-center leading-[1.3] max-w-[95vw] md:max-w-[80vw]"
+                >
+                    O laboratório de IA aplicada e engenharia de receita.<br /> Menos abstração, mais tração.
+                </motion.p>
             </motion.div>
 
         </motion.div>

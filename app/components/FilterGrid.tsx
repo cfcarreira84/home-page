@@ -32,18 +32,18 @@ const arsenal = [
 
 export const categories = ["ALL", "AI & AUTO", "DATA & BI", "MÍDIA & CRM", "MANAGEMENT"];
 
-export const categoryTheme: Record<string, { bg: string, text: string, shape1: string, shape2: string }> = {
-    "ALL": { bg: "#F8F9FA", text: "#111827", shape1: "/shapes/shape-cyan.svg", shape2: "/shapes/shape-orange.svg" },
-    "AI & AUTO": { bg: "#E0F2FE", text: "#0ea5e9", shape1: "/shapes/shape-cyan.svg", shape2: "/shapes/shape-cyan.svg" },
-    "DATA & BI": { bg: "#ECFDF5", text: "#10b981", shape1: "/shapes/shape-emerald.svg", shape2: "/shapes/shape-emerald.svg" },
-    "MÍDIA & CRM": { bg: "#FDF4FF", text: "#d946ef", shape1: "/shapes/shape-magenta.svg", shape2: "/shapes/shape-magenta.svg" },
-    "MANAGEMENT": { bg: "#FFF7ED", text: "#f97316", shape1: "/shapes/shape-orange.svg", shape2: "/shapes/shape-orange.svg" }
+export const categoryTheme: Record<string, { bg: string, text: string, btnBg: string, btnActive: string, shape1: string, shape2: string }> = {
+    "ALL": { bg: "#F5F3ED", text: "#111111", btnBg: "#E6E1D6", btnActive: "#1A1A1A", shape1: "/shapes/shape-cyan.svg", shape2: "/shapes/shape-orange.svg" },
+    "AI & AUTO": { bg: "#E0F2FE", text: "#0ea5e9", btnBg: "#bae6fd", btnActive: "#0284c7", shape1: "/shapes/shape-cyan.svg", shape2: "/shapes/shape-cyan.svg" },
+    "DATA & BI": { bg: "#ECFDF5", text: "#10b981", btnBg: "#a7f3d0", btnActive: "#059669", shape1: "/shapes/shape-emerald.svg", shape2: "/shapes/shape-emerald.svg" },
+    "MÍDIA & CRM": { bg: "#FDF4FF", text: "#d946ef", btnBg: "#f5d0fe", btnActive: "#c026d3", shape1: "/shapes/shape-magenta.svg", shape2: "/shapes/shape-magenta.svg" },
+    "MANAGEMENT": { bg: "#FFF7ED", text: "#f97316", btnBg: "#fed7aa", btnActive: "#ea580c", shape1: "/shapes/shape-orange.svg", shape2: "/shapes/shape-orange.svg" }
 };
 
 interface FilterGridProps {
     activeFilter: string;
     setActiveFilter: (filter: string) => void;
-    theme: { bg: string, text: string, shape1: string, shape2: string };
+    theme: { bg: string, text: string, btnBg: string, btnActive: string, shape1: string, shape2: string };
 }
 
 export default function FilterGrid({ activeFilter, setActiveFilter, theme }: FilterGridProps) {
@@ -61,26 +61,61 @@ export default function FilterGrid({ activeFilter, setActiveFilter, theme }: Fil
     const prevCard = () => setCurrentIndex((prev) => Math.max(prev - 1, 0));
 
     return (
-        <section id="arquitetura" className="relative w-full flex flex-col pt-[120px] px-[6vw] pb-[60px] max-md:pt-[80px] max-md:px-0 max-md:pb-[60px] text-[#111111]">
+        <section id="arquitetura" className="relative w-full flex flex-col pt-[120px] px-[6vw] pb-[60px] max-md:pt-[80px] max-md:px-0 max-md:pb-[60px] light-section overflow-hidden transition-colors duration-500" style={{ backgroundColor: theme.bg }}>
             
+            {/* Formas Flutuantes no Fundo orbitando nas extremidades */}
+            <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden">
+                <motion.div
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
+                    className="absolute w-[800px] h-[800px] opacity-30 mix-blend-multiply max-md:w-[500px] max-md:h-[500px]"
+                    style={{ left: "-10%", top: "-10%", transformOrigin: "center" }}
+                >
+                    <Image src={theme.shape1} alt="Shape 1" fill className="object-contain" />
+                </motion.div>
+                
+                <motion.div
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 50, repeat: Infinity, ease: "linear" }}
+                    className="absolute w-[560px] h-[560px] opacity-30 mix-blend-multiply max-md:w-[350px] max-md:h-[350px]"
+                    style={{ right: "-5%", bottom: "5%", transformOrigin: "center" }}
+                >
+                    <Image src={theme.shape2} alt="Shape 2" fill className="object-contain" />
+                </motion.div>
+            </div>
+
             {/* Title - Order 1 on Mobile */}
-            <div className="relative z-10 w-full mb-12 max-md:mb-[32px] max-md:px-[6vw] max-md:order-1">
-                <h2 className="font-display font-medium text-[clamp(40px,6vw,90px)] leading-[1.05] tracking-[-0.04em] text-[#111111]">
+            <div className="relative z-10 w-full mb-12 max-md:mb-[32px] max-md:px-[6vw] max-md:order-1 text-center pointer-events-none mix-blend-difference">
+                <h2 className="font-display font-medium text-[clamp(40px,6vw,90px)] leading-[1.05] tracking-[-0.04em] text-white">
                     Domínio Técnico<br/>& Credenciais
                 </h2>
             </div>
 
             {/* Filters - Order 4 on Mobile */}
-            <div className="relative z-30 w-full flex flex-wrap gap-[12px] mb-[64px] max-md:flex-nowrap max-md:overflow-x-auto max-md:mb-0 max-md:px-[6vw] max-md:scrollbar-hide max-md:order-4 max-md:pb-4" style={{ WebkitOverflowScrolling: 'touch' }}>
+            <div className="relative z-30 w-full flex flex-wrap justify-center gap-[12px] mb-[64px] max-md:flex-nowrap max-md:overflow-x-auto max-md:mb-0 max-md:px-[6vw] max-md:scrollbar-hide max-md:order-4 max-md:pb-4 max-md:justify-start" style={{ WebkitOverflowScrolling: 'touch' }}>
                 {categories.map((category, idx) => (
                     <button
                         key={category}
+                        onMouseEnter={(e) => {
+                            if (activeFilter !== category) {
+                                e.currentTarget.style.backgroundColor = theme.btnActive;
+                                e.currentTarget.style.color = '#ffffff';
+                            }
+                        }}
+                        onMouseLeave={(e) => {
+                            if (activeFilter !== category) {
+                                e.currentTarget.style.backgroundColor = theme.btnBg;
+                                e.currentTarget.style.color = theme.btnActive;
+                            }
+                        }}
                         onClick={() => setActiveFilter(category)}
-                        className={`shrink-0 rounded-[100px] text-[16px] max-md:text-[13px] max-md:px-[20px] max-md:py-[10px] font-medium uppercase transition-all duration-200 border px-[24px] py-[12px] ${
-                            activeFilter === category
-                                ? 'bg-[#111111] text-white border-[#111111]'
-                                : 'bg-transparent text-[#111111] border-[#111111] hover:bg-black/5'
-                        }`}
+                        style={{
+                            backgroundColor: activeFilter === category ? theme.btnActive : theme.btnBg,
+                            color: activeFilter === category ? '#ffffff' : theme.btnActive
+                        }}
+                        className="shrink-0 rounded-[100px] font-sans text-[16px] max-md:text-[13px] max-md:px-[20px] max-md:py-[10px] font-medium uppercase transition-all duration-200 px-[28px] py-[12px]"
                     >
                         {category === "ALL" ? "TODAS" : category}
                     </button>
