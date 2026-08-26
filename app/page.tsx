@@ -21,13 +21,13 @@ export default function Home() {
 
   return (
     <main className="min-h-screen relative bg-cosmos-base overflow-x-hidden">
-      <Navbar />
-
       <AnimatePresence mode="wait">
         {showSplash && (
           <SplashScreen key="splash" onComplete={() => setShowSplash(false)} />
         )}
       </AnimatePresence>
+
+      {!showSplash && <Navbar />}
 
       <div className="flex flex-col relative z-0">
         <HeroSlider isSplashActive={showSplash} />
