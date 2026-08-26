@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
+import { VercelToolbar } from '@vercel/toolbar/next';
 
 // Trazendo as fontes direto do servidor do Google
 const inter = Inter({
@@ -27,6 +28,7 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${inter.variable} ${jakarta.variable}`}>
       <body className="font-sans antialiased selection:bg-cosmos-cyan selection:text-cosmos-base">
         {children}
+        <VercelToolbar />
       </body>
     </html>
   );
