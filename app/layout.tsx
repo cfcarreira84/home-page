@@ -24,11 +24,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const shouldInjectToolbar = process.env.NODE_ENV === 'development';
+
   return (
     <html lang="pt-BR" className={`${inter.variable} ${jakarta.variable}`}>
       <body className="font-sans antialiased selection:bg-cosmos-cyan selection:text-cosmos-base">
         {children}
-        <VercelToolbar />
+        {shouldInjectToolbar && <VercelToolbar />}
       </body>
     </html>
   );
