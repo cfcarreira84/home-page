@@ -34,15 +34,20 @@ export default function AgentTerminal({ theme }: AgentTerminalProps) {
 
     const handleDownloadPDF = async () => {
         if (!pdfRef.current) return;
-        const html2pdf = (await import('html2pdf.js')).default;
-        const opt = {
-            margin: 0, // A margem será controlada exclusivamente pelo padding do HTML
-            filename: 'Dossie_Executivo_Carlos_Carreira.pdf',
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        };
-        html2pdf().from(pdfRef.current).set(opt).save();
+        try {
+            const html2pdf = (await import('html2pdf.js')).default;
+            const opt = {
+                margin: 0,
+                filename: 'Dossie_Executivo_Carlos_Carreira.pdf',
+                image: { type: 'jpeg' as const, quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, scrollY: 0 },
+                jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+            } as any;
+            html2pdf().set(opt).from(pdfRef.current).save();
+        } catch (error) {
+            console.error('Erro ao gerar PDF:', error);
+            alert('Houve um erro ao gerar o PDF. Verifique o console.');
+        }
     };
 
     const handleChipClick = (id: number, text: string) => {
