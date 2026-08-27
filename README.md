@@ -1,41 +1,35 @@
-# CFCARREIRA // LABS
+# C.F. Carreira // AI Profiler & Lean Ops Portfolio
 
-Este projeto é um laboratório prático focado em orquestração de IA para engenharia de front-end. O desafio foi atuar como Tech Lead utilizando IA e Agentic Coding para replicar a complexidade de UI/UX do Google Labs em uma stack moderna. 
+Criei um ecossistema para deixar de ser um simples portfólio digital e ser em uma máquina autônoma de geração e qualificação de leads B2B. 
 
-O foco principal não foi a digitação manual de código, mas sim a capacidade de estruturar arquitetura, refinar prompts diretos e modulares, debugar em alto nível e manter um padrão estético e de performance rigoroso.
+Fundi engenharia de software, inteligência artificial e psicologia de vendas em um único fluxo.
 
-## 🚀 Tecnologias e Stack
-- **Framework:** Next.js 14+ (App Router)
-- **Styling:** Tailwind CSS (v4)
-- **Animações:** Framer Motion (Transições complexas, animações atreladas ao scroll, máscaras em SVG)
-- **Ícones:** SVGs nativos 
-- **Deploy:** Vercel
+Abaixo está a radiografia completa da nossa infraestrutura, dividida pelos quatro pilares fundamentais do projeto, evidenciando o como e o porquê de cada decisão.
 
-## 🧠 Metodologia: O Engenheiro de Receita ("One-Person Agency")
-Ao invés de codificar e criar de forma tradicional, este projeto foi concebido e executado de ponta a ponta por **apenas 1 profissional**, sem nenhum apoio de times de DevOps, programadores, designers ou agências de comunicação. 
+## 1. Arquitetura Serverless e Integrações (O Motor) 
+Construímos um backend totalmente desacoplado do site (Next.js), garantindo que a sua aplicação front-end permaneça levíssima e imune a travamentos.
 
-Todo o ecossistema foi construído através de **Prompt Engineering, Orquestração e Direção Técnica Avançada**, utilizando uma suíte completa de Inteligência Artificial:
-- **Código & Arquitetura:** Gemini Pro 3.1 (Antigravity IDE)
-- **Redação & Copywriting:** Gemini Flash 3.7
-- **Geração de Imagens:** Nano Banana
-- **Geração de Vídeos:** Omni Flash
+* **A Esteira (Make.com):** Atua como o maestro da operação, recebendo o texto via Webhook e roteando os dados. A escolha pelo Make garantiu custo zero de infraestrutura e extrema facilidade de manutenção.
+* **O Cérebro (Google Gemini):** Após testarmos um modelo superestruturado (v5.0), fizemos um rollback estratégico para a versão persuasiva (v4.0). A IA não cospe apenas dados, ela argumenta, contorna objeções (como a falta de experiência em um setor específico) e cria pontes entre o seu histórico e a dor do cliente.
+* **Telemetria Avançada (Supabase):** Posicionamos o banco de dados no final da esteira. Em vez de apenas contar acessos, o Supabase grava a requisição do usuário e a resposta exata da IA. Isso transforma o banco em uma ferramenta de Business Intelligence e Quality Assurance, permitindo que você audite o que o mercado está buscando e como a IA está vendendo o seu perfil.
 
-O processo envolveu:
+## 2. Eficiência Operacional e Segurança (Lean Ops)
+A premissa foi manter o teto de gastos rigorosamente controlado, transferindo o trabalho pesado para o computador do usuário final.
 
-1. **Design System & Prototipação:** Criação e validação de referências visuais estáticas (Vanilla HTML/CSS) para balizar a inteligência artificial.
-2. **Arquitetura de Componentes:** Direcionamento estratégico para fragmentar a UI em componentes React altamente reutilizáveis, gerenciando estados complexos.
-3. **Refinamento de UI/UX:** Exigência de precisão *pixel-perfect*. Implementação de máscaras reveladoras em SVG, painéis interativos de arrasto (drag-to-scroll) e temas dinâmicos (Dark/Light mode automatizado).
-4. **Resolução de Problemas (Debugging):** Orientação para resolução de falhas de hidratação, problemas em dependências externas de ícones e otimizações pesadas de performance estrutural no DOM.
+* **Extração Client-Side (Tesseract & PDF.js):** Em vez de enviar PDFs ou imagens pesadas para a nuvem, instalamos motores de leitura ótica (OCR) no próprio navegador do usuário. O celular ou PC do recrutador faz o processamento pesado e envia apenas um texto leve (bytes) para o seu webhook. Isso blinda o seu limite de banda no Make.com e elimina custos com APIs de visão computacional.
+* **Sanitização de Dados:** Implementamos um filtro invisível no front-end que remove quebras de linha e caracteres especiais (como aspas duplas) antes do envio, evitando que usuários quebrem o JSON do backend ao colar textos mal formatados.
 
-Este repositório serve como prova de conceito (PoC) da evolução do papel do Engenheiro de Software em direção à arquitetura de fluxos operados por Inteligência Artificial.
+## 3. UX/UI e Fricção Zero (A Experiência C-Level)
+O design foi pensado para dois perfis de altíssima exigência: headhunters sobrecarregados e executivos sem tempo.
 
-## 🛠️ Como rodar localmente
+* **Ditado por Voz (Web Speech API):** Reduzimos o atrito a zero. O usuário não precisa digitar um desafio complexo; ele clica no microfone e fala. O uso da API nativa dos navegadores evitou a dependência de serviços pagos de transcrição.
+* **Contingência Comercial (Fail-Safe PLG):** Se o Make.com falhar ou atingir o limite mensal de operações, a tela não congela. O sistema intercepta o erro (CORS ou Timeout) e exibe a tela de "Limite de Lean Ops Atingido", transformando uma falha técnica em um gatilho de escassez e exclusividade, direcionando o lead imediatamente para o seu WhatsApp.
 
-Clone o projeto, instale as dependências e inicie o servidor:
+## 4. Engenharia de Documentos (O Template Fantasma)
+Resolvemos o problema crônico de exportação de PDFs em aplicações web (onde o documento fica parecendo um "print" distorcido da tela).
 
-```bash
-npm install
-npm run dev
-```
+* **Canvas A4 Híbrido:** Criamos uma div oculta perfeitamente dimensionada para o formato A4 (794px). Ela absorve a análise dinâmica e os cases gerados pela IA, combinando-os com uma base estática inegociável (seus MBAs na PUCRS, certificações e idiomas).  
+* **Design Executivo:** O uso de alinhamento justificado e a precisão das margens internas (p-14) via Tailwind garantiram que o documento não sofresse cortes na impressão.
+* **Mitigação do Viés de "Overqualified":** Substituímos o título agressivo de C-Level no cabeçalho por um termo guarda-chuva estratégico (Estrategista de Negócios, GTM & Operações de Tecnologia). Isso garante que o documento seja digerido sem atritos por qualquer sistema ATS (Gupy, Kenoby) ou recrutador, servindo perfeitamente desde posições de gestão operacional até cadeiras de diretoria.  
 
-Abra [http://localhost:3000](http://localhost:3000) no seu navegador para ver o resultado.
+Temos em mãos um produto polido, blindado contra falhas comuns de infraestrutura e otimizado para conversão de alto impacto. O código está pronto para a compilação final e o deploy em produção.

@@ -15,7 +15,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Carlos F. Carreira | Revenue Engineering",
+  title: "Carlos Felipe Carreira | Menos abstração, mais tração.",
   description: "Menos slides. Mais vendas. Orquestração de IA e dados para escala comercial.",
 };
 

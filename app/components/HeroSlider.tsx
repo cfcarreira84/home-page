@@ -9,36 +9,45 @@ const SLIDE_DURATION = 8000; // 8 seconds per slide
 const slides = [
     {
         id: 1,
+        title: "AI Profiler",
+        description: "Diagnóstico contextualizado cruzando o escopo do seu projeto com a minha experiência",
+        buttonText: "Conhecer Trajetória",
+        image: "/images/ai-sdr.jpg",
+        video: "/footages/ai-profiler-1080p-202608271650.webm",
+        maskPath: "M 300 0 C 134.316406 0 0 134.316406 0 300 C 0 465.683594 134.316406 600 300 600 C 465.683594 600 600 465.683594 600 300 C 600 134.316406 465.683594 0 300 0 Z M 300 0"
+    },
+    {
+        id: 2,
         title: "AI SDR",
         description: "Vendas autônomas via WhatsApp a custo < 1% da receita gerada",
-        buttonText: "Explorar Case",
+        buttonText: "EM BREVE",
         image: "/images/ai-sdr.jpg",
         video: "/footages/sdr-ai-1080p-202608242215.webm",
         maskPath: "M 10.5 97.960938 L 589.5 97.960938 C 592.027344 97.960938 594.414062 99.121094 595.972656 101.113281 C 597.53125 103.101562 598.085938 105.699219 597.476562 108.152344 L 502.523438 491.847656 C 501.039062 497.835938 495.667969 502.039062 489.5 502.039062 L 110.5 502.039062 C 104.332031 502.039062 98.960938 497.835938 97.476562 491.847656 L 2.523438 108.152344 C 1.914062 105.699219 2.46875 103.101562 4.027344 101.113281 C 5.585938 99.121094 7.972656 97.960938 10.5 97.960938 Z M 10.5 97.960938"
     },
     {
-        id: 2,
+        id: 3,
         title: "Executive BI",
         description: "Atribuição real de ROI unificando mídia, receita e margem",
-        buttonText: "Explorar Case",
+        buttonText: "EM BREVE",
         image: "/images/executive-bi.jpg",
         video: "/footages/executive-bi-1080p-202608242218.webm",
         maskPath: "M 35.480469 251.566406 C 52.933594 272.554688 52.96875 328.246094 35.613281 349.316406 C 13.789062 375.808594 0.71875 409.699219 0.71875 446.546875 C 0.71875 531.640625 69.648438 600 153.8125 600 C 190.851562 600 224.75 586.972656 251.226562 565.214844 C 272.347656 547.855469 328.375 547.855469 349.496094 565.210938 C 375.972656 586.972656 409.875 600 446.921875 600 C 531.085938 600 600 531.640625 600 446.546875 C 600 409.425781 586.523438 375.304688 564.332031 348.726562 C 546.894531 327.847656 546.894531 272.867188 564.304688 251.964844 C 586.511719 225.300781 600 190.988281 600 153.453125 C 600 69.09375 531.085938 0 446.921875 0 C 410.195312 0 376.691406 12.738281 350.351562 34.0625 C 328.910156 51.421875 270.746094 51.226562 249.304688 33.871094 C 223.105469 12.664062 189.695312 0 153.078125 0 C 68.914062 0 0 69.09375 0 153.453125 C 0 190.796875 13.355469 224.960938 35.480469 251.566406 Z M 35.480469 251.566406"
     },
     {
-        id: 3,
+        id: 4,
         title: "High-Ticket Sales",
         description: "GTM de luxo com elevação de 33% no ticket médio em vendas 100% digitais",
-        buttonText: "Explorar Case",
+        buttonText: "EM BREVE",
         image: "/images/hight-tickets.jpg",
         video: "/footages/high-ticket-sales-1080p-202608242220.webm",
         maskPath: "M 300 0 C 134.316406 0 0 134.316406 0 300 C 0 465.683594 134.316406 600 300 600 C 465.683594 600 600 465.683594 600 300 C 600 134.316406 465.683594 0 300 0 Z M 300 0"
     },
     {
-        id: 4,
+        id: 5,
         title: "Lean Ops",
         description: "Engenharia de processos entregando a capacidade de 50 pessoas com apenas 15",
-        buttonText: "Explorar Case",
+        buttonText: "EM BREVE",
         image: "/images/lean-ops.jpg",
         video: "/footages/lean-ops-1080p-202608242219.webm",
         maskPath: "M 14.25 93.75 L 391.304688 93.75 C 506.5625 93.75 600 186.089844 600 300 C 600 413.910156 506.5625 506.25 391.304688 506.25 L 14.25 506.25 C 6.378906 506.25 0 499.871094 0 492 L 0 108 C 0 100.128906 6.378906 93.75 14.25 93.75 Z M 14.25 93.75"
@@ -138,7 +147,18 @@ export default function HeroSlider({ isSplashActive = false }: { isSplashActive?
                                 >
                                     {slide.description}
                                 </p>
-                                <button className="px-10 py-4 bg-white text-black font-sans font-medium rounded-[100px] hover:bg-[#111111] hover:text-white transition-colors duration-200 text-[16px]">
+                                <button
+                                    onClick={() => {
+                                        if (index === 0) {
+                                            document.getElementById('sandbox')?.scrollIntoView({ behavior: 'smooth' });
+                                        }
+                                    }}
+                                    disabled={index !== 0}
+                                    className={`px-10 py-4 bg-white text-black font-sans font-medium rounded-[100px] transition-colors duration-200 text-[16px] ${index === 0
+                                            ? 'hover:bg-[#111111] hover:text-white cursor-pointer'
+                                            : 'opacity-60 cursor-not-allowed'
+                                        }`}
+                                >
                                     {slide.buttonText}
                                 </button>
                             </div>

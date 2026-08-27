@@ -61,7 +61,7 @@ export default function Footer({ theme }: FooterProps) {
             </div>
 
             {/* Socket Inferior Institucional */}
-            <div className="w-full max-w-7xl flex flex-col md:flex-row justify-between items-center gap-8 font-sans text-xs font-semibold uppercase tracking-widest text-black/50 z-10">
+            <div className="w-full max-w-7xl flex flex-col md:flex-row justify-start items-center md:items-center gap-8 md:gap-16 font-sans text-xs font-semibold uppercase tracking-widest text-black/50 z-10">
 
                 {/* Esquerda */}
                 <div className="flex items-center gap-2">
@@ -69,26 +69,12 @@ export default function Footer({ theme }: FooterProps) {
                     <span>Jaguariúna, SP, Brasil</span>
                 </div>
 
-                {/* Centro (Redes Sociais) */}
-                <div className="flex gap-6 flex-wrap justify-center">
+                {/* Redes Sociais */}
+                <div className="flex gap-6 flex-wrap justify-center md:justify-start">
                     <a href="https://github.com/cfcarreira84" target="_blank" rel="noreferrer" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = theme?.text || '#000'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>GitHub</a>
                     <a href="https://discordapp.com/users/cf.carreira" target="_blank" rel="noreferrer" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = theme?.text || '#000'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>Discord</a>
                     <a href="https://www.linkedin.com/in/cfcarreira/" target="_blank" rel="noreferrer" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = theme?.text || '#000'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>LinkedIn</a>
                     <a href="https://wa.me/5511994787501" target="_blank" rel="noreferrer" className="transition-colors" onMouseEnter={(e) => e.currentTarget.style.color = theme?.text || '#000'} onMouseLeave={(e) => e.currentTarget.style.color = ''}>WhatsApp</a>
-                </div>
-
-                {/* Direita (Botão Text-Swap) */}
-                <div 
-                    className="relative group cursor-pointer overflow-hidden px-6 py-3 border border-black/10 rounded-full transition-colors bg-white/50 backdrop-blur-md"
-                    onMouseEnter={(e) => e.currentTarget.style.borderColor = theme?.text || '#000'}
-                    onMouseLeave={(e) => e.currentTarget.style.borderColor = 'rgba(0,0,0,0.1)'}
-                >
-                    <div className="transition-transform duration-300 group-hover:-translate-y-8 text-black/60">
-                        <span className="group-hover:opacity-0 transition-opacity">Standard Profile</span>
-                    </div>
-                    <div className="absolute inset-0 flex items-center justify-center translate-y-8 transition-transform duration-300 group-hover:translate-y-0 font-bold" style={{ color: theme?.text }}>
-                        Baixar CV.pdf
-                    </div>
                 </div>
 
             </div>
