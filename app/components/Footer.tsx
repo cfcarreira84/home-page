@@ -53,7 +53,7 @@ export default function Footer({ theme }: FooterProps) {
             {/* Texto Garrafal Brutalista de Fundo */}
             <div className="w-full max-w-7xl flex justify-center mb-16 select-none pointer-events-none mt-12 overflow-hidden">
                 <h1 
-                    className="font-display text-[15.6vw] xl:text-[210px] leading-none whitespace-nowrap tracking-tighter"
+                    className="font-display text-[14vw] xl:text-[190px] leading-none whitespace-nowrap tracking-tighter"
                     style={{ color: theme?.text || '#111827' }}
                 >
                     <span className="font-light">CF</span><span className="font-black">CARREIRA</span>

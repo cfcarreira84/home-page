@@ -233,7 +233,7 @@ export default function AgentTerminal({ theme }: AgentTerminalProps) {
                             />
 
                             <div className="flex justify-between items-center p-[16px_32px] max-md:p-[16px_24px] bg-white/25 border-t border-white/40">
-                                <div className="flex items-center gap-6">
+                                <div className="flex items-center gap-4">
                                     <input
                                         type="file"
                                         accept=".pdf,.txt,image/png,image/jpeg,image/jpg"
@@ -244,40 +244,44 @@ export default function AgentTerminal({ theme }: AgentTerminalProps) {
                                     <button
                                         onClick={() => fileInputRef.current?.click()}
                                         type="button"
+                                        title="Anexar (PDF/Img/TXT)"
                                         disabled={isExtracting}
-                                        className="bg-transparent border-none text-[#666666] hover:text-[#111111] text-[15px] font-semibold cursor-pointer flex items-center gap-[8px] transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                                        className="bg-transparent border-none text-[#666666] hover:text-[#111111] cursor-pointer flex items-center justify-center w-12 h-12 rounded-full hover:bg-black/5 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        <Paperclip size={18} />
-                                        <span>{isExtracting ? 'Lendo Arquivo...' : 'Anexar (PDF/Img/TXT)'}</span>
+                                        {isExtracting ? (
+                                            <span className="w-5 h-5 border-2 border-[#666666] border-t-transparent rounded-full animate-spin"></span>
+                                        ) : (
+                                            <Paperclip size={24} />
+                                        )}
                                     </button>
 
                                     <button
                                         onClick={handleVoiceInput}
                                         type="button"
+                                        title="Áudio"
                                         disabled={isExtracting}
-                                        className={`bg-transparent border-none text-[15px] font-semibold flex items-center gap-[8px] transition-all disabled:opacity-50 disabled:cursor-not-allowed ${isListening
-                                                ? 'text-red-500 animate-pulse'
+                                        className={`bg-transparent border-none flex items-center justify-center w-12 h-12 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed ${isListening
+                                                ? 'text-red-500 bg-red-500/10 animate-pulse'
                                                 : isExtracting
                                                     ? 'text-[#666666]'
-                                                    : 'text-[#666666] hover:text-[#111111] cursor-pointer'
+                                                    : 'text-[#666666] hover:text-[#111111] hover:bg-black/5 cursor-pointer'
                                             }`}
                                     >
-                                        <Mic size={18} />
-                                        <span>{isListening ? 'Gravando...' : 'Áudio'}</span>
+                                        <Mic size={24} />
                                     </button>
                                 </div>
 
                                 <button
                                     onClick={handleRunSimulation}
+                                    title="Iniciar AI Profiler"
                                     disabled={(!scopeText && activeChipId === null) || isExtracting}
                                     style={(scopeText || activeChipId !== null) ? { backgroundColor: theme?.text, color: '#fff', borderColor: 'transparent' } : {}}
-                                    className={`bg-[#111111] text-white px-[32px] py-[14px] rounded-[100px] text-[15px] font-medium transition-all flex items-center gap-[8px] ${(!scopeText && activeChipId === null) || isExtracting
+                                    className={`bg-[#111111] text-white w-14 h-14 rounded-full flex items-center justify-center transition-all ${(!scopeText && activeChipId === null) || isExtracting
                                             ? 'opacity-50 cursor-not-allowed'
-                                            : 'hover:opacity-85 hover:scale-[1.02] cursor-pointer'
+                                            : 'hover:opacity-85 hover:scale-[1.05] cursor-pointer shadow-lg'
                                         }`}
                                 >
-                                    <Sparkles size={16} />
-                                    <span>Iniciar AI Profiler</span>
+                                    <Sparkles size={24} />
                                 </button>
                             </div>
                         </motion.div>

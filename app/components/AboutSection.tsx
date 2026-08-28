@@ -57,7 +57,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
         <>
             {/* ================= SECTION 03.a: FUNDAMENTAÇÃO (MANIFESTO) ================= */}
             <section id="fundamentacao" className="relative w-full py-[120px] px-[4vw] flex flex-col items-center justify-center text-center overflow-hidden light-section transition-colors duration-500 max-md:py-[80px]" style={{ backgroundColor: theme?.bg || '#F5F3ED' }}>
-                
+
                 {/* Shapes */}
                 {theme && (
                     <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-0">
@@ -70,7 +70,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
                         >
                             <Image src={theme.shape1} alt="Shape 1" fill className="object-contain" />
                         </motion.div>
-                        
+
                         <motion.div
                             initial={{ rotate: 0 }}
                             animate={{ rotate: -360 }}
@@ -88,10 +88,10 @@ export default function AboutSection({ theme }: AboutSectionProps) {
                         SOBRE O LABS // RIGOR TÉCNICO & EXECUÇÃO
                     </p>
                     <h2 className="font-display font-medium text-[clamp(28px,4vw,54px)] leading-[1.15] tracking-[-0.02em] text-[#111111] mx-auto text-center">
-                        Arquitetura de dados, IA e modelos preditivos<br className="max-md:hidden" />
-                        em produção. Da validação técnica direta<br className="max-md:hidden" />
-                        à engenharia de processos que escalam<br className="max-md:hidden" />
-                        receita com previsibilidade<br className="max-md:hidden" />
+                        Arquitetura de dados, IA e modelos preditivos <br className="max-md:hidden" />
+                        em produção. Da validação técnica direta <br className="max-md:hidden" />
+                        à engenharia de processos que escalam <br className="max-md:hidden" />
+                        receita com previsibilidade <br className="max-md:hidden" />
                         e governança.
                     </h2>
                 </div>
@@ -99,7 +99,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
 
             {/* ================= SECTION 03.b: DIPLOMAS ACADÊMICOS ================= */}
             <section id="fundamentacao-base" className="relative w-full pt-[40px] pb-[160px] flex flex-col items-center light-section transition-colors duration-500 max-md:pt-[60px] max-md:pb-[100px] overflow-hidden" style={{ backgroundColor: theme?.bg || '#F5F3ED' }}>
-                
+
                 {/* Shapes */}
                 {theme && (
                     <div className="absolute inset-0 pointer-events-none flex items-center justify-center overflow-hidden z-0">
@@ -112,7 +112,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
                         >
                             <Image src={theme.shape1} alt="Shape 1" fill className="object-contain" />
                         </motion.div>
-                        
+
                         <motion.div
                             initial={{ rotate: 0 }}
                             animate={{ rotate: -360 }}
@@ -137,7 +137,7 @@ export default function AboutSection({ theme }: AboutSectionProps) {
                 </div>
 
                 {/* Carrossel Horizontal Flex (Desktop e Mobile) */}
-                <div 
+                <div
                     ref={sliderRef}
                     onMouseDown={onMouseDown}
                     onMouseLeave={onMouseLeave}
@@ -147,21 +147,21 @@ export default function AboutSection({ theme }: AboutSectionProps) {
                 >
                     {formations.map((item, index) => (
                         <div key={item.id} className="shrink-0 w-[480px] h-[640px] max-md:w-[85vw] max-md:h-[500px] snap-center bg-[#131416] rounded-[40px] max-md:rounded-[32px] flex flex-col justify-between relative overflow-hidden cursor-pointer group shadow-2xl border border-white/10">
-                            
+
                             {/* Imagem de Fundo com Hover Zoom */}
-                            <Image 
-                                src={item.image} 
-                                alt={item.title} 
-                                fill 
+                            <Image
+                                src={item.image}
+                                alt={item.title}
+                                fill
                                 draggable={false}
-                                className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out z-0 pointer-events-none" 
+                                className="object-cover group-hover:scale-110 transition-transform duration-1000 ease-out z-0 pointer-events-none"
                             />
-                            
+
                             {/* Gradiente Overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-[#131416] via-black/40 to-black/10 group-hover:bg-[#131416]/90 transition-colors duration-[600ms] ease-out z-10" />
 
                             <div className="relative z-20 w-full h-full flex flex-col justify-between p-[32px] max-md:p-[24px]">
-                                
+
                                 {/* Top: Tags */}
                                 <div className="flex gap-[12px]">
                                     <span className="px-[16px] py-[8px] max-md:px-[12px] max-md:py-[6px] bg-white/10 backdrop-blur-md rounded-full font-sans text-[13px] max-md:text-[11px] font-medium uppercase text-white/90">
