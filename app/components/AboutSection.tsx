@@ -89,8 +89,8 @@ export default function AboutSection({ theme }: AboutSectionProps) {
                     </p>
                     <h2 className="font-display font-medium text-[clamp(28px,4vw,54px)] leading-[1.15] tracking-[-0.02em] text-[#111111] mx-auto text-center">
                         Arquitetura de dados, IA e modelos preditivos <br className="max-md:hidden" />
-                        em produção. Da validação técnica direta <br className="max-md:hidden" />
-                        à engenharia de processos que escalam <br className="max-md:hidden" />
+                        em produção. Da validação técnica direta à <br className="max-md:hidden" />
+                        engenharia de processos que escalam <br className="max-md:hidden" />
                         receita com previsibilidade <br className="max-md:hidden" />
                         e governança.
                     </h2>
