@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     siteName: "Carlos Felipe Carreira Portfolio",
     locale: "pt_BR",
     type: "article",
-    images: [{ url: "/images/lean-ops.jpg", width: 1200, height: 630, alt: "Lean Ops Case Study - Auren CRM" }]
+    images: [{ url: "/images/lean-ops.jpg", width: 1200, height: 630, alt: "Lean Ops Case Study - Cockpit Comercial com IA" }]
   },
   twitter: {
     card: "summary_large_image",

@@ -20,14 +20,14 @@
   <text class="m" x="40" y="110">cockpit_config.js (único config)</text>
   <text class="m" x="40" y="128">app.js · monte_carlo.js</text>
   <text class="m" x="40" y="146">supabase_client.js · auth.js</text>
-  <text class="t s" x="40" y="166">Hospedagem: auren.arq.br/crm/</text>
+  <text class="t s" x="40" y="166">Hospedagem: domain.com.br/crm/</text>
 
   <rect class="db" x="380" y="30" width="300" height="190" rx="12"/>
-  <text class="t h" x="396" y="56">Supabase · yejtnpuldfamyaicqvyc</text>
+  <text class="t h" x="396" y="56">Supabase · proj-id-xxxx</text>
   <text class="t s" x="396" y="78">Postgres + RLS (só usuário logado)</text>
   <text class="m" x="396" y="100">empresas_alvo · interacoes_sdr</text>
   <text class="m" x="396" y="118">base_conhecimento · configuracoes</text>
-  <text class="t s" x="396" y="142">Auth: carlos, grace, jaime</text>
+  <text class="t s" x="396" y="142">Auth: usr1, usr2, usr3</text>
   <text class="t s" x="396" y="160">Realtime: publicação empresas_alvo</text>
   <text class="t s" x="396" y="178">PostgREST (REST paginado, 1000/pág.)</text>
 
