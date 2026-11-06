@@ -2,12 +2,16 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../context/translations';
 
 interface FooterProps {
     theme?: { bg: string, text: string, shape1: string, shape2: string };
 }
 
 export default function Footer({ theme }: FooterProps) {
+    const { lang } = useLanguage();
+    const t = translations[lang].footer;
     const floatingShapes = [
         { id: 1, src: theme?.shape1 || "/shapes/shape-cyan.svg", size: 100, x: "15%" },
         { id: 2, src: theme?.shape2 || "/shapes/shape-orange.svg", size: 140, x: "35%" },
@@ -66,7 +70,7 @@ export default function Footer({ theme }: FooterProps) {
                 {/* Esquerda */}
                 <div className="flex items-center gap-2">
                     <div className="w-2 h-2 rounded-full animate-pulse" style={{ backgroundColor: theme?.text || '#10b981' }} />
-                    <span>Jaguariúna, SP, Brasil</span>
+                    <span>{t.city}</span>
                 </div>
 
                 {/* Redes Sociais */}
@@ -81,7 +85,7 @@ export default function Footer({ theme }: FooterProps) {
 
             {/* Socket Final - Créditos */}
             <div className="w-full max-w-7xl mt-16 pt-8 border-t border-black/5 text-center text-[10px] text-black/40 font-sans uppercase tracking-widest leading-relaxed">
-                Projeto inspirado no Google Labs, criado 100% com Antigravity IDE, Gemini 3.1 Pro, Nano Banana, Omni Flash e outras APIs em 16 horas.
+                {t.credits}
             </div>
             
         </footer>

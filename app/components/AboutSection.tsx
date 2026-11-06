@@ -4,6 +4,8 @@ import { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../context/translations';
 
 interface AboutSectionProps {
     theme?: { bg: string, shape1: string, shape2: string };
@@ -18,6 +20,8 @@ const formations = [
 ];
 
 export default function AboutSection({ theme }: AboutSectionProps) {
+    const { lang } = useLanguage();
+    const t = translations[lang].about;
     const sliderRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);
@@ -85,14 +89,33 @@ export default function AboutSection({ theme }: AboutSectionProps) {
 
                 <div className="relative z-10 w-full mx-auto max-md:px-[16px]">
                     <p className="font-sans text-[13px] font-bold text-[#111111] uppercase tracking-[0.05em] mb-[32px]">
-                        SOBRE O LABS // RIGOR TÉCNICO & EXECUÇÃO
+                        {t.tag}
                     </p>
                     <h2 className="font-display font-medium text-[clamp(28px,4vw,54px)] leading-[1.15] tracking-[-0.02em] text-[#111111] mx-auto text-center">
-                        Arquitetura de dados, IA e modelos preditivos <br className="max-md:hidden" />
-                        em produção. Da validação técnica direta à <br className="max-md:hidden" />
-                        engenharia de processos que escalam <br className="max-md:hidden" />
-                        receita com previsibilidade <br className="max-md:hidden" />
-                        e governança.
+                        {lang === 'pt' ? (
+                            <>
+                                Arquitetura de dados, IA e modelos preditivos <br className="max-md:hidden" />
+                                em produção. Da validação técnica direta à <br className="max-md:hidden" />
+                                engenharia de processos que escalam <br className="max-md:hidden" />
+                                receita com previsibilidade <br className="max-md:hidden" />
+                                e governança.
+                            </>
+                        ) : lang === 'en' ? (
+                            <>
+                                Data architecture, AI and predictive models <br className="max-md:hidden" />
+                                in production. From hands-on technical validation <br className="max-md:hidden" />
+                                to process engineering that scales <br className="max-md:hidden" />
+                                revenue with predictability <br className="max-md:hidden" />
+                                and governance.
+                            </>
+                        ) : (
+                            <>
+                                生产环境中的数据架构、人工智能与预测模型。<br className="max-md:hidden" />
+                                从底层硬核技术验证到流程工程化，<br className="max-md:hidden" />
+                                助力企业实现兼具可预测性与<br className="max-md:hidden" />
+                                卓越治理的业务增长。
+                            </>
+                        )}
                     </h2>
                 </div>
             </section>
@@ -127,12 +150,16 @@ export default function AboutSection({ theme }: AboutSectionProps) {
 
                 <div className="relative z-10 text-center max-w-[1000px] mx-auto mb-[64px] px-[4vw] max-md:mb-[48px]">
                     <h3 className="font-display font-medium text-[clamp(36px,4.5vw,56px)] leading-[1.1] tracking-[-0.02em] text-[#111111] mb-[32px] max-md:text-[42px] max-md:leading-[1.05] max-md:mb-[20px]">
-                        A Base por trás do Lab
+                        {lang === 'pt' ? "A Base por trás do Lab" : lang === 'en' ? "The Foundation Behind the Lab" : "实验室背后的学术底蕴"}
                     </h3>
                     <p className="font-sans font-normal text-[clamp(20px,2.2vw,26px)] leading-[1.4] text-[#111111] max-md:text-[18px]">
-                        No laboratório, cada experimento nasce de uma tese sólida: como transformar modelos teóricos em
-                        ferramentas de valor real? Nossa fundamentação acadêmica sustenta a arquitetura técnica para converter
-                        conceitos complexos em produtos de mercado.
+                        {lang === 'pt' ? (
+                            "No laboratório, cada experimento nasce de uma tese sólida: como transformar modelos teóricos em ferramentas de valor real? Nossa fundamentação acadêmica sustenta a arquitetura técnica para converter conceitos complexos em produtos de mercado."
+                        ) : lang === 'en' ? (
+                            "In the lab, every experiment stems from a solid thesis: how to convert theoretical models into real business value? Our academic foundation underpins the technical architecture that turns complex concepts into market-ready engines."
+                        ) : (
+                            "在实验室中，每一个实验都源自扎实的论题：如何将前沿理论转化为实际商业价值？我们深厚的学术底蕴为技术架构提供坚实支撑，将前沿模型转化为落地生产力。"
+                        )}
                     </p>
                 </div>
 

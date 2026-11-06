@@ -3,6 +3,8 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../context/translations';
 
 const SLIDE_DURATION = 8000; // 8 seconds per slide
 
@@ -56,6 +58,8 @@ const slides = [
 
 export default function HeroSlider({ isSplashActive = false }: { isSplashActive?: boolean }) {
     const [currentIndex, setCurrentIndex] = useState(0);
+    const { lang } = useLanguage();
+    const t = translations[lang].hero;
 
     const nextSlide = () => {
         setCurrentIndex((prev) => (prev + 1) % slides.length);
@@ -139,13 +143,13 @@ export default function HeroSlider({ isSplashActive = false }: { isSplashActive?
                                     className="text-white font-display font-normal tracking-[-0.03em] leading-[1.05] mb-[12px] text-center"
                                     style={{ fontSize: 'clamp(56px, 12vw, 110px)' }}
                                 >
-                                    {slide.title}
+                                    {t[`slide${slide.id}` as keyof typeof t]?.title || slide.title}
                                 </h1>
                                 <p
                                     className="text-white/90 font-sans font-normal mb-[56px] max-md:mb-[40px] text-center whitespace-normal max-w-[90%] max-md:max-w-[95vw] leading-[1.4]"
                                     style={{ fontSize: 'clamp(16px, 2vw, 20px)' }}
                                 >
-                                    {slide.description}
+                                    {t[`slide${slide.id}` as keyof typeof t]?.description || slide.description}
                                 </p>
                                 <button
                                     onClick={() => {
@@ -161,7 +165,7 @@ export default function HeroSlider({ isSplashActive = false }: { isSplashActive?
                                             : 'opacity-60 cursor-not-allowed'
                                         }`}
                                 >
-                                    {slide.buttonText}
+                                    {t[`slide${slide.id}` as keyof typeof t]?.btn || slide.buttonText}
                                 </button>
                             </div>
                         </motion.div>

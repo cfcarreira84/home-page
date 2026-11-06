@@ -5,6 +5,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Paperclip, Download, MessageCircle, Mic, Sparkles } from 'lucide-react';
 import * as pdfjsLib from 'pdfjs-dist';
 import Tesseract from 'tesseract.js';
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../context/translations';
 
 pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLib.version}/build/pdf.worker.min.mjs`;
 
@@ -38,7 +40,10 @@ export default function AgentTerminal({
     id = "sandbox",
     className = ""
 }: AgentTerminalProps) {
-    const defaultPlaceholder = customPlaceholder || "Descreva o gargalo da sua operação, cole a descrição de uma vaga ou pergunte sobre cases e marcas atendidas...";
+    const { lang } = useLanguage();
+    const t = translations[lang].terminal;
+    const currentChips = t.chips || promptChips;
+    const defaultPlaceholder = customPlaceholder || t.defaultPlaceholder;
     const [scopeText, setScopeText] = useState('');
     const [activeChipId, setActiveChipId] = useState<number | null>(null);
     const [placeholder, setPlaceholder] = useState(defaultPlaceholder);
@@ -79,7 +84,7 @@ export default function AgentTerminal({
     };
 
     const handleRunSimulation = async () => {
-        const promptValue = scopeText || (activeChipId !== null ? promptChips.find(c => c.id === activeChipId)?.text : '');
+        const promptValue = scopeText || (activeChipId !== null ? currentChips.find(c => c.id === activeChipId)?.text : '');
         if (!promptValue) return;
 
         // Filtro de sanitização para proteger o JSON do Backend
@@ -190,17 +195,15 @@ export default function AgentTerminal({
 
             <div className="max-w-[900px] w-full text-center mx-auto mb-[48px] max-md:px-[6vw]">
                 <p className="font-sans text-[13px] font-bold text-[#111111] uppercase tracking-[0.05em] mb-[32px]">
-                    {customBadge || "EXPERIMENT 05 // INTERACTIVE AGENT"}
+                    {customBadge || t.defaultBadge}
                 </p>
                 <h2 className="font-display font-medium text-[clamp(36px,4.5vw,56px)] leading-[1.1] tracking-[-0.02em] text-[#111111] mb-[32px]">
-                    {customTitle || "Conecte seu Desafio à Minha Trajetória"}
+                    {customTitle || t.defaultTitle}
                 </h2>
                 <div className="font-sans font-normal text-[clamp(20px,2.2vw,26px)] leading-[1.4] text-[#111111] max-md:text-[18px]">
                     {customSubtitle || (
                         <p>
-                            Insira o escopo de um projeto, o descritivo de uma posição executiva ou pergunte sobre cases e marcas
-                            atendidas. O sistema cruza sua necessidade com meu histórico profissional em tempo real, gerando um
-                            diagnóstico contextualizado e uma visão sob medida da minha experiência para a sua demanda.
+                            {t.defaultSubtitle}
                         </p>
                     )}
                 </div>
@@ -217,7 +220,7 @@ export default function AgentTerminal({
                             transition={{ duration: 0.4 }}
                             className="flex flex-wrap justify-center gap-[12px] max-w-[1000px] w-full max-md:flex-nowrap max-md:overflow-x-auto max-md:px-[6vw] max-md:justify-start max-md:scrollbar-hide max-md:pb-2" style={{ WebkitOverflowScrolling: 'touch' }}
                         >
-                            {promptChips.map((chip) => (
+                            {currentChips.map((chip) => (
                                 <button
                                     key={chip.id}
                                     onClick={() => handleChipClick(chip.id, chip.text)}
@@ -268,7 +271,7 @@ export default function AgentTerminal({
                                     <button
                                         onClick={() => fileInputRef.current?.click()}
                                         type="button"
-                                        title="Anexar (PDF/Img/TXT)"
+                                        title={t.attachText}
                                         disabled={isExtracting}
                                         className="bg-transparent border-none text-[#666666] hover:text-[#111111] cursor-pointer flex items-center justify-center w-12 h-12 rounded-full hover:bg-black/5 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
@@ -282,7 +285,7 @@ export default function AgentTerminal({
                                     <button
                                         onClick={handleVoiceInput}
                                         type="button"
-                                        title="Áudio"
+                                        title={t.audioText}
                                         disabled={isExtracting}
                                         className={`bg-transparent border-none flex items-center justify-center w-12 h-12 rounded-full transition-all disabled:opacity-50 disabled:cursor-not-allowed ${isListening
                                                 ? 'text-red-500 bg-red-500/10 animate-pulse'
@@ -310,7 +313,7 @@ export default function AgentTerminal({
 
                                     <button
                                         onClick={handleRunSimulation}
-                                        title="Iniciar AI Profiler"
+                                        title={t.runText}
                                         disabled={(!scopeText && activeChipId === null) || isExtracting}
                                         style={(scopeText || activeChipId !== null) ? { backgroundColor: theme?.text, color: '#fff', borderColor: 'transparent' } : {}}
                                         className={`bg-[#111111] text-white w-14 h-14 rounded-full flex items-center justify-center transition-all ${(!scopeText && activeChipId === null) || isExtracting
@@ -400,7 +403,7 @@ export default function AgentTerminal({
                                     className="flex-1 flex items-center justify-center gap-2 px-6 py-4 bg-transparent border border-[#111111]/20 text-[#111111] hover:bg-black/5 rounded-[100px] font-sans text-[14px] font-bold uppercase tracking-wider transition-colors"
                                 >
                                     <Download size={18} />
-                                    <span>BAIXAR PDF</span>
+                                    <span>{t.btnDownload}</span>
                                 </button>
                                 <a
                                     href={`https://wa.me/5511994787501?text=${encodeURIComponent("Olá! Acabei de usar a sua Sandbox (AI Profiler) e vi bastante aderência com uma demanda que temos aqui. Gostaria de conversar para entendermos um possível avanço.")}`}
@@ -410,7 +413,7 @@ export default function AgentTerminal({
                                     className="flex-1 flex items-center justify-center gap-2 px-6 py-4 text-white rounded-[100px] font-sans text-[14px] font-bold uppercase tracking-wider hover:scale-[1.02] transition-transform shadow-md"
                                 >
                                     <MessageCircle size={18} />
-                                    <span>CONTINUAR NO WHATSAPP</span>
+                                    <span>{t.btnWhatsApp}</span>
                                 </a>
                             </div>
                         </motion.div>

@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import Image from 'next/image';
+import { useLanguage } from '../context/LanguageContext';
 
 const arsenal = [
     { id: 1, category: "AI & AUTO", title: "Agents and Workflows", text: "Arquitetura de agentes autônomos e fluxos cognitivos, orquestração de tarefas complexas e chamadas de ferramentas e automação ponta a ponta sem atrito operacional.", tag: "OpenAI · Jun 2026", image: "/images/agents-and-workflows-openai.jpg", video: "/footages/agents-and-workflows-openai.webm" },
@@ -47,7 +48,17 @@ interface FilterGridProps {
 }
 
 export default function FilterGrid({ activeFilter, setActiveFilter, theme }: FilterGridProps) {
+    const { lang } = useLanguage();
     const [currentIndex, setCurrentIndex] = useState(0);
+
+    const getCategoryLabel = (cat: string) => {
+        if (cat === "ALL") return lang === 'pt' ? "TODAS" : lang === 'en' ? "ALL" : "全部";
+        if (cat === "AI & AUTO") return lang === 'zh' ? "AI与自动化" : cat;
+        if (cat === "DATA & BI") return lang === 'zh' ? "数据与BI" : cat;
+        if (cat === "MÍDIA & CRM") return lang === 'en' ? "MEDIA & CRM" : lang === 'zh' ? "营销与CRM" : cat;
+        if (cat === "MANAGEMENT") return lang === 'zh' ? "管理与战略" : cat;
+        return cat;
+    };
 
     const filteredArsenal = arsenal.filter(item =>
         activeFilter === "ALL" || item.category === activeFilter
@@ -89,7 +100,13 @@ export default function FilterGrid({ activeFilter, setActiveFilter, theme }: Fil
             {/* Title - Order 1 on Mobile */}
             <div className="relative z-10 w-full mb-12 max-md:mb-[32px] max-md:px-[6vw] max-md:order-1 text-center pointer-events-none mix-blend-difference">
                 <h2 className="font-display font-medium text-[clamp(40px,6vw,90px)] leading-[1.05] tracking-[-0.04em] text-white">
-                    Domínio Técnico<br/>& Credenciais
+                    {lang === 'pt' ? (
+                        <>Domínio Técnico<br/>& Credenciais</>
+                    ) : lang === 'en' ? (
+                        <>Technical Domain<br/>& Credentials</>
+                    ) : (
+                        <>技术领域<br/>与实战认证</>
+                    )}
                 </h2>
             </div>
 
@@ -117,7 +134,7 @@ export default function FilterGrid({ activeFilter, setActiveFilter, theme }: Fil
                         }}
                         className="shrink-0 rounded-[100px] font-sans text-[16px] max-md:text-[13px] max-md:px-[20px] max-md:py-[10px] font-medium uppercase transition-all duration-200 px-[28px] py-[12px]"
                     >
-                        {category === "ALL" ? "TODAS" : category}
+                        {getCategoryLabel(category)}
                     </button>
                 ))}
             </div>

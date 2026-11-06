@@ -19,6 +19,8 @@ import {
 import dynamic from 'next/dynamic';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../context/translations';
 
 const AgentTerminal = dynamic(() => import('../components/AgentTerminal'), { ssr: false });
 
@@ -28,14 +30,6 @@ const theme = {
     shape1: "/shapes/shape-cyan.svg", 
     shape2: "/shapes/shape-orange.svg" 
 };
-
-const kpis = [
-    { value: "R$ 0", label: "Custo mensal de ferramentas", sub: "Arquitetura serverless e camadas gratuitas gerenciadas" },
-    { value: "~700", label: "De itens brutos a leads aptos", sub: "Tratamento, sanitização e anamnese por lead" },
-    { value: "~12 h", label: "Até as primeiras oportunidades", sub: "Geração de tração com histórico e notas no mesmo dia" },
-    { value: "> R$ 100 mil", label: "Potencial ponderado no funil", sub: "Forecast via simulação probabilística de Monte Carlo" },
-    { value: "R$ 0", label: "Custo de mídia por lead qualificado", sub: "Redução de R$ 25 a R$ 150 (histórico pago) para zero" },
-];
 
 const funilLayers = [
     {
@@ -200,11 +194,21 @@ const stackItens = [
 ];
 
 export default function LeanOpsPage() {
+    const { lang } = useLanguage();
+    const t = translations[lang].leanOps;
     const [selectedEtapa, setSelectedEtapa] = useState(0);
     const [selectedCamada, setSelectedCamada] = useState(0);
     const [selectedFunilIndex, setSelectedFunilIndex] = useState(4);
     const [selectedMcPhase, setSelectedMcPhase] = useState(3);
     const [modalSvg, setModalSvg] = useState<string | null>(null);
+
+    const dynamicKpis = [
+        { value: "R$ 0", label: t.kpiTools, sub: t.kpiToolsSub },
+        { value: "~700", label: t.kpiLeads, sub: t.kpiLeadsSub },
+        { value: "~12 h", label: t.kpiTime, sub: t.kpiTimeSub },
+        { value: "> R$ 100 mil", label: t.kpiForecast, sub: t.kpiForecastSub },
+        { value: "R$ 0", label: t.kpiMedia, sub: t.kpiMediaSub },
+    ];
 
     return (
         <main className="min-h-screen relative bg-cosmos-base overflow-x-hidden selection:bg-black selection:text-white">
@@ -238,8 +242,8 @@ export default function LeanOpsPage() {
                         transition={{ duration: 0.7 }}
                         className="font-display font-medium text-[clamp(38px,6.2vw,78px)] leading-[1.08] tracking-[-0.03em] mb-6 max-w-5xl"
                     >
-                        Do SaaS caro a um cockpit comercial com IA, <br className="max-md:hidden" />
-                        <span className="font-light italic text-white/90">a custo zero.</span>
+                        {t.heroTitle1} <br className="max-md:hidden" />
+                        <span className="font-light italic text-white/90">{t.heroTitle2}</span>
                     </motion.h1>
 
                     <motion.p
@@ -248,7 +252,7 @@ export default function LeanOpsPage() {
                         transition={{ duration: 0.7, delay: 0.15 }}
                         className="font-sans text-[clamp(17px,1.9vw,21px)] leading-[1.5] text-white/85 max-w-[980px] mb-12"
                     >
-                        Como substituí a assinatura de um CRM por um motor próprio que capta, qualifica, faz a anamnese clínica de cada lead, conversa no tom da marca e prevê receita — gerando oportunidades em menos de 12 horas.
+                        {t.heroSubtitle}
                     </motion.p>
 
                     <motion.div
@@ -261,14 +265,14 @@ export default function LeanOpsPage() {
                             href="#ciclo"
                             className="px-8 py-3.5 rounded-full bg-white text-black font-sans font-medium text-[15px] hover:bg-neutral-200 transition-all flex items-center gap-2 shadow-lg"
                         >
-                            <span>Ver Arquitetura do Motor</span>
+                            <span>{t.btnViewArch}</span>
                             <ChevronRight size={16} />
                         </a>
                         <a 
                             href="#diagnostico"
                             className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 font-sans font-medium text-[15px] transition-all"
                         >
-                            Ler a Tese do Projeto
+                            {t.btnReadThesis}
                         </a>
                     </motion.div>
 
@@ -281,7 +285,7 @@ export default function LeanOpsPage() {
                     transition={{ duration: 0.8, delay: 0.35 }}
                     className="relative z-10 w-full max-w-6xl mt-20 grid grid-cols-2 md:grid-cols-5 gap-3 max-md:gap-2 px-2"
                 >
-                    {kpis.map((kpi, idx) => (
+                    {dynamicKpis.map((kpi, idx) => (
                         <div 
                             key={idx}
                             className={`p-5 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-md flex flex-col justify-between transition-all hover:bg-white/[0.1] ${idx === 4 ? 'col-span-2 md:col-span-1' : ''}`}
@@ -304,7 +308,7 @@ export default function LeanOpsPage() {
             </section>
 
             {/* ================= CORPO EDITORIAL (Light Section: #F5F3ED) ================= */}
-            <div className="light-section w-full bg-[#F5F3ED] text-[#111111] transition-colors duration-500 relative overflow-hidden">
+            <div className="light-section w-full bg-[#F5F3ED] text-[#111111] transition-colors duration-500 relative">
                 
                 {/* Elementos Geográficos Dinâmicos e Giratórios em Toda a Página (Estilo Google Labs) */}
                 <motion.div
@@ -348,10 +352,10 @@ export default function LeanOpsPage() {
                     
                     <div className="max-w-3xl mb-16">
                         <span className="font-sans text-[12px] font-bold text-black/50 uppercase tracking-[0.14em] block mb-3">
-                            01 // O CENÁRIO E A PROVOCAÇÃO
+                            {t.sec1Tag}
                         </span>
                         <h2 className="font-display font-medium text-[clamp(30px,4.5vw,52px)] leading-[1.12] tracking-[-0.02em] text-[#111111]">
-                            O CRM de prateleira cobra por assento e entrega uma IA que não conhece o seu produto.
+                            {t.sec1Title}
                         </h2>
                     </div>
 
@@ -360,9 +364,9 @@ export default function LeanOpsPage() {
                         <div className="p-8 rounded-3xl bg-white/70 border border-black/5 backdrop-blur-sm shadow-sm flex flex-col justify-between">
                             <div>
                                 <span className="font-sans text-[12px] font-bold text-[#E11D48] tracking-widest uppercase mb-4 block">Gargalo 01</span>
-                                <h3 className="font-display font-semibold text-[22px] mb-3 leading-snug">Captação cara e lenta</h3>
+                                <h3 className="font-display font-semibold text-[22px] mb-3 leading-snug">{t.bottleneck1Title}</h3>
                                 <p className="font-sans text-[15px] text-black/70 leading-relaxed">
-                                    Historicamente, cada lead qualificado custava à indústria entre <strong>R$ 25 e R$ 150 em anúncios de mídia</strong>, trazendo uma média limitada de apenas 15 a 30 contatos por semana.
+                                    {t.bottleneck1Desc}
                                 </p>
                             </div>
                             <div className="mt-8 pt-4 border-t border-black/5 text-[12px] font-medium text-black/50">
@@ -373,9 +377,9 @@ export default function LeanOpsPage() {
                         <div className="p-8 rounded-3xl bg-white/70 border border-black/5 backdrop-blur-sm shadow-sm flex flex-col justify-between">
                             <div>
                                 <span className="font-sans text-[12px] font-bold text-[#D97706] tracking-widest uppercase mb-4 block">Gargalo 02</span>
-                                <h3 className="font-display font-semibold text-[22px] mb-3 leading-snug">Voz e tom inconsistentes</h3>
+                                <h3 className="font-display font-semibold text-[22px] mb-3 leading-snug">{t.bottleneck2Title}</h3>
                                 <p className="font-sans text-[15px] text-black/70 leading-relaxed">
-                                    Cada operador falava de um jeito. Em vendas B2B de alto padrão (arquitetura e hotelaria), o tom é parte essencial do produto: a marca precisa soar com autoridade e coerência absoluta.
+                                    {t.bottleneck2Desc}
                                 </p>
                             </div>
                             <div className="mt-8 pt-4 border-t border-black/5 text-[12px] font-medium text-black/50">
@@ -386,9 +390,9 @@ export default function LeanOpsPage() {
                         <div className="p-8 rounded-3xl bg-white/70 border border-black/5 backdrop-blur-sm shadow-sm flex flex-col justify-between">
                             <div>
                                 <span className="font-sans text-[12px] font-bold text-[#2563EB] tracking-widest uppercase mb-4 block">Gargalo 03</span>
-                                <h3 className="font-display font-semibold text-[22px] mb-3 leading-snug">Foco difuso da equipe</h3>
+                                <h3 className="font-display font-semibold text-[22px] mb-3 leading-snug">{t.bottleneck3Title}</h3>
                                 <p className="font-sans text-[15px] text-black/70 leading-relaxed">
-                                    Com centenas de contatos em planilhas, a atenção do vendedor ia intuitivamente para quem respondeu por último, e não para a conta com real aderência e maior potencial de fechamento.
+                                    {t.bottleneck3Desc}
                                 </p>
                             </div>
                             <div className="mt-8 pt-4 border-t border-black/5 text-[12px] font-medium text-black/50">
@@ -404,7 +408,7 @@ export default function LeanOpsPage() {
                                 A TESE OPERACIONAL
                             </span>
                             <blockquote className="font-display text-[clamp(22px,3vw,36px)] leading-[1.25] tracking-tight mb-8">
-                                “Em vez de assinar um SaaS inflado que faz tudo mais ou menos, construir um motor compacto que executa com perfeição cirúrgica o que realmente move o ponteiro.”
+                                {t.thesisQuote}
                             </blockquote>
 
                             <div className="grid sm:grid-cols-3 gap-6 pt-6 border-t border-white/15">
@@ -432,14 +436,14 @@ export default function LeanOpsPage() {
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                         <div className="max-w-2xl">
                             <span className="font-sans text-[12px] font-bold text-black/50 uppercase tracking-[0.14em] block mb-3">
-                                02 // DA MASSA BRUTA AOS LEADS APTOS
+                                {t.sec2Tag}
                             </span>
                             <h2 className="font-display font-medium text-[clamp(28px,3.8vw,46px)] leading-[1.15] tracking-tight">
-                                O ciclo contínuo do motor: captação, sanitização e forecast.
+                                {t.sec2Title}
                             </h2>
                         </div>
                         <p className="font-sans text-[15px] text-black/70 max-w-md">
-                            Milhares de registros brutos lapidados em etapas com validação de integridade até restarem cerca de 700 contas com prontuário clínico pronto.
+                            {t.sec2Desc}
                         </p>
                     </div>
 
@@ -449,16 +453,16 @@ export default function LeanOpsPage() {
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 pb-4 border-b border-black/5 gap-3">
                             <div>
                                 <span className="font-sans text-[11px] font-bold text-black/40 uppercase tracking-widest block mb-1">
-                                    DIAGRAMA 01 // ARQUITETURA DE FILTRAGEM
+                                    {t.diagram1Header}
                                 </span>
-                                <h3 className="font-display font-semibold text-[22px]">Funil de Captação e Tratamento em Camadas</h3>
+                                <h3 className="font-display font-semibold text-[22px]">{t.diagram1Title}</h3>
                             </div>
                             <button
                                 onClick={() => setModalSvg("/images/cases/lean-ops/funil-captacao.svg")}
                                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 text-[13px] font-medium text-black/80 hover:text-black transition-all cursor-pointer self-start sm:self-auto"
                             >
                                 <Maximize2 size={15} />
-                                <span>Expandir Imagem Original</span>
+                                <span>{t.btnExpand}</span>
                             </button>
                         </div>
 
@@ -663,13 +667,13 @@ export default function LeanOpsPage() {
                     
                     <div className="max-w-3xl mb-16">
                         <span className="font-sans text-[12px] font-bold text-black/50 uppercase tracking-[0.14em] block mb-3">
-                            03 // A ANAMNESE CLÍNICA DO LEAD
+                            {t.sec3Tag}
                         </span>
                         <h2 className="font-display font-medium text-[clamp(28px,3.8vw,46px)] leading-[1.15] tracking-tight">
-                            A IA lê o lead como um médico lê um paciente: anamnese, diagnóstico e indicação.
+                            {t.sec3Title}
                         </h2>
                         <p className="font-sans text-[16px] text-black/70 mt-4 leading-relaxed">
-                            Em vez de uma IA que apenas redige e-mails plausíveis, ela cruza o portfólio real da fábrica com os dados públicos do escritório, produzindo um <strong>prontuário clínico</strong> que orienta a abordagem do operador.
+                            {t.sec3Desc}
                         </p>
                     </div>
 
@@ -678,10 +682,10 @@ export default function LeanOpsPage() {
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 pb-4 border-b border-black/5 gap-3">
                             <div>
                                 <span className="font-sans text-[13px] font-semibold text-black/80 block">
-                                    Diagrama 02: Prontuário Real de um Lead da Fila
+                                    {t.diagram2Title}
                                 </span>
                                 <span className="font-sans text-[12px] text-black/50">
-                                    Dados públicos de escritório de arquitetura; contatos omitidos por privacidade.
+                                    {t.diagram2Sub}
                                 </span>
                             </div>
                             <button
@@ -689,7 +693,7 @@ export default function LeanOpsPage() {
                                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 text-[13px] font-medium text-black/80 hover:text-black transition-all cursor-pointer self-start sm:self-auto"
                             >
                                 <Maximize2 size={15} />
-                                <span>Ver Prontuário Completo</span>
+                                <span>{t.btnViewDossier}</span>
                             </button>
                         </div>
                         <div className="w-full overflow-hidden flex items-center justify-center py-4 bg-[#F8FAFC] rounded-2xl">
@@ -710,7 +714,7 @@ export default function LeanOpsPage() {
                             DETALHAMENTO // AS 7 CAMADAS DO PRONTUÁRIO
                         </span>
                         <h3 className="font-display font-semibold text-[22px] mb-8">
-                            A regra que mantém a inteligência honesta
+                            {t.layersTitle}
                         </h3>
 
                         <div className="grid lg:grid-cols-12 gap-8 items-start">
@@ -778,14 +782,14 @@ export default function LeanOpsPage() {
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
                         <div className="max-w-2xl">
                             <span className="font-sans text-[12px] font-bold text-black/50 uppercase tracking-[0.14em] block mb-3">
-                                04 // FORECAST PREDITIVO & RETORNO DE INVESTIMENTO
+                                {t.sec4Tag}
                             </span>
                             <h2 className="font-display font-medium text-[clamp(28px,3.8vw,46px)] leading-[1.15] tracking-tight">
-                                Gestão de atenção por Monte Carlo e o paralelo com mídia paga.
+                                {t.sec4Title}
                             </h2>
                         </div>
                         <p className="font-sans text-[15px] text-black/70 max-w-md">
-                            10.000 iterações matemáticas ponderadas por probabilidade de conversão para evitar desperdício de tempo com contas frias.
+                            {t.sec4Desc}
                         </p>
                     </div>
 
@@ -798,7 +802,7 @@ export default function LeanOpsPage() {
                                     <div className="flex items-center gap-2">
                                         <Calculator size={18} className="text-blue-600" />
                                         <span className="font-sans text-[14px] font-semibold text-black/90">
-                                            Simulação Estocástica de Monte Carlo
+                                            {t.mcTitle}
                                         </span>
                                     </div>
                                     <button
@@ -810,7 +814,7 @@ export default function LeanOpsPage() {
                                     </button>
                                 </div>
                                 <p className="font-sans text-[13px] text-black/60 mb-6 leading-relaxed">
-                                    Selecione a fase para visualizar a probabilidade ponderada e o forecast preditivo calculados pelo motor:
+                                    {t.mcDesc}
                                 </p>
 
                                 {/* Seletor de Fases do Funil */}
@@ -865,7 +869,7 @@ export default function LeanOpsPage() {
                                     <div className="flex items-center gap-2">
                                         <BarChart3 size={18} className="text-emerald-600" />
                                         <span className="font-sans text-[14px] font-semibold text-black/90">
-                                            Mídia Paga Histórica vs. Motor Próprio
+                                            {t.mediaCompTitle}
                                         </span>
                                     </div>
                                     <button
@@ -877,7 +881,7 @@ export default function LeanOpsPage() {
                                     </button>
                                 </div>
                                 <p className="font-sans text-[13px] text-black/60 mb-6 leading-relaxed">
-                                    Comparativo de ordens de grandeza para posicionar ~700 leads aptos:
+                                    {t.mediaCompDesc}
                                 </p>
 
                                 {/* Barras Visuais Comparativas */}
@@ -885,8 +889,8 @@ export default function LeanOpsPage() {
                                     {/* Métrica 1: Tempo */}
                                     <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-black/5">
                                         <div className="flex justify-between text-[12px] font-bold text-black/70 mb-2">
-                                            <span>TEMPO DE CAPTAÇÃO & QUALIFICAÇÃO</span>
-                                            <span className="text-emerald-600">99.6% Mais Rápido</span>
+                                            <span>{t.timeTitle}</span>
+                                            <span className="text-emerald-600">{t.timeHighlight}</span>
                                         </div>
                                         <div className="space-y-1.5 font-mono text-[11px]">
                                             <div className="flex items-center justify-between text-black/60">
@@ -906,23 +910,26 @@ export default function LeanOpsPage() {
                                         </div>
                                     </div>
 
-                                    {/* Métrica 2: Custo */}
+                                    {/* Métrica 2: Custo Completo (Mídia + Setup & Mensalidades de SaaS) */}
                                     <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-black/5">
                                         <div className="flex justify-between text-[12px] font-bold text-black/70 mb-2">
-                                            <span>CUSTO FINANCEIRO DE AQUISIÇÃO</span>
-                                            <span className="text-emerald-600">Economia Total</span>
+                                            <span>{t.costTitle}</span>
+                                            <span className="text-emerald-600">{t.costHighlight}</span>
                                         </div>
                                         <div className="space-y-1.5 font-mono text-[11px]">
                                             <div className="flex items-center justify-between text-black/60">
-                                                <span>Verba de anúncios (R$ 25 a R$ 150/lead)</span>
-                                                <span className="font-bold">R$ 17,5k a R$ 105k</span>
+                                                <span>{t.mediaLabel}</span>
+                                                <span className="font-bold">R$ 45,5k a R$ 180k</span>
+                                            </div>
+                                            <div className="text-[10px] text-black/40 -mt-0.5">
+                                                {lang === 'pt' ? "(Mídia R$ 17,5k-105k + SaaS CRM Setup/Contrato R$ 28k-75k)" : lang === 'en' ? "(Media $ 3.5k-21k + CRM SaaS Setup/Contract $ 5.6k-15k)" : "(广告投放 R$ 17.5k-105k + CRM SaaS实施与订阅 R$ 28k-75k)"}
                                             </div>
                                             <div className="w-full h-2.5 rounded-full bg-black/10 overflow-hidden">
                                                 <div className="w-[100%] h-full bg-amber-500/80 rounded-full" />
                                             </div>
                                             <div className="flex items-center justify-between text-black/90 font-bold pt-1">
-                                                <span>Motor Lean Ops</span>
-                                                <span className="text-emerald-700">R$ 0 de mídia e R$ 0 de SaaS</span>
+                                                <span>{t.motorLabel}</span>
+                                                <span className="text-emerald-700">{lang === 'pt' ? "R$ 0 de mídia e R$ 0 de SaaS" : lang === 'en' ? "$ 0 paid media and $ 0 SaaS" : "R$ 0 广告费与 R$ 0 软件订阅费"}</span>
                                             </div>
                                             <div className="w-full h-2.5 rounded-full bg-black/10 overflow-hidden">
                                                 <div className="w-[2%] h-full bg-emerald-500 rounded-full" />
@@ -933,7 +940,13 @@ export default function LeanOpsPage() {
                             </div>
 
                             <div className="p-4 rounded-xl bg-black/[0.02] border border-black/5 text-[12px] text-black/60 leading-relaxed">
-                                * Paralelo de ordem de grandeza com base no histórico da operação e métricas reais de validação.
+                                {lang === 'pt' ? (
+                                    "* Paralelo de ordem de grandeza considerando mídia histórica e contratação de SaaS de CRM com setup de implantação e licenças contratuais vs. motor proprietário serverless."
+                                ) : lang === 'en' ? (
+                                    "* Order-of-magnitude benchmark comparing historical paid acquisition and commercial CRM SaaS (setup + license contracts) against our proprietary serverless engine."
+                                ) : (
+                                    "* 数量级对照基准：综合考量历史付费广告投放与商业CRM SaaS订阅（含实施部署费及合同期软件年费）对比自研Serverless引擎。"
+                                )}
                             </div>
                         </div>
 
@@ -946,10 +959,10 @@ export default function LeanOpsPage() {
                     
                     <div className="max-w-3xl mb-16">
                         <span className="font-sans text-[12px] font-bold text-black/50 uppercase tracking-[0.14em] block mb-3">
-                            05 // DECISÕES DE ENGENHARIA DE SOFTWARE
+                            {t.sec5Tag}
                         </span>
                         <h2 className="font-display font-medium text-[clamp(28px,3.8vw,46px)] leading-[1.15] tracking-tight">
-                            Como a engenharia substituiu o custo por usuário da mensalidade de SaaS.
+                            {t.sec5Title}
                         </h2>
                     </div>
 
@@ -958,10 +971,10 @@ export default function LeanOpsPage() {
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 pb-4 border-b border-black/5 gap-3">
                             <div>
                                 <span className="font-sans text-[13px] font-semibold text-black/80 block">
-                                    Diagrama 03: Arquitetura Técnica do Cockpit Comercial
+                                    {t.diagram3Title}
                                 </span>
                                 <span className="font-sans text-[12px] text-black/50">
-                                    Controle de privilégios e fronteiras de execução
+                                    {t.diagram3Sub}
                                 </span>
                             </div>
                             <button
@@ -969,7 +982,7 @@ export default function LeanOpsPage() {
                                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 text-[13px] font-medium text-black/80 hover:text-black transition-all cursor-pointer self-start sm:self-auto"
                             >
                                 <Maximize2 size={15} />
-                                <span>Ver Arquitetura Completa</span>
+                                <span>{t.btnViewArchFull}</span>
                             </button>
                         </div>
 
@@ -988,7 +1001,7 @@ export default function LeanOpsPage() {
                         <div className="mt-4 p-4 rounded-xl bg-blue-50/60 border border-blue-100 flex items-start gap-3 text-[12px] text-blue-900 leading-relaxed">
                             <Info size={16} className="text-blue-700 shrink-0 mt-0.5" />
                             <span>
-                                <strong>Nota Técnica de Engenharia:</strong> As setas do diagrama mapeiam estritamente o <strong>fluxo de iniciação de requisições e a fronteira de privilégios</strong> (quem aciona quem e onde residem as chaves sensíveis). O tráfego de dados de retorno flui bidirecionalmente em mão dupla via respostas HTTP/REST e conexões WebSocket em tempo real gerenciadas pelo Supabase.
+                                {t.archNote}
                             </span>
                         </div>
                     </div>
@@ -1058,27 +1071,28 @@ export default function LeanOpsPage() {
                 </section>
 
                 {/* ================= 7. PRÓXIMO PASSO EXECUTIVO (SANDBOX FUNCIONAL COM WHATSAPP) ================= */}
-                <section className="relative z-10 w-full pt-10 pb-16">
-                    <AgentTerminal
-                        id="sandbox-case"
-                        theme={theme}
-                        hideChips={true}
-                        customBadge="PRÓXIMO PASSO EXECUTIVO"
-                        customTitle={
-                            <>
-                                Menos abstração.<br />
-                                Mais tração.
-                            </>
-                        }
-                        customSubtitle={
-                            <p className="font-sans font-normal text-[clamp(18px,2vw,24px)] leading-[1.5] text-[#111111]">
-                                Quer estruturar uma máquina enxuta de qualificação B2B e orquestração de IA personalizada para a sua realidade comercial?
-                            </p>
-                        }
-                        customPlaceholder="Descreva o seu modelo comercial, ticket médio, gargalo de prospecção ou escopo da sua empresa para receber um diagnóstico preliminar com IA..."
-                        showWhatsAppButton={true}
-                    />
-                </section>
+                <AgentTerminal
+                    id="sandbox-case"
+                    theme={theme}
+                    hideChips={true}
+                    customBadge={t.ctaBadge}
+                    customTitle={
+                        <>
+                            {lang === 'pt' ? (
+                                <>Menos abstração.<br />Mais tração.</>
+                            ) : (
+                                t.ctaTitle
+                            )}
+                        </>
+                    }
+                    customSubtitle={
+                        <p className="font-sans font-normal text-[clamp(18px,2vw,24px)] leading-[1.5] text-[#111111]">
+                            {t.ctaSubtitle}
+                        </p>
+                    }
+                    customPlaceholder={t.ctaPlaceholder}
+                    showWhatsAppButton={true}
+                />
 
                 {/* Footer Institucional Idêntico */}
                 <Footer theme={theme} />
