@@ -106,6 +106,88 @@ export const translations = {
             credits: "PROJETO INSPIRADO NO GOOGLE LABS, CRIADO 100% COM ANTIGRAVITY IDE, GEMINI 3.1 PRO, NANO BANANA, OMNI FLASH E OUTRAS APIS EM 16 HORAS."
         },
         leanOps: {
+            deck: {
+                badge: "BRIEFING EXECUTIVO // C-LEVEL PITCH",
+                skipToCase: "Pular para o Dossiê Técnico Completo",
+                slideLabel: "SLIDE",
+                ofLabel: "DE",
+                prevBtn: "Lâmina anterior",
+                nextBtn: "Próxima lâmina",
+                slides: [
+                    {
+                        tag: "01 // DA POSTURA REATIVA AO HUNTING ATIVO",
+                        title: "Esperar o lead de mídia chegar é queimar margem. O jogo muda com hunting proativo de alta propensão.",
+                        subtitle: "Em vez de aguardar passivamente formulários de campanhas convencionais ('nome, e-mail e com sorte WhatsApp'), o motor busca ativamente empresas e interfaces que realmente movem o ponteiro comercial. A nível de cada conta, antecipa pontos fortes e fracos da negociação e aponta ao operador o produto ideal com base em evidências reais.",
+                        kpis: [
+                            { label: "Postura Comercial", val: "Hunting Ativo", desc: "Varredura proativa de decisores estratégicos" },
+                            { label: "Inteligência Prévia", val: "Nível de Conta", desc: "Pontos fortes e fracos mapeados antes do contato" },
+                            { label: "Aderência", val: "Produto Cirúrgico", desc: "Cruzamento com os 28 blocos do catálogo da indústria" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-kanban.jpg",
+                        imageCaption: "Cockpit Kanban com esteira de 9 fases e priorização ponderada"
+                    },
+                    {
+                        tag: "02 // HOMOGENEIDADE & ANAMNESE CLÍNICA",
+                        title: "Padronização cirúrgica: transformar qualquer operador no consultor mais preparado do mercado.",
+                        subtitle: "O operador não precisa adivinhar argumentos nem improvisar no escuro: ele recebe um prontuário clínico com diagnóstico, hipóteses e ganchos prontos no tom da marca. Uma triagem enriquecida com IA que municia a linha de frente para nunca queimar uma oportunidade de alto ticket.",
+                        kpis: [
+                            { label: "Anamnese Pré-Atendimento", val: "100% dos Leads", desc: "Contexto técnico completo antes de abrir o WhatsApp" },
+                            { label: "Blindagem Institucional", val: "Zero Alucinação", desc: "Auditável na fonte, sem suposições ou clichês corporativos" },
+                            { label: "Tom de Voz", val: "Padrão Diretoria", desc: "A sofisticação da alta gestão replicada em todo o time" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-prontuario.jpg",
+                        imageCaption: "Prontuário com Scout IA: pontos fortes, fracos e sugestão técnica de produto"
+                    },
+                    {
+                        tag: "03 // PRAGMATISMO ESTATÍSTICO & GESTÃO DE ATENÇÃO",
+                        title: "Substituir a intuição por previsibilidade matemática com simulação estocástica de Monte Carlo.",
+                        subtitle: "Vendedores intuitivos gastam horas perseguindo quem respondeu por último. O cockpit roda 10.000 iterações estocásticas na Matriz de Discovery para ponderar matematicamente a real probabilidade de fechamento, direcionando a energia do time exclusivamente para onde está o faturamento.",
+                        kpis: [
+                            { label: "Pipeline Ponderado", val: "> R$ 100 mil", desc: "Forecast probabilístico dinâmico calculado por conta" },
+                            { label: "Simulação Estocástica", val: "10.000 Rodadas", desc: "Cálculo matemático de propensão de fechamento (Monte Carlo)" },
+                            { label: "Direcionamento", val: "Atenção Cirúrgica", desc: "Alocação do tempo do operador sênior onde o dinheiro está" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-discovery.jpg",
+                        imageCaption: "Matriz de Discovery e cálculo dinâmico de propensão de fechamento"
+                    },
+                    {
+                        tag: "04 // QUANTITATIVO DE FUNIL & ROLLOUT EM 1 DIA",
+                        title: "Rollout em 1 dia útil: uma base concisa e qualificada sem o custo ou a lentidão da mídia.",
+                        subtitle: "A diferença brutal entre pagar caro por lead morno — onde o operador despreparado perde semanas para fechar um negócio mediano — e estruturar ~700 contas com prontuário em 1 dia útil. Uma economia de 23 a 47 semanas de mídia paga (R$ 17,5k a R$ 105k) e R$ 28k a R$ 75k em custos de software.",
+                        kpis: [
+                            { label: "Velocidade de Tração", val: "1 Dia Útil", desc: "vs. 23 a 47 semanas de mídia paga (99,6% mais rápido)" },
+                            { label: "Base Qualificada", val: "~700 Contas", desc: "Triagem enriquecida para o operador nunca perder argumento" },
+                            { label: "Primeiras Oportunidades", val: "< 12 Horas", desc: "Geração de tração com notas e histórico no mesmo dia" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-bi.jpg",
+                        imageCaption: "Dashboard Executivo BI: acompanhamento temporal de receita e pipeline"
+                    },
+                    {
+                        tag: "05 // O ARQUITETO DE RECEITA NO C-LEVEL",
+                        title: "A intersecção rara entre liderança estratégica de GTM e engenharia de software em produção.",
+                        subtitle: "O mercado separa quem desenha o slide de quem programa a ferramenta. O diferencial de um Revenue Engineer é articular a visão de negócios no conselho e codificar o motor que executa a estratégia — entregando 14 micro-releases documentadas em 48 horas com zero débito técnico.",
+                        kpis: [
+                            { label: "Para CEOs & Boards", val: "Margens Limpas", desc: "Expansão de receita com custos de software zerados e tração ágil" },
+                            { label: "Para CROs & CMOs", val: "Alta Conversão", desc: "Linguagem homogênea, prontuários de negociação e autoridade" },
+                            { label: "Para CTOs & Engenharia", val: "14 Releases / 48h", desc: "SemVer, governança, idempotência e código modular sem débitos" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-releases.jpg",
+                        imageCaption: "Changelog integrado no cockpit: 14 versões documentadas em 2 dias"
+                    },
+                    {
+                        tag: "06 // A PROVA DOS FATOS & PRÓXIMO PASSO",
+                        title: "Resultados consistentes se sustentam em engenharia rigorosa. Veja a prova no detalhe.",
+                        subtitle: "Abaixo está a prova material completa: contratos de 32 colunas, arquitetura serverless, simulação estocástica de Monte Carlo interativa e anatomia real dos prontuários. Explore o dossiê técnico detalhado ou inicie um diagnóstico preliminar para a sua operação.",
+                        ctas: {
+                            primary: "Explorar Dossiê Técnico Completo ↓",
+                            whatsapp: "Falar com Carlos Felipe (WhatsApp)",
+                            sandbox: "Testar no AI Profiler (Sandbox)"
+                        },
+                        image: "/images/cases/lean-ops/cockpit/cockpit-kanban.jpg",
+                        imageCaption: "Cockpit Comercial completo em produção: da captação ao forecast preditivo"
+                    }
+                ]
+            },
             heroTitle1: "Do SaaS caro a um cockpit comercial com IA,",
             heroTitle2: "a custo zero.",
             heroSubtitle: "Como substituí a assinatura de um CRM por um motor próprio que capta, qualifica, faz a anamnese clínica de cada lead, conversa no tom da marca e prevê receita — gerando oportunidades em menos de 12 horas.",
@@ -342,6 +424,88 @@ export const translations = {
             credits: "PROJECT INSPIRED BY GOOGLE LABS, BUILT 100% WITH ANTIGRAVITY IDE, GEMINI 3.1 PRO, NANO BANANA, OMNI FLASH AND APIS IN 16 HOURS."
         },
         leanOps: {
+            deck: {
+                badge: "EXECUTIVE BRIEFING // C-LEVEL PITCH",
+                skipToCase: "Skip to Full Technical Dossier",
+                slideLabel: "SLIDE",
+                ofLabel: "OF",
+                prevBtn: "Previous slide",
+                nextBtn: "Next slide",
+                slides: [
+                    {
+                        tag: "01 // FROM PASSIVE INBOUND TO ACTIVE HUNTING",
+                        title: "Waiting for paid media leads burns margin. Active high-propensity hunting changes the game.",
+                        subtitle: "Instead of waiting passively for standard lead forms ('name, email, and maybe phone'), the engine proactively hunts companies and accounts that genuinely move the revenue needle. At every single account level, it identifies negotiation strengths, weaknesses, and the exact product match before outreach.",
+                        kpis: [
+                            { label: "Sales Posture", val: "Active Hunting", desc: "Proactive discovery of high-impact strategic buyers" },
+                            { label: "Pre-Scout Intel", val: "Account-Level", desc: "Negotiation leverage points mapped beforehand" },
+                            { label: "Product Fit", val: "Surgical Match", desc: "Mapped against the industry's 28 product lines" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-kanban.jpg",
+                        imageCaption: "Kanban Cockpit with 9-stage pipeline and weighted probability scoring"
+                    },
+                    {
+                        tag: "02 // BRAND HOMOGENEITY & CLINICAL DOSSIER",
+                        title: "Surgical standard: transforming frontline reps into the brand's top consultative advisors.",
+                        subtitle: "Sales reps no longer improvise in the dark. Each lead arrives with a clinical dossier detailing client portfolio analysis, hypothesis, and conversation hooks in the brand's exact tone. An AI-enriched scouting workflow ensuring high-ticket enterprise deals are never mishandled.",
+                        kpis: [
+                            { label: "Pre-Contact Dossier", val: "100% of Leads", desc: "Full technical context before initiating conversation" },
+                            { label: "Brand Shielding", val: "Zero Hallucination", desc: "Strictly verifiable data with documented source URLs" },
+                            { label: "Voice Homogeneity", val: "Executive Standard", desc: "C-level sophistication replicated across every rep" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-prontuario.jpg",
+                        imageCaption: "Lead Dossier with AI Scout: strengths, gaps, and tailored product recommendations"
+                    },
+                    {
+                        tag: "03 // STATISTICAL PRAGMATISM & ATTENTION MANAGEMENT",
+                        title: "Replacing guesswork with mathematical certainty via Monte Carlo stochastic simulation.",
+                        subtitle: "Intuitive sales teams waste hours chasing whoever answered last. The cockpit runs 10,000 stochastic iterations in the Discovery Matrix to dynamically weigh closing probabilities, focusing commercial energy strictly where the real revenue lies.",
+                        kpis: [
+                            { label: "Weighted Pipeline", val: "> $ 20k+", desc: "Dynamic probabilistic forecast calculated per account" },
+                            { label: "Stochastic Engine", val: "10,000 Runs", desc: "Monte Carlo closing probability model" },
+                            { label: "Attention Focus", val: "High Value", desc: "Allocating senior reps where closing probability is highest" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-discovery.jpg",
+                        imageCaption: "Discovery Matrix with dynamic closing probability calculation and quick WhatsApp trigger"
+                    },
+                    {
+                        tag: "04 // QUANTITATIVE FUNNEL & SAME-DAY ROLLOUT",
+                        title: "Same-day rollout: a concise, qualified pipeline without the drag or expense of paid media.",
+                        subtitle: "The stark difference between overpaying for lukewarm leads — where an unqualified rep spends weeks trying to close a mediocre deal — versus building ~700 verified accounts in 1 business day. Saving 23 to 47 weeks of ad drag and over $ 10,000 in software and setup fees.",
+                        kpis: [
+                            { label: "Pipeline Velocity", val: "1 Business Day", desc: "vs. 23 to 47 weeks in traditional paid media (99.6% faster)" },
+                            { label: "Qualified Dataset", val: "~700 Accounts", desc: "AI-enriched triage ensuring no commercial argument is missed" },
+                            { label: "First Opportunities", val: "< 12 Hours", desc: "First real opportunities and notes logged on launch day" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-bi.jpg",
+                        imageCaption: "Executive BI Dashboard: temporal tracking of actual, projected, and lost pipeline"
+                    },
+                    {
+                        tag: "05 // THE REVENUE ARCHITECT IN THE C-SUITE",
+                        title: "The rare intersection between executive GTM strategy and production software engineering.",
+                        subtitle: "Most organizations separate the consultant who crafts the deck from the engineer who builds the software. A Revenue Engineer bridges both: architecting board-level growth strategy while coding the production engine — delivering 14 documented releases in 48 hours with zero technical debt.",
+                        kpis: [
+                            { label: "For CEOs & Boards", val: "Clean Margins", desc: "Revenue acceleration with zero tool costs and lean ops" },
+                            { label: "For CROs & CMOs", val: "High Conversion", desc: "Homogeneous messaging, negotiation dossiers, and authority" },
+                            { label: "For CTOs & Tech", val: "14 Releases / 48h", desc: "SemVer, idempotency, strict schemas, zero technical debt" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-releases.jpg",
+                        imageCaption: "Integrated release changelog: 14 micro-versions documented in 2 days"
+                    },
+                    {
+                        tag: "06 // THE PROOF OF EXECUTION & NEXT STEP",
+                        title: "Consistent revenue performance rests on rigorous engineering. Explore the proof.",
+                        subtitle: "Below is the complete technical evidence: 32-column data contracts, serverless architecture, interactive Monte Carlo simulation, and live dossiers. Explore the technical breakdown or start an executive diagnostic conversation.",
+                        ctas: {
+                            primary: "Explore Full Technical Dossier ↓",
+                            whatsapp: "Contact Carlos Felipe (WhatsApp)",
+                            sandbox: "Test in AI Profiler (Sandbox)"
+                        },
+                        image: "/images/cases/lean-ops/cockpit/cockpit-kanban.jpg",
+                        imageCaption: "Full Commercial Cockpit in production: from discovery to predictive forecasting"
+                    }
+                ]
+            },
             heroTitle1: "From costly SaaS to an AI commercial cockpit,",
             heroTitle2: "at zero cost.",
             heroSubtitle: "How I replaced an enterprise CRM subscription with a proprietary engine that captures, qualifies, conducts clinical lead anamnesis and forecasts revenue in 12 hours.",
@@ -578,6 +742,88 @@ export const translations = {
             credits: "灵感源自GOOGLE LABS，16小时内使用ANTIGRAVITY IDE、GEMINI 3.1 PRO、NANO BANANA及OMNI FLASH等API全栈构建。"
         },
         leanOps: {
+            deck: {
+                badge: "高管汇报简报 // C-LEVEL PITCH",
+                skipToCase: "直达完整技术档案",
+                slideLabel: "幻灯片",
+                ofLabel: "共",
+                prevBtn: "上一页",
+                nextBtn: "下一页",
+                slides: [
+                    {
+                        tag: "01 // 从被动等待到主动猎寻",
+                        title: "等待广告线索是在消耗企业利润。高净值主动猎寻彻底重塑游戏规则。",
+                        subtitle: "与其被动等待传统广告表单（往往仅有姓名、邮箱甚至无效电话），自研引擎主动扫描并识别真正能推动业绩增长的企业与关键决策人。在初次触达前，即在单个客户层面完成谈判优劣势推演，并基于真实证据精准匹配理想产品。",
+                        kpis: [
+                            { label: "销售姿态", val: "主动猎寻", desc: "主动发现具备采购权的战略级企业决策人" },
+                            { label: "前置情报", val: "客户级洞察", desc: "触达前即全面掌握商务谈判优劣势与切入点" },
+                            { label: "产品契合", val: "精准匹配", desc: "智能交叉比对企业28个核心工业品类目录" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-kanban.jpg",
+                        imageCaption: "全流程看板式驾驶舱：9阶段管线与加权意向排序"
+                    },
+                    {
+                        tag: "02 // 品牌话术高度对齐与临床式档案",
+                        title: "外科手术式标准化：将一线销售员武装为全行业最资深的顾问专家。",
+                        subtitle: "销售人员无需在黑暗中摸索猜测或随意临场发挥：系统自动为每个线索生成包含精准诊断、需求假设与高情商破冰话术的临床档案。AI深度赋能一线，确保每一张高客单价战略级商机都能得到顶级水准的专业承接。",
+                        kpis: [
+                            { label: "触达前临床画像", val: "100% 客户覆盖", desc: "在发起WhatsApp沟通前即掌握完整技术与业务背景" },
+                            { label: "品牌声誉护城河", val: "零幻觉风险", desc: "所有判断严格源自公开可溯源的权威证据，拒绝空洞套话" },
+                            { label: "对外沟通调性", val: "统一高管级水准", desc: "将最高管理层的行业权威与专业谈吐无缝复制给每位员工" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-prontuario.jpg",
+                        imageCaption: "AI侦察档案：客户优劣势剖析与定制化产品解决方案"
+                    },
+                    {
+                        tag: "03 // 统计学务实主义与注意力精细化管理",
+                        title: "用蒙特卡洛随机模拟的数学确定性，彻底终结凭直觉做销售的时代。",
+                        subtitle: "依靠直觉的销售团队往往把宝贵时间浪费在追逐最后回复但成交概率极低的客户身上。驾驶舱在发现矩阵中运行10,000次随机模拟迭代，动态计算成交概率，将团队注意力与精力精准锁定在高概率成单客户上。",
+                        kpis: [
+                            { label: "加权流水潜力", val: "> R$ 10万+", desc: "基于单客户特征与阶段动态计算的概率化预测" },
+                            { label: "随机模拟引擎", val: "10,000 次迭代", desc: "基于蒙特卡洛模型的成交概率数学测算" },
+                            { label: "资源聚焦", val: "注意力精益管理", desc: "让资深销售人员的精力严格投入在高净值商机上" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-discovery.jpg",
+                        imageCaption: "商机发现矩阵与动态成交概率测算，一键调起WhatsApp会话"
+                    },
+                    {
+                        tag: "04 // 漏斗量化优势与首日极速交付",
+                        title: "1个工作日全面上线：无需忍受付费广告的缓慢爬坡与高昂沉没成本。",
+                        subtitle: "传统模式下企业为平庸线索支付高昂广告费，缺乏武装的销售员需耗费数周才能磕下一个中等订单；而自研引擎仅用1个工作日即沉淀出近700个带临床档案的高质量客户。直接节省23至47周广告投放周期，以及数万雷亚尔的软件与实施年费。",
+                        kpis: [
+                            { label: "业绩启动速度", val: "1 个工作日", desc: "对比传统广告23至47周的冗长周期（提速99.6%）" },
+                            { label: "高净值客户池", val: "~700 家优选客户", desc: "经AI深度清洗与赋能，让销售绝不错失任何关键谈判论点" },
+                            { label: "首批有效商机", val: "< 12 小时", desc: "上线当日即产生真实的客户跟进记录与高意向反馈" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-bi.jpg",
+                        imageCaption: "高管BI数据看板：周度营收、预测与流失的多维度时序追踪"
+                    },
+                    {
+                        tag: "05 // C-LEVEL视角下的营收架构师价值",
+                        title: "商业战略视角与软件工程实战能力的罕见交汇：推动业务跨越式增长。",
+                        subtitle: "传统分工将画PPT的战略顾问与敲代码的程序员割裂开来。营收架构师（Revenue Engineer）的核心价值在于：既能在董事会层面推演增长模型，又能亲手编写在生产环境运行的代码引擎——48小时内高频交付14个规范版本且零技术债务。",
+                        kpis: [
+                            { label: "面向CEO与董事会", val: "纯净净利润", desc: "软件零边际成本，以极速敏捷步伐驱动核心业务增长" },
+                            { label: "面向CRO与CMO", val: "高转化确定性", desc: "统一沟通语言、临床级谈判智库与不可撼动的专业声誉" },
+                            { label: "面向CTO与研发线", val: "48小时交付14版", desc: "语义化版本、幂等性设计、严格Schema约束与模块化整洁架构" }
+                        ],
+                        image: "/images/cases/lean-ops/cockpit/cockpit-releases.jpg",
+                        imageCaption: "驾驶舱内置发布日志：2天内敏捷演进并完备记录14个微版本"
+                    },
+                    {
+                        tag: "06 // 事实胜于雄辩与下一步对话",
+                        title: "扎实持久的商业回报，永远建立在严苛可靠的技术工程之上。",
+                        subtitle: "上方是面向决策层的核心要点概述。下方为您呈现完整的实证细节：32列数据规范合约、Serverless架构拓扑、交互式蒙特卡洛模拟工具与真实客户临床档案。欢迎深入查阅或预约战略诊断会话。",
+                        ctas: {
+                            primary: "探索完整技术档案 ↓",
+                            whatsapp: "与 Carlos Felipe 沟通 (WhatsApp)",
+                            sandbox: "在 AI Profiler 中测试业务场景"
+                        },
+                        image: "/images/cases/lean-ops/cockpit/cockpit-kanban.jpg",
+                        imageCaption: "生产环境中运行的完整商业驾驶舱：从智能获客到加权预测闭环"
+                    }
+                ]
+            },
             heroTitle1: "告别昂贵SaaS：零软件成本",
             heroTitle2: "构建全自研AI商业驾驶舱。",
             heroSubtitle: "如何用自研引擎替代昂贵CRM订阅：自动获客、深度临床式客户建档、品牌语调对话与收入预测，12小时内捕获高价值商机。",

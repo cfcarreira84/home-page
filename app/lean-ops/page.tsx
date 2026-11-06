@@ -19,6 +19,7 @@ import {
 import dynamic from 'next/dynamic';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import ExecutiveDeck from '../components/ExecutiveDeck';
 import { useLanguage } from '../context/LanguageContext';
 import { translations } from '../context/translations';
 
@@ -47,110 +48,14 @@ export default function LeanOpsPage() {
     const [selectedMcPhase, setSelectedMcPhase] = useState(3);
     const [modalSvg, setModalSvg] = useState<string | null>(null);
 
-    const dynamicKpis = [
-        { value: "R$ 0", label: t.kpiTools, sub: t.kpiToolsSub },
-        { value: "~700", label: t.kpiLeads, sub: t.kpiLeadsSub },
-        { value: "~12 h", label: t.kpiTime, sub: t.kpiTimeSub },
-        { value: "> R$ 100 mil", label: t.kpiForecast, sub: t.kpiForecastSub },
-        { value: "R$ 0", label: t.kpiMedia, sub: t.kpiMediaSub },
-    ];
-
     return (
         <main className="min-h-screen relative bg-cosmos-base overflow-x-hidden selection:bg-black selection:text-white">
             
             {/* Header Global */}
             <Navbar />
 
-            {/* ================= 1. HERO SECTION (Dark Editorial) ================= */}
-            <section className="relative w-full min-h-[94vh] bg-[#0b0b0b] text-white flex flex-col justify-center items-center px-6 pt-32 pb-20 overflow-hidden">
-                
-                {/* Background Video Vívido e Sem Bloqueios */}
-                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                    <video
-                        src="/footages/lean-ops-1080p-202608242219.webm"
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        preload="auto"
-                        className="absolute inset-0 w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/60" />
-                </div>
-
-                {/* Conteúdo Central do Hero */}
-                <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center text-center">
-                    
-                    <motion.h1
-                        initial={{ opacity: 0, y: 25 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7 }}
-                        className="font-display font-medium text-[clamp(38px,6.2vw,78px)] leading-[1.08] tracking-[-0.03em] mb-6 max-w-5xl"
-                    >
-                        {t.heroTitle1} <br className="max-md:hidden" />
-                        <span className="font-light italic text-white/90">{t.heroTitle2}</span>
-                    </motion.h1>
-
-                    <motion.p
-                        initial={{ opacity: 0, y: 25 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: 0.15 }}
-                        className="font-sans text-[clamp(17px,1.9vw,21px)] leading-[1.5] text-white/85 max-w-[980px] mb-12"
-                    >
-                        {t.heroSubtitle}
-                    </motion.p>
-
-                    <motion.div
-                        initial={{ opacity: 0, y: 25 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: 0.25 }}
-                        className="flex flex-wrap items-center justify-center gap-4"
-                    >
-                        <a 
-                            href="#ciclo"
-                            className="px-8 py-3.5 rounded-full bg-white text-black font-sans font-medium text-[15px] hover:bg-neutral-200 transition-all flex items-center gap-2 shadow-lg"
-                        >
-                            <span>{t.btnViewArch}</span>
-                            <ChevronRight size={16} />
-                        </a>
-                        <a 
-                            href="#diagnostico"
-                            className="px-8 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 font-sans font-medium text-[15px] transition-all"
-                        >
-                            {t.btnReadThesis}
-                        </a>
-                    </motion.div>
-
-                </div>
-
-                {/* Grid Flutuante de KPIs Rápidos */}
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.35 }}
-                    className="relative z-10 w-full max-w-6xl mt-20 grid grid-cols-2 md:grid-cols-5 gap-3 max-md:gap-2 px-2"
-                >
-                    {dynamicKpis.map((kpi, idx) => (
-                        <div 
-                            key={idx}
-                            className={`p-5 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-md flex flex-col justify-between transition-all hover:bg-white/[0.1] ${idx === 4 ? 'col-span-2 md:col-span-1' : ''}`}
-                        >
-                            <span className="font-display font-bold text-[clamp(26px,2.4vw,34px)] text-white tracking-tight leading-none mb-2">
-                                {kpi.value}
-                            </span>
-                            <div>
-                                <p className="font-sans text-[13px] font-semibold text-white/90 leading-tight mb-1">
-                                    {kpi.label}
-                                </p>
-                                <p className="font-sans text-[11px] text-white/50 leading-snug">
-                                    {kpi.sub}
-                                </p>
-                            </div>
-                        </div>
-                    ))}
-                </motion.div>
-
-            </section>
+            {/* ================= 0. APRESENTAÇÃO EXECUTIVA (100vh PITCH DECK C-LEVEL) ================= */}
+            <ExecutiveDeck />
 
             {/* ================= CORPO EDITORIAL (Light Section: #F5F3ED) ================= */}
             <div className="light-section w-full bg-[#F5F3ED] text-[#111111] transition-colors duration-500 relative">
