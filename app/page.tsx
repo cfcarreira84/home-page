@@ -15,16 +15,16 @@ const AgentTerminal = dynamic(() => import('./components/AgentTerminal'), { ssr:
 const Footer = dynamic(() => import('./components/Footer'), { ssr: false });
 
 export default function Home() {
-  const [showSplash, setShowSplash] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
   const [activeFilter, setActiveFilter] = useState("ALL");
   const theme = categoryTheme[activeFilter];
 
   useEffect(() => {
-    // Só exibe a splashscreen se ainda não tiver sido exibida na sessão atual
+    // Se a splash já foi exibida na sessão, não exibe novamente
     if (typeof window !== 'undefined') {
       const splashShown = sessionStorage.getItem('splash_shown');
-      if (!splashShown) {
-        setShowSplash(true);
+      if (splashShown) {
+        setShowSplash(false);
       }
     }
   }, []);
@@ -32,6 +32,7 @@ export default function Home() {
   const handleSplashComplete = () => {
     if (typeof window !== 'undefined') {
       sessionStorage.setItem('splash_shown', 'true');
+      document.documentElement.classList.add('splash-already-shown');
     }
     setShowSplash(false);
   };

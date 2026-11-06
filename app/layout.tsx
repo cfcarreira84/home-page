@@ -58,6 +58,17 @@ export default function RootLayout({
     <html lang="pt-BR" className={`${inter.variable} ${jakarta.variable}`}>
       <head>
         <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                if (sessionStorage.getItem('splash_shown')) {
+                  document.documentElement.classList.add('splash-already-shown');
+                }
+              } catch (e) {}
+            `
+          }}
+        />
+        <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({

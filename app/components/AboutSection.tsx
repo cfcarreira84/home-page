@@ -11,17 +11,21 @@ interface AboutSectionProps {
     theme?: { bg: string, shape1: string, shape2: string };
 }
 
-const formations = [
-    { id: 1, title: "MBA: AI, Data Science e Big Data", local: "PUCRS", period: "2023 - 2024", text: "Especialização corporativa com foco em modelagem de dados avançada, algoritmos preditivos de Machine Learning e arquitetura escalável de Big Data.", image: "/images/mba-ai-data-science-e-big-data.jpg" },
-    { id: 2, title: "MBA: Transformação Digital", local: "PUCRS", period: "2021 - 2022", text: "Visão estratégica focada em inovação disruptiva, adoção de metodologias ágeis e digitalização profunda de processos operacionais e modelos de negócio.", image: "/images/mba-transformacao-digital.jpg" },
-    { id: 3, title: "Gerenciamento de Projetos (PMBoK)", local: "SENAC SP", period: "2018 - 2019", text: "Aprofundamento nas práticas e processos do guia PMBoK para planejamento de alto nível, controle de riscos e execução eficiente de projetos.", image: "/images/gerenciamento-de-projetos-pmbok.jpg" },
-    { id: 4, title: "Propaganda e Marketing", local: "USJT", period: "2014 - 2015", text: "Desenvolvimento técnico de estratégias de mercado, análise de comportamento do consumidor e estruturação de campanhas comerciais 360º.", image: "/images/propaganda-e-marketing.jpg" },
-    { id: 5, title: "Tecnólogo: Design de Mídia Digital", local: "IMPACTA", period: "2008 - 2012", text: "Formação acadêmica multidisciplinar em design de interfaces, experiência do usuário (UX) e desenvolvimento web front-end de alta performance.", image: "/images/design-de-midia-digital.jpg" }
-];
+const formationImages: Record<number, string> = {
+    1: "/images/mba-ai-data-science-e-big-data.jpg",
+    2: "/images/mba-transformacao-digital.jpg",
+    3: "/images/gerenciamento-de-projetos-pmbok.jpg",
+    4: "/images/propaganda-e-marketing.jpg",
+    5: "/images/design-de-midia-digital.jpg"
+};
 
 export default function AboutSection({ theme }: AboutSectionProps) {
     const { lang } = useLanguage();
     const t = translations[lang].about;
+    const formations = (t.formations || []).map(f => ({
+        ...f,
+        image: formationImages[f.id] || ""
+    }));
     const sliderRef = useRef<HTMLDivElement>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [startX, setStartX] = useState(0);

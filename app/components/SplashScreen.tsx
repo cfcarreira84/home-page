@@ -4,8 +4,13 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import { FlaskConical } from 'lucide-react';
+import { useLanguage } from '../context/LanguageContext';
+import { translations } from '../context/translations';
 
 export default function SplashScreen({ onComplete }: { onComplete: () => void }) {
+    const { lang } = useLanguage();
+    const t = translations[lang].splash;
+
     useEffect(() => {
         const finishTimer = setTimeout(onComplete, 5000);
         return () => clearTimeout(finishTimer);
@@ -55,6 +60,7 @@ export default function SplashScreen({ onComplete }: { onComplete: () => void })
             </svg>
 
             <motion.div
+                id="splash-screen-root"
                 className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-[#F5F3ED] overflow-hidden"
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.1, delay: 4.4, ease: "easeOut" }}
@@ -163,7 +169,7 @@ export default function SplashScreen({ onComplete }: { onComplete: () => void })
                     variants={textItem}
                     className="text-[18px] md:text-[32px] font-sans font-normal text-[#202124] tracking-tight text-center leading-[1.3] max-w-[95vw] md:max-w-[80vw]"
                 >
-                    O laboratório de IA aplicada e engenharia de receita.<br /> Menos abstração, mais tração.
+                    {t.sub1}<br /> {t.sub2}
                 </motion.p>
             </motion.div>
 

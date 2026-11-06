@@ -32,3 +32,8 @@
 ::-webkit-scrollbar {
   display: none;
 }
+
+/* Previne flash da tela inicial quando splash já foi exibida na sessão */
+html.splash-already-shown #splash-screen-root {
+  display: none !important;
+}

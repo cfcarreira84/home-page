@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from 'framer-motion';
 import { useLanguage, Language } from '../context/LanguageContext';
 import { translations } from '../context/translations';
@@ -10,6 +10,8 @@ export default function Navbar() {
     const [hidden, setHidden] = useState(false);
     const [isLight, setIsLight] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
+    const [isLangOpen, setIsLangOpen] = useState(false);
+    const langDropdownRef = useRef<HTMLDivElement>(null);
     const { lang, setLanguage } = useLanguage();
     const t = translations[lang].nav;
 
@@ -57,6 +59,18 @@ export default function Navbar() {
             document.body.classList.remove('menu-open');
         };
     }, [menuOpen]);
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (langDropdownRef.current && !langDropdownRef.current.contains(e.target as Node)) {
+                setIsLangOpen(false);
+            }
+        };
+        if (isLangOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [isLangOpen]);
 
     const handleLinkClick = () => {
         setMenuOpen(false);
@@ -115,43 +129,86 @@ export default function Navbar() {
                             {/* Divisor vertical sutil */}
                             <span className="w-[1px] h-[14px] bg-current opacity-25 mx-1" />
 
-                            {/* Seletor Discreto de Idiomas (PT · EN · 中) */}
-                            <div className="flex items-center gap-1 font-mono text-[12px] tracking-wider">
+                            {/* Seletor Dropdown Minimalista de Idiomas (Ocupa o espaço de 1 ícone) */}
+                            <div className="relative" ref={langDropdownRef}>
                                 <button
-                                    onClick={() => setLanguage('pt')}
-                                    className={`px-1.5 py-0.5 rounded transition-all cursor-pointer ${
-                                        lang === 'pt'
-                                            ? 'font-bold opacity-100 border-b border-current'
-                                            : 'opacity-40 hover:opacity-80'
+                                    onClick={() => setIsLangOpen(!isLangOpen)}
+                                    className={`flex items-center justify-center gap-1 h-8 px-2.5 rounded-full border transition-all duration-300 font-mono text-[11px] font-semibold tracking-wider cursor-pointer ${
+                                        isLight
+                                            ? isLangOpen
+                                                ? 'border-black bg-black text-white shadow-sm'
+                                                : 'border-black/20 hover:border-black/50 text-[#111111] bg-black/[0.04]'
+                                            : isLangOpen
+                                                ? 'border-white bg-white text-black shadow-sm'
+                                                : 'border-white/20 hover:border-white/50 text-white/90 bg-white/[0.06]'
                                     }`}
-                                    title="Português"
+                                    title="Idioma / Language"
+                                    aria-expanded={isLangOpen}
                                 >
-                                    PT
+                                    <span>{lang === 'zh' ? '中' : lang.toUpperCase()}</span>
+                                    <motion.svg
+                                        animate={{ rotate: isLangOpen ? 180 : 0 }}
+                                        transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+                                        width="10"
+                                        height="10"
+                                        viewBox="0 0 24 24"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        strokeWidth="2.5"
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        className="opacity-70 shrink-0"
+                                    >
+                                        <path d="m6 9 6 6 6-6" />
+                                    </motion.svg>
                                 </button>
-                                <span className="opacity-25 text-[10px]">·</span>
-                                <button
-                                    onClick={() => setLanguage('en')}
-                                    className={`px-1.5 py-0.5 rounded transition-all cursor-pointer ${
-                                        lang === 'en'
-                                            ? 'font-bold opacity-100 border-b border-current'
-                                            : 'opacity-40 hover:opacity-80'
-                                    }`}
-                                    title="English"
-                                >
-                                    EN
-                                </button>
-                                <span className="opacity-25 text-[10px]">·</span>
-                                <button
-                                    onClick={() => setLanguage('zh')}
-                                    className={`px-1.5 py-0.5 rounded transition-all cursor-pointer ${
-                                        lang === 'zh'
-                                            ? 'font-bold opacity-100 border-b border-current'
-                                            : 'opacity-40 hover:opacity-80'
-                                    }`}
-                                    title="简体中文"
-                                >
-                                    中
-                                </button>
+
+                                <AnimatePresence>
+                                    {isLangOpen && (
+                                        <motion.div
+                                            initial={{ opacity: 0, y: -8, scale: 0.94 }}
+                                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                                            exit={{ opacity: 0, y: -8, scale: 0.94 }}
+                                            transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+                                            className={`absolute right-0 top-full mt-2 w-36 rounded-2xl p-1.5 shadow-2xl backdrop-blur-2xl border z-[120] flex flex-col gap-1 ${
+                                                isLight
+                                                    ? 'bg-[#F5F3ED]/95 border-black/10 text-[#111111] shadow-black/10'
+                                                    : 'bg-[#121212]/95 border-white/10 text-white shadow-black/60'
+                                            }`}
+                                        >
+                                            {[
+                                                { code: 'pt', label: 'Português', short: 'PT' },
+                                                { code: 'en', label: 'English', short: 'EN' },
+                                                { code: 'zh', label: '简体中文', short: '中' },
+                                            ].map((item) => {
+                                                const isActive = lang === item.code;
+                                                return (
+                                                    <button
+                                                        key={item.code}
+                                                        onClick={() => {
+                                                            setLanguage(item.code as Language);
+                                                            setIsLangOpen(false);
+                                                        }}
+                                                        className={`flex items-center justify-between w-full px-3 py-2 rounded-xl text-left font-mono text-[11px] transition-all cursor-pointer ${
+                                                            isActive
+                                                                ? isLight
+                                                                    ? 'bg-black text-white font-bold'
+                                                                    : 'bg-white text-black font-bold'
+                                                                : isLight
+                                                                    ? 'hover:bg-black/5 text-[#111111]/80 hover:text-[#111111]'
+                                                                    : 'hover:bg-white/10 text-white/80 hover:text-white'
+                                                        }`}
+                                                    >
+                                                        <span className="font-sans text-[13px]">{item.label}</span>
+                                                        <span className={`text-[10px] uppercase font-mono tracking-wider ${isActive ? 'opacity-90' : 'opacity-40'}`}>
+                                                            {item.short}
+                                                        </span>
+                                                    </button>
+                                                );
+                                            })}
+                                        </motion.div>
+                                    )}
+                                </AnimatePresence>
                             </div>
                         </div>
                         

@@ -31,171 +31,16 @@ const theme = {
     shape2: "/shapes/shape-orange.svg" 
 };
 
-const funilLayers = [
-    {
-        id: "descoberta",
-        level: "01",
-        name: "Descoberta Bruta",
-        volume: "Milhares de itens",
-        color: "from-blue-900 to-indigo-950",
-        badge: "Varredura Pública",
-        criteria: "Mapas, diretórios setoriais e listas abertas de arquitetura, design e redes gastronômicas.",
-        action: "Só o 1º lote de arquitetura avaliou mais de 1.100 empresas; o 2º lote ultrapassou 2.400 resultados brutos."
-    },
-    {
-        id: "tratamento",
-        level: "02",
-        name: "Higienização & Validação",
-        volume: "Empresas reais com site ativo",
-        color: "from-blue-800 to-indigo-900",
-        badge: "Filtro de Ruído",
-        criteria: "Eliminação de agências, perfis sociais avulsos, CNPJs baixados e marcas com atividades encerradas.",
-        action: "Repetidos fundidos, unidades de redes consolidadas em um decisor e 55 contatos inativos descartados."
-    },
-    {
-        id: "enriquecimento",
-        level: "03",
-        name: "Contatos Auditados",
-        volume: "Canais oficiais verificados",
-        color: "from-blue-700 to-blue-800",
-        badge: "Conferência na Fonte",
-        criteria: "Apenas contatos públicos (WhatsApp, e-mail institucional e telefone) com a URL de origem registrada.",
-        action: "Sanitização automática contra regras de conformidade e gravação de metadados em 32 colunas padronizadas."
-    },
-    {
-        id: "prontuario",
-        level: "04",
-        name: "Anamnese & Prontuário",
-        volume: "Análise clínica por IA",
-        color: "from-blue-600 to-blue-700",
-        badge: "Qualificação Profunda",
-        criteria: "Cruzamento do portfólio real do cliente com os 28 blocos de produtos da fábrica para gerar argumentos exclusivos.",
-        action: "Diagnóstico de pontos fortes, hipóteses de obra, até 3 produtos indicados e gancho de 1ª mensagem customizado."
-    },
-    {
-        id: "resultado",
-        level: "05",
-        name: "Leads Aptos para Abordagem",
-        volume: "~700 contas prontas",
-        color: "from-emerald-600 to-teal-700",
-        badge: "Alta Propensão B2B",
-        criteria: "Somente empresas que justificam o tempo e a atenção do operador humano comercial sênior.",
-        action: "608 escritórios de arquitetura e design de interiores + 89 redes selecionadas de food service e hospitalidade."
-    }
-];
-
-const cicloEtapas = [
-    {
-        id: 1,
-        step: "01",
-        name: "Captar",
-        sub: "/captacao-escritorios",
-        desc: "Assistente autônomo navega em fontes e registros públicos, valida se a empresa é ativa e audita dados sem disparar abordagens precipitadas.",
-        rules: ["Varredura em sites e diretórios abertos", "Apenas dados de contato públicos e verificáveis", "Pausa e consulta humana em caso de inconsistência"],
-        output: "Lista MESTRE com milhares de registros brutos"
-    },
-    {
-        id: 2,
-        step: "02",
-        name: "Higienizar",
-        sub: "/higienizar-base-prospeccao",
-        desc: "Normalização estrutural que elimina duplicidades, agrupa filiais de redes corporativas em um único decisor e redige o gancho de abordagem.",
-        rules: ["Filtro de integridade de CNPJ/nome fantasia", "Priorização ponderada por perfil e porte", "Redação do primeiro gancho em 2 parágrafos"],
-        output: "Dataset higienizado com contrato de 32 colunas"
-    },
-    {
-        id: 3,
-        step: "03",
-        name: "Carregar",
-        sub: "/carga-leads",
-        desc: "Ingestão idempotente no banco relacional Supabase com validação prévia de colunas obrigatórias e snapshot de backup antes de qualquer mutação.",
-        rules: ["Validação estrita de schema de dados", "Backup automatizado com validação de hash", "Carga incremental idempotente (nunca duplica)"],
-        output: "Leads inseridos na fila 'Aguardando Contato'"
-    },
-    {
-        id: 4,
-        step: "04",
-        name: "Trabalhar",
-        sub: "Cockpit Kanban com IA Sob Demanda",
-        desc: "Esteira de 9 fases onde o operador humano tem suporte de IA contextualizada, pronta para sugerir réplicas e respeitar o tom de voz da marca.",
-        rules: ["Histórico contextual das últimas 20 mensagens", "Smart Console para réplicas de objeções", "Sugestão inteligente do próximo passo no pipeline"],
-        output: "Negócios avançando de forma qualificada no funil"
-    },
-    {
-        id: 5,
-        step: "05",
-        name: "Medir",
-        sub: "Simulador de Monte Carlo & BI",
-        desc: "Algoritmo estatístico que roda 10.000 iterações estocásticas para calcular o forecast ponderado e reordenar a prioridade visual dos cartões.",
-        rules: ["Matriz de discovery (interlocutor, demanda, ticket)", "Probabilidade dinâmica calculada por lead", "Filtros interativos direto nos KPIs do cockpit"],
-        output: "Forecast preditivo e gestão de atenção executiva"
-    }
-];
-
-const camadasProntuario = [
-    {
-        id: "anamnese",
-        title: "Anamnese",
-        desc: "Mapeamento rigoroso do ecossistema do lead (projetos executados, prêmios, mini bio e canais oficiais).",
-        honestyRule: "Só o que é publicamente auditável com URL da fonte. Se não houver registro, o campo permanece vazio."
-    },
-    {
-        id: "diagnostico",
-        title: "Diagnóstico",
-        desc: "Cruzamento dos pontos fortes do escritório com eventuais gargalos de fornecimento ou acabamento.",
-        honestyRule: "Pontos de atenção só com evidência clara; caso contrário, é marcado como 'Sem informação verificada'."
-    },
-    {
-        id: "hipoteses",
-        title: "Hipóteses",
-        desc: "Formulação de teses técnicas para o operador validar durante a conversa (tipo de marcenaria, demandas de obra, prazos).",
-        honestyRule: "Escritas explicitamente no formato de hipótese, ligadas a um fato concreto, jamais como verdade presumida."
-    },
-    {
-        id: "indicacao",
-        title: "Indicação de Portfólio",
-        desc: "Recomendação cirúrgica de até 3 equipamentos do catálogo que atendem exatamente ao padrão dos projetos do cliente.",
-        honestyRule: "Apenas se houver aderência arquitetônica demonstrada. Sem dados, emite 'Sem dados suficientes para proposta'."
-    },
-    {
-        id: "argumento",
-        title: "Argumento Comercial",
-        desc: "Identificação da alavanca de valor com maior apelo para aquele perfil (ex: flexibilidade de nicho, ART, INDICA).",
-        honestyRule: "Selecionado estritamente a partir da matriz comercial aprovada da diretoria, sem improvisos da IA."
-    },
-    {
-        id: "prioridade",
-        title: "Score & Prioridade",
-        desc: "Classificação em Alta, Média-alta ou Média, baseada em aderência de ticket e capacidade de especificação.",
-        honestyRule: "Critérios matemáticos e explicáveis no prontuário, sem pontuações 'caixa-preta'."
-    },
-    {
-        id: "mensagem",
-        title: "Primeira Mensagem",
-        desc: "Texto de abertura em dois parágrafos: conexão genuína com uma obra real do lead + introdução de autoridade da marca.",
-        honestyRule: "Transparência total sobre a origem da pesquisa, banindo elogios vazios ou clichês corporativos."
-    }
-];
-
-const monteCarloPhases = [
-    { phase: "Aguardando Contato", mult: "1.0x", prob: "12%", desc: "Lead na esteira com prontuário gerado, sem toque humano inicial.", forecast: "R$ 14.400" },
-    { phase: "Abordagem Realizada", mult: "1.2x", prob: "28%", desc: "Primeiro contato honesto enviado com referência direta ao portfólio.", forecast: "R$ 33.600" },
-    { phase: "Conversa em Andamento", mult: "1.5x", prob: "46%", desc: "Interlocutor respondeu, Smart Console sugerindo réplica técnica.", forecast: "R$ 55.200" },
-    { phase: "Interesse Confirmado", mult: "1.8x", prob: "74%", desc: "Demanda imediata por projeto residencial ou gastronômico mapeada.", forecast: "R$ 88.800" },
-    { phase: "Proposta / Fechamento", mult: "2.0x", prob: "91%", desc: "Especificação de nicho validada e negociação em estágio avançado.", forecast: "R$ 109.200" }
-];
-
-const stackItens = [
-    { layer: "Interface Front-end", tech: "HTML5, CSS moderno e Vanilla JS modular", cost: "R$ 0", reason: "Zero overhead de build, carregamento instantâneo em hospedagem existente" },
-    { layer: "Banco de Dados & Auth", tech: "Supabase (PostgreSQL com RLS + Realtime)", cost: "R$ 0", reason: "Camada gratuita com segurança granular por usuário e replicação em tempo real" },
-    { layer: "Inteligência Artificial", tech: "Google Gemini (Edge Functions Deno/TS)", cost: "R$ 0", reason: "Fallback automático entre 4 modelos gratuitos e prompts calibrados" },
-    { layer: "Automações & Pipelines", tech: "Python, scripts de batch e Chrome Headless", cost: "R$ 0", reason: "Validação rigorosa por hash, sanitização de dados e idempotência" },
-    { layer: "Versionamento & DevOps", tech: "GitHub privado com SemVer e 14 releases", cost: "R$ 0", reason: "Rastreabilidade de cada evolução com documentação técnica padronizada" }
-];
-
 export default function LeanOpsPage() {
     const { lang } = useLanguage();
     const t = translations[lang].leanOps;
+    const funilLayers = t.funilLayers;
+    const cicloEtapas = t.cicloEtapas;
+    const camadasProntuario = t.camadasProntuario;
+    const monteCarloPhases = t.monteCarloPhases;
+    const stackItens = t.stackItens;
+    const regrasEngenharia = t.regrasEngenharia;
+
     const [selectedEtapa, setSelectedEtapa] = useState(0);
     const [selectedCamada, setSelectedCamada] = useState(0);
     const [selectedFunilIndex, setSelectedFunilIndex] = useState(4);
@@ -361,69 +206,44 @@ export default function LeanOpsPage() {
 
                     {/* Os 3 Gargalos Estruturais */}
                     <div className="grid md:grid-cols-3 gap-6 mb-16">
-                        <div className="p-8 rounded-3xl bg-white/70 border border-black/5 backdrop-blur-sm shadow-sm flex flex-col justify-between">
-                            <div>
-                                <span className="font-sans text-[12px] font-bold text-[#E11D48] tracking-widest uppercase mb-4 block">Gargalo 01</span>
-                                <h3 className="font-display font-semibold text-[22px] mb-3 leading-snug">{t.bottleneck1Title}</h3>
-                                <p className="font-sans text-[15px] text-black/70 leading-relaxed">
-                                    {t.bottleneck1Desc}
-                                </p>
-                            </div>
-                            <div className="mt-8 pt-4 border-t border-black/5 text-[12px] font-medium text-black/50">
-                                Alto custo marginal por clique
-                            </div>
-                        </div>
-
-                        <div className="p-8 rounded-3xl bg-white/70 border border-black/5 backdrop-blur-sm shadow-sm flex flex-col justify-between">
-                            <div>
-                                <span className="font-sans text-[12px] font-bold text-[#D97706] tracking-widest uppercase mb-4 block">Gargalo 02</span>
-                                <h3 className="font-display font-semibold text-[22px] mb-3 leading-snug">{t.bottleneck2Title}</h3>
-                                <p className="font-sans text-[15px] text-black/70 leading-relaxed">
-                                    {t.bottleneck2Desc}
-                                </p>
-                            </div>
-                            <div className="mt-8 pt-4 border-t border-black/5 text-[12px] font-medium text-black/50">
-                                Ruído e atrito na primeira impressão
-                            </div>
-                        </div>
-
-                        <div className="p-8 rounded-3xl bg-white/70 border border-black/5 backdrop-blur-sm shadow-sm flex flex-col justify-between">
-                            <div>
-                                <span className="font-sans text-[12px] font-bold text-[#2563EB] tracking-widest uppercase mb-4 block">Gargalo 03</span>
-                                <h3 className="font-display font-semibold text-[22px] mb-3 leading-snug">{t.bottleneck3Title}</h3>
-                                <p className="font-sans text-[15px] text-black/70 leading-relaxed">
-                                    {t.bottleneck3Desc}
-                                </p>
-                            </div>
-                            <div className="mt-8 pt-4 border-t border-black/5 text-[12px] font-medium text-black/50">
-                                Perda de oportunidades de alto ticket
-                            </div>
-                        </div>
+                        {(t.bottlenecks || []).map((item, idx) => {
+                            const colors = ["text-[#E11D48]", "text-[#D97706]", "text-[#2563EB]"];
+                            return (
+                                <div key={idx} className="p-8 rounded-3xl bg-white/70 border border-black/5 backdrop-blur-sm shadow-sm flex flex-col justify-between">
+                                    <div>
+                                        <span className={`font-sans text-[12px] font-bold ${colors[idx % colors.length]} tracking-widest uppercase mb-4 block`}>
+                                            {item.tag}
+                                        </span>
+                                        <h3 className="font-display font-semibold text-[22px] mb-3 leading-snug">{item.title}</h3>
+                                        <p className="font-sans text-[15px] text-black/70 leading-relaxed">
+                                            {item.desc}
+                                        </p>
+                                    </div>
+                                    <div className="mt-8 pt-4 border-t border-black/5 text-[12px] font-medium text-black/50">
+                                        {item.footer}
+                                    </div>
+                                </div>
+                            );
+                        })}
                     </div>
 
                     {/* A Tese Brutalista */}
                     <div className="p-10 md:p-14 rounded-3xl bg-[#111111] text-white relative overflow-hidden shadow-xl">
                         <div className="relative z-10 max-w-3xl">
                             <span className="font-sans text-[11px] font-bold text-white/50 uppercase tracking-[0.18em] block mb-4">
-                                A TESE OPERACIONAL
+                                {t.thesisTag}
                             </span>
                             <blockquote className="font-display text-[clamp(22px,3vw,36px)] leading-[1.25] tracking-tight mb-8">
                                 {t.thesisQuote}
                             </blockquote>
 
                             <div className="grid sm:grid-cols-3 gap-6 pt-6 border-t border-white/15">
-                                <div>
-                                    <h4 className="font-display font-semibold text-[17px] text-white mb-1">LeanOps</h4>
-                                    <p className="font-sans text-[13px] text-white/70">Mínimo de peças móveis. Front estático sem build, banco gerenciado e custo zero de infraestrutura.</p>
-                                </div>
-                                <div>
-                                    <h4 className="font-display font-semibold text-[17px] text-white mb-1">RevOps</h4>
-                                    <p className="font-sans text-[13px] text-white/70">Processo unificado de ponta a ponta: do scraping inicial ao forecast preditivo com a mesma métrica.</p>
-                                </div>
-                                <div>
-                                    <h4 className="font-display font-semibold text-[17px] text-white mb-1">MarTech</h4>
-                                    <p className="font-sans text-[13px] text-white/70">IA calibrada com 28 blocos do produto, acionada sob demanda e com fonte estritamente verificável.</p>
-                                </div>
+                                {(t.thesisPillars || []).map((pillar, pIdx) => (
+                                    <div key={pIdx}>
+                                        <h4 className="font-display font-semibold text-[17px] text-white mb-1">{pillar.name}</h4>
+                                        <p className="font-sans text-[13px] text-white/70">{pillar.desc}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -526,7 +346,13 @@ export default function LeanOpsPage() {
                                         className="p-8 rounded-3xl bg-[#F8FAFC] border border-black/5 shadow-xs"
                                     >
                                         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-700 font-mono text-[12px] font-bold mb-4">
-                                            <span>CAMADA {funilLayers[selectedFunilIndex].level} DE 05</span>
+                                            <span>
+                                                {lang === 'pt' 
+                                                    ? `CAMADA ${funilLayers[selectedFunilIndex].level} DE 05` 
+                                                    : lang === 'en' 
+                                                        ? `LAYER ${funilLayers[selectedFunilIndex].level} OF 05` 
+                                                        : `第 ${funilLayers[selectedFunilIndex].level} 层（共 05 层）`}
+                                            </span>
                                         </div>
 
                                         <h4 className="font-display font-bold text-[24px] text-black mb-1">
@@ -539,7 +365,7 @@ export default function LeanOpsPage() {
                                         <div className="space-y-4 pt-4 border-t border-black/5">
                                             <div>
                                                 <span className="text-[11px] font-bold text-black/40 uppercase tracking-widest block mb-1">
-                                                    Critério de Filtragem:
+                                                    {lang === 'pt' ? 'Critério de Filtragem:' : lang === 'en' ? 'Filtering Criteria:' : '筛选标准：'}
                                                 </span>
                                                 <p className="font-sans text-[14px] text-black/75 leading-relaxed">
                                                     {funilLayers[selectedFunilIndex].criteria}
@@ -548,7 +374,7 @@ export default function LeanOpsPage() {
 
                                             <div className="p-4 rounded-xl bg-white border border-black/5">
                                                 <span className="text-[11px] font-bold text-black/40 uppercase tracking-widest block mb-1">
-                                                    Ação Operacional Executada:
+                                                    {lang === 'pt' ? 'Ação Operacional Executada:' : lang === 'en' ? 'Operational Action Taken:' : '执行的操作：'}
                                                 </span>
                                                 <p className="font-sans text-[13px] text-black/85 leading-relaxed">
                                                     {funilLayers[selectedFunilIndex].action}
@@ -568,16 +394,16 @@ export default function LeanOpsPage() {
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 pb-4 border-b border-black/5 gap-3">
                             <div>
                                 <span className="font-sans text-[11px] font-bold text-black/40 uppercase tracking-widest block mb-1">
-                                    INTERATIVIDADE // O MOTOR EM EXECUÇÃO
+                                    {t.cycleInteractiveHeader}
                                 </span>
-                                <h3 className="font-display font-semibold text-[22px]">As 5 etapas operacionais do ciclo</h3>
+                                <h3 className="font-display font-semibold text-[22px]">{t.cycleInteractiveTitle}</h3>
                             </div>
                             <button
                                 onClick={() => setModalSvg("/images/cases/lean-ops/ciclo.svg")}
                                 className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 text-[13px] font-medium text-black/80 hover:text-black transition-all cursor-pointer self-start sm:self-auto"
                             >
                                 <Maximize2 size={15} />
-                                <span>Ver Diagrama Completo</span>
+                                <span>{t.btnViewCycleFull}</span>
                             </button>
                         </div>
 
@@ -594,7 +420,7 @@ export default function LeanOpsPage() {
                                     }`}
                                 >
                                     <span className={`text-[11px] font-mono block mb-1 ${selectedEtapa === idx ? 'text-white/60' : 'text-black/40'}`}>
-                                        ETAPA {etapa.step}
+                                        {lang === 'pt' ? `ETAPA ${etapa.step}` : lang === 'en' ? `STAGE ${etapa.step}` : `环节 ${etapa.step}`}
                                     </span>
                                     <span className="font-display font-semibold text-[15px] block">
                                         {etapa.name}
@@ -628,7 +454,7 @@ export default function LeanOpsPage() {
 
                                     <div className="space-y-2">
                                         <span className="text-[12px] font-bold text-black/50 uppercase tracking-wider block mb-2">
-                                            Regras de Validação & Integridade:
+                                            {t.validationRulesLabel}
                                         </span>
                                         {cicloEtapas[selectedEtapa].rules.map((rule, rIdx) => (
                                             <div key={rIdx} className="flex items-center gap-2 text-[14px] text-black/80">
@@ -641,7 +467,7 @@ export default function LeanOpsPage() {
 
                                 <div className="p-6 rounded-2xl bg-white border border-black/5 flex flex-col justify-between shadow-xs">
                                     <span className="text-[11px] font-bold text-black/40 uppercase tracking-widest">
-                                        Saída Garantida da Fase
+                                        {t.guaranteedOutputLabel}
                                     </span>
                                     <div className="my-auto py-4">
                                         <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center font-mono font-bold text-[14px] mb-3">
@@ -652,7 +478,7 @@ export default function LeanOpsPage() {
                                         </p>
                                     </div>
                                     <span className="text-[11px] text-black/40 font-mono">
-                                        Pipeline automatizado sem atrito manual
+                                        {t.automatedPipelineLabel}
                                     </span>
                                 </div>
                             </motion.div>
@@ -711,7 +537,7 @@ export default function LeanOpsPage() {
                     {/* Componente Interativo: As 7 Camadas do Prontuário */}
                     <div className="rounded-3xl bg-white p-6 md:p-10 border border-black/5 shadow-sm mb-16">
                         <span className="font-sans text-[11px] font-bold text-black/40 uppercase tracking-widest block mb-1">
-                            DETALHAMENTO // AS 7 CAMADAS DO PRONTUÁRIO
+                            {t.prontuarioHeader}
                         </span>
                         <h3 className="font-display font-semibold text-[22px] mb-8">
                             {t.layersTitle}
@@ -750,7 +576,11 @@ export default function LeanOpsPage() {
                                         className="p-8 rounded-3xl bg-[#F8FAFC] border border-black/5"
                                     >
                                         <span className="font-mono text-[11px] uppercase tracking-wider text-blue-600 block mb-2">
-                                            CAMADA {selectedCamada + 1} DE 7
+                                            {lang === 'pt' 
+                                                ? `CAMADA ${selectedCamada + 1} DE 7` 
+                                                : lang === 'en' 
+                                                    ? `LAYER ${selectedCamada + 1} OF 7` 
+                                                    : `第 ${selectedCamada + 1} 层（共 7 层）`}
                                         </span>
                                         <h4 className="font-display font-bold text-[26px] text-black mb-4">
                                             {camadasProntuario[selectedCamada].title}
@@ -762,7 +592,7 @@ export default function LeanOpsPage() {
                                         <div className="p-5 rounded-2xl bg-amber-50/80 border border-amber-200/80">
                                             <div className="flex items-center gap-2 text-amber-900 font-display font-semibold text-[13px] mb-1">
                                                 <ShieldCheck size={16} className="text-amber-700" />
-                                                <span>Regra de Blindagem Anti-Alucinação</span>
+                                                <span>{t.antiHallucinationRule}</span>
                                             </div>
                                             <p className="font-sans text-[13px] text-amber-900/80 leading-relaxed">
                                                 {camadasProntuario[selectedCamada].honestyRule}
@@ -810,7 +640,7 @@ export default function LeanOpsPage() {
                                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/5 hover:bg-black/10 text-[12px] font-medium text-black/70 hover:text-black transition-all cursor-pointer"
                                     >
                                         <Maximize2 size={13} />
-                                        <span>Original</span>
+                                        <span>{lang === 'pt' ? 'Original' : lang === 'en' ? 'Original' : '原图'}</span>
                                     </button>
                                 </div>
                                 <p className="font-sans text-[13px] text-black/60 mb-6 leading-relaxed">
@@ -850,7 +680,11 @@ export default function LeanOpsPage() {
                             <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-100 flex items-center justify-between">
                                 <div>
                                     <span className="text-[11px] font-mono uppercase tracking-wider text-blue-700 block">
-                                        Forecast Ponderado da Fase ({monteCarloPhases[selectedMcPhase].mult}):
+                                        {lang === 'pt' 
+                                            ? `Forecast Ponderado da Fase (${monteCarloPhases[selectedMcPhase].mult}):` 
+                                            : lang === 'en' 
+                                                ? `Weighted Phase Forecast (${monteCarloPhases[selectedMcPhase].mult}):` 
+                                                : `该阶段加权预测 (${monteCarloPhases[selectedMcPhase].mult}):`}
                                     </span>
                                     <p className="font-sans text-[13px] text-blue-900/80">
                                         {monteCarloPhases[selectedMcPhase].desc}
@@ -877,7 +711,7 @@ export default function LeanOpsPage() {
                                         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/5 hover:bg-black/10 text-[12px] font-medium text-black/70 hover:text-black transition-all cursor-pointer"
                                     >
                                         <Maximize2 size={13} />
-                                        <span>Original</span>
+                                        <span>{lang === 'pt' ? 'Original' : lang === 'en' ? 'Original' : '原图'}</span>
                                     </button>
                                 </div>
                                 <p className="font-sans text-[13px] text-black/60 mb-6 leading-relaxed">
@@ -894,15 +728,15 @@ export default function LeanOpsPage() {
                                         </div>
                                         <div className="space-y-1.5 font-mono text-[11px]">
                                             <div className="flex items-center justify-between text-black/60">
-                                                <span>Mídia paga (15 a 30 leads/sem.)</span>
-                                                <span className="font-bold">23 a 47 semanas</span>
+                                                <span>{lang === 'pt' ? 'Mídia paga (15 a 30 leads/sem.)' : lang === 'en' ? 'Paid media (15 to 30 leads/week)' : '付费广告获客（每周15-30线索）'}</span>
+                                                <span className="font-bold">{lang === 'pt' ? '23 a 47 semanas' : lang === 'en' ? '23 to 47 weeks' : '23 至 47 周'}</span>
                                             </div>
                                             <div className="w-full h-2.5 rounded-full bg-black/10 overflow-hidden">
                                                 <div className="w-[100%] h-full bg-red-400/80 rounded-full" />
                                             </div>
                                             <div className="flex items-center justify-between text-black/90 font-bold pt-1">
-                                                <span>Motor Lean Ops (Batch ativo)</span>
-                                                <span className="text-emerald-700">1 dia útil</span>
+                                                <span>{lang === 'pt' ? 'Motor Lean Ops (Batch ativo)' : lang === 'en' ? 'Lean Ops Engine (Active batch)' : 'Lean Ops引擎（批处理执行）'}</span>
+                                                <span className="text-emerald-700">{lang === 'pt' ? '1 dia útil' : lang === 'en' ? '1 business day' : '1 个工作日'}</span>
                                             </div>
                                             <div className="w-full h-2.5 rounded-full bg-black/10 overflow-hidden">
                                                 <div className="w-[5%] h-full bg-emerald-500 rounded-full" />
@@ -922,14 +756,14 @@ export default function LeanOpsPage() {
                                                 <span className="font-bold">R$ 45,5k a R$ 180k</span>
                                             </div>
                                             <div className="text-[10px] text-black/40 -mt-0.5">
-                                                {lang === 'pt' ? "(Mídia R$ 17,5k-105k + SaaS CRM Setup/Contrato R$ 28k-75k)" : lang === 'en' ? "(Media $ 3.5k-21k + CRM SaaS Setup/Contract $ 5.6k-15k)" : "(广告投放 R$ 17.5k-105k + CRM SaaS实施与订阅 R$ 28k-75k)"}
+                                                {t.mediaSubDetail}
                                             </div>
                                             <div className="w-full h-2.5 rounded-full bg-black/10 overflow-hidden">
                                                 <div className="w-[100%] h-full bg-amber-500/80 rounded-full" />
                                             </div>
                                             <div className="flex items-center justify-between text-black/90 font-bold pt-1">
                                                 <span>{t.motorLabel}</span>
-                                                <span className="text-emerald-700">{lang === 'pt' ? "R$ 0 de mídia e R$ 0 de SaaS" : lang === 'en' ? "$ 0 paid media and $ 0 SaaS" : "R$ 0 广告费与 R$ 0 软件订阅费"}</span>
+                                                <span className="text-emerald-700">{t.motorValue}</span>
                                             </div>
                                             <div className="w-full h-2.5 rounded-full bg-black/10 overflow-hidden">
                                                 <div className="w-[2%] h-full bg-emerald-500 rounded-full" />
@@ -940,13 +774,7 @@ export default function LeanOpsPage() {
                             </div>
 
                             <div className="p-4 rounded-xl bg-black/[0.02] border border-black/5 text-[12px] text-black/60 leading-relaxed">
-                                {lang === 'pt' ? (
-                                    "* Paralelo de ordem de grandeza considerando mídia histórica e contratação de SaaS de CRM com setup de implantação e licenças contratuais vs. motor proprietário serverless."
-                                ) : lang === 'en' ? (
-                                    "* Order-of-magnitude benchmark comparing historical paid acquisition and commercial CRM SaaS (setup + license contracts) against our proprietary serverless engine."
-                                ) : (
-                                    "* 数量级对照基准：综合考量历史付费广告投放与商业CRM SaaS订阅（含实施部署费及合同期软件年费）对比自研Serverless引擎。"
-                                )}
+                                {t.comparisonNote}
                             </div>
                         </div>
 
@@ -1022,7 +850,7 @@ export default function LeanOpsPage() {
                                     </p>
                                 </div>
                                 <div className="mt-4 pt-3 border-t border-black/5 flex items-center justify-between">
-                                    <span className="text-[11px] font-bold text-black/40 uppercase">Custo</span>
+                                    <span className="text-[11px] font-bold text-black/40 uppercase">{t.costLabel}</span>
                                     <span className="font-display font-bold text-[14px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md">
                                         {item.cost}
                                     </span>
@@ -1034,37 +862,23 @@ export default function LeanOpsPage() {
                     {/* As 6 Regras de Engenharia */}
                     <div className="rounded-3xl bg-[#111111] text-white p-8 md:p-12 shadow-xl">
                         <span className="font-sans text-[11px] font-bold text-white/40 uppercase tracking-widest block mb-3">
-                            PRINCÍPIOS OPERACIONAIS
+                            {t.principlesHeader}
                         </span>
                         <h3 className="font-display font-semibold text-[26px] mb-8">
-                            6 decisões que sustentam a operação e blindam contra falhas
+                            {t.principlesTitle}
                         </h3>
 
                         <div className="grid md:grid-cols-3 gap-8">
-                            <div className="space-y-2">
-                                <span className="font-mono text-blue-400 text-[13px] font-bold">01 // Qualidade antes de volume</span>
-                                <p className="font-sans text-[14px] text-white/70 leading-relaxed">O validador barra qualquer linha mal formatada; backups prévios e idempotência tornam erros baratos e fáceis de reverter.</p>
-                            </div>
-                            <div className="space-y-2">
-                                <span className="font-mono text-blue-400 text-[13px] font-bold">02 // Fonte única de parametrização</span>
-                                <p className="font-sans text-[14px] text-white/70 leading-relaxed">Marca, funil, perfis e pesos num só arquivo; mudar uma fase ou alterar uma regra não exige migrações complexas de banco.</p>
-                            </div>
-                            <div className="space-y-2">
-                                <span className="font-mono text-blue-400 text-[13px] font-bold">03 // Conhecimento em dados</span>
-                                <p className="font-sans text-[14px] text-white/70 leading-relaxed">Corrigir um argumento comercial ou nova especificação é atualizar um JSON estruturado, sem necessidade de recompile ou novo deploy.</p>
-                            </div>
-                            <div className="space-y-2">
-                                <span className="font-mono text-blue-400 text-[13px] font-bold">04 // Honestidade como código</span>
-                                <p className="font-sans text-[14px] text-white/70 leading-relaxed">A IA é configurada para se recusar a forçar uma proposta caso não existam dados suficientes, emitindo alertas explícitos de checagem.</p>
-                            </div>
-                            <div className="space-y-2">
-                                <span className="font-mono text-blue-400 text-[13px] font-bold">05 // Pausar em vez de improvisar</span>
-                                <p className="font-sans text-[14px] text-white/70 leading-relaxed">Assistentes de dados pausam a execução e consultam o operador diante de qualquer bloqueio, prevenindo contaminação da base com ruído.</p>
-                            </div>
-                            <div className="space-y-2">
-                                <span className="font-mono text-blue-400 text-[13px] font-bold">06 // Cadência de entrega</span>
-                                <p className="font-sans text-[14px] text-white/70 leading-relaxed">14 micro-versões documentadas em 2 dias, cada uma registrada no changelog para garantir rastreabilidade completa e zero regressões.</p>
-                            </div>
+                            {regrasEngenharia.map((regra, rIdx) => (
+                                <div key={rIdx} className="space-y-2">
+                                    <span className="font-mono text-blue-400 text-[13px] font-bold">
+                                        {regra.num} // {regra.title}
+                                    </span>
+                                    <p className="font-sans text-[14px] text-white/70 leading-relaxed">
+                                        {regra.desc}
+                                    </p>
+                                </div>
+                            ))}
                         </div>
                     </div>
 
@@ -1118,7 +932,7 @@ export default function LeanOpsPage() {
                         >
                             <div className="flex items-center justify-between pb-4 border-b border-black/10 mb-4">
                                 <span className="font-display font-semibold text-[16px] text-black">
-                                    Diagrama Técnico em Alta Resolução (Original)
+                                    {lang === 'pt' ? 'Diagrama Técnico em Alta Resolução (Original)' : lang === 'en' ? 'High-Resolution Technical Diagram (Original)' : '高分辨率技术架构图（原图）'}
                                 </span>
                                 <button
                                     onClick={() => setModalSvg(null)}
