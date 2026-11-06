@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 380" role="img" aria-label="Paralelo entre captar 700 leads por mídia paga e pelo motor: tempo e custo">
+  <style>
+    .t{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#0B1220}
+    .h{font-weight:700;font-size:15px}
+    .s{font-size:12.5px;fill:#475569}
+    .v{font-weight:700;font-size:14px}
+  </style>
+  <rect width="1000" height="380" rx="14" fill="#F1F5F9"/>
+  <text class="t h" x="30" y="38">Para ter ~700 leads qualificados, o histórico da empresa exigiria...</text>
+
+  <text class="t h" x="30" y="86">Tempo</text>
+  <text class="t s" x="30" y="104">escala em semanas</text>
+  <g>
+    <text class="t s" x="150" y="76">Mídia paga a 30 leads por semana</text>
+    <rect x="150" y="82" width="380" height="22" rx="6" fill="#94A3B8"/>
+    <text class="t v" x="540" y="98">~23 semanas</text>
+    <text class="t s" x="150" y="130">Mídia paga a 15 leads por semana</text>
+    <rect x="150" y="136" width="760" height="22" rx="6" fill="#64748B"/>
+    <text class="t v" x="702" y="152" style="fill:#fff">~47 semanas</text>
+    <text class="t s" x="150" y="184">Motor (captação, tratamento e enriquecimento)</text>
+    <rect x="150" y="190" width="8" height="22" rx="3" fill="#059669"/>
+    <text class="t v" x="168" y="206" style="fill:#047857">1 dia útil (no modelo ativo)</text>
+  </g>
+
+  <text class="t h" x="30" y="262">Custo</text>
+  <text class="t s" x="30" y="280">em mídia</text>
+  <g>
+    <text class="t s" x="150" y="252">A R$ 25 por lead qualificado</text>
+    <rect x="150" y="258" width="127" height="22" rx="6" fill="#94A3B8"/>
+    <text class="t v" x="287" y="274">R$ 17,5 mil</text>
+    <text class="t s" x="150" y="304">A R$ 150 por lead qualificado</text>
+    <rect x="150" y="310" width="760" height="22" rx="6" fill="#64748B"/>
+    <text class="t v" x="740" y="326" style="fill:#fff">R$ 105 mil</text>
+    <text class="t s" x="150" y="354">Motor</text>
+    <rect x="190" y="342" width="16" height="16" rx="4" fill="#059669" opacity="0"/>
+    <text class="t v" x="200" y="356" style="fill:#047857">R$ 0 de mídia e de ferramenta</text>
+  </g>
+</svg>

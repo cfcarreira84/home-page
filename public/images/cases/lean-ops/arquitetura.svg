@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 440" role="img" aria-label="Arquitetura: navegador, Supabase, Edge Function ia, Gemini e ferramentas Python">
+  <style>
+    .t{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#0B1220}
+    .h{font-weight:700;font-size:15px}
+    .s{font-size:12px;fill:#475569}
+    .m{font-family:Consolas,Menlo,monospace;font-size:11.5px;fill:#1E3A8A}
+    .bx{fill:#fff;stroke:#CBD5E1;stroke-width:1.5}
+    .db{fill:#EFF6FF;stroke:#2563EB;stroke-width:1.8}
+    .ai{fill:#F5F3FF;stroke:#7C3AED;stroke-width:1.8}
+    .tl{fill:#ECFDF5;stroke:#059669;stroke-width:1.8}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1000" height="440" rx="14" fill="#F8FAFC"/>
+
+  <rect class="bx" x="24" y="40" width="250" height="140" rx="12"/>
+  <text class="t h" x="40" y="66">Navegador do operador</text>
+  <text class="t s" x="40" y="88">web/ estático: HTML, CSS, JS</text>
+  <text class="m" x="40" y="110">cockpit_config.js (único config)</text>
+  <text class="m" x="40" y="128">app.js · monte_carlo.js</text>
+  <text class="m" x="40" y="146">supabase_client.js · auth.js</text>
+  <text class="t s" x="40" y="166">Hospedagem: auren.arq.br/crm/</text>
+
+  <rect class="db" x="380" y="30" width="300" height="190" rx="12"/>
+  <text class="t h" x="396" y="56">Supabase · yejtnpuldfamyaicqvyc</text>
+  <text class="t s" x="396" y="78">Postgres + RLS (só usuário logado)</text>
+  <text class="m" x="396" y="100">empresas_alvo · interacoes_sdr</text>
+  <text class="m" x="396" y="118">base_conhecimento · configuracoes</text>
+  <text class="t s" x="396" y="142">Auth: carlos, grace, jaime</text>
+  <text class="t s" x="396" y="160">Realtime: publicação empresas_alvo</text>
+  <text class="t s" x="396" y="178">PostgREST (REST paginado, 1000/pág.)</text>
+
+  <rect class="ai" x="380" y="270" width="300" height="130" rx="12"/>
+  <text class="t h" x="396" y="296">Edge Function ia (Deno/TS)</text>
+  <text class="t s" x="396" y="318">ações: mensagem · analise · console</text>
+  <text class="t s" x="396" y="336">segredos: Gemini_Key, Gemini_Modelos</text>
+  <text class="t s" x="396" y="354">valida usuário em /auth/v1/user</text>
+  <text class="t s" x="396" y="372">lê blocos com o token do operador</text>
+
+  <rect class="bx" x="760" y="290" width="216" height="90" rx="12"/>
+  <text class="t h" x="776" y="316">Google Gemini</text>
+  <text class="t s" x="776" y="338">gemini-3.5-flash → 3.6-flash →</text>
+  <text class="t s" x="776" y="356">3-flash-preview → 3.5-flash-lite</text>
+
+  <rect class="tl" x="24" y="250" width="290" height="160" rx="12"/>
+  <text class="t h" x="40" y="276">tools/ (Python, service key)</text>
+  <text class="m" x="40" y="298">backup_banco.py · carga_base.py</text>
+  <text class="m" x="40" y="316">corrigir_ganchos.py · sync_version.py</text>
+  <text class="m" x="40" y="334">prospect_base/ (higienização)</text>
+  <text class="m" x="40" y="352">captacao_escritorios/ (raspagem)</text>
+  <text class="t s" x="40" y="376">database/.env fora do Git</text>
+  <text class="t s" x="40" y="394">backups/ fora do Git</text>
+
+  <g stroke="#334155" stroke-width="2" fill="none" marker-end="url(#a)">
+    <path d="M274 90H376"/>
+    <path d="M150 182V230H530V266" stroke-dasharray="0"/>
+    <path d="M680 335H756"/>
+    <path d="M314 330H340V160H376" stroke="#059669"/>
+  </g>
+  <text class="t s" x="282" y="82">REST + JWT</text>
+  <text class="t s" x="160" y="222">POST /functions/v1/ia + JWT</text>
+  <text class="t s" x="696" y="326">segredo</text>
+  <text class="t s" x="320" y="352" fill="#059669">service key</text>
+</svg>

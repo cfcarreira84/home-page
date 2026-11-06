@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 360" role="img" aria-label="Como o Monte Carlo ordena o Kanban: fase, matriz de discovery e prioridade da base geram a probabilidade e o forecast">
+  <style>
+    .t{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#0B1220}
+    .h{font-weight:700;font-size:15px}
+    .s{font-size:12.5px;fill:#475569}
+    .w{font-size:13px;font-weight:700;fill:#fff}
+    .bx{fill:#fff;stroke:#CBD5E1;stroke-width:1.5}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#334155"/></marker>
+  </defs>
+  <rect width="1000" height="360" rx="14" fill="#F1F5F9"/>
+
+  <text class="t h" x="40" y="40">O que o operador (e a base) informa</text>
+  <rect class="bx" x="40" y="56" width="270" height="52" rx="10"/><text class="t h" x="56" y="78">Fase do funil</text><text class="t s" x="56" y="96">multiplicador: Atendimento 1,2 … Oferta 2,8</text>
+  <rect class="bx" x="40" y="120" width="270" height="52" rx="10"/><text class="t h" x="56" y="142">Matriz de discovery</text><text class="t s" x="56" y="160">interlocutor · potencial · inclinação · demanda</text>
+  <rect class="bx" x="40" y="184" width="270" height="52" rx="10"/><text class="t h" x="56" y="206">Prioridade da base</text><text class="t s" x="56" y="224">Alta 1,20 · Média-alta 1,10 · Média 1,00</text>
+  <rect class="bx" x="40" y="248" width="270" height="52" rx="10"/><text class="t h" x="56" y="270">Perfil do cliente</text><text class="t s" x="56" y="288">taxa base 25% (neutra até calibrar)</text>
+
+  <g stroke="#334155" stroke-width="2" fill="none" marker-end="url(#a)">
+    <path d="M312 82H390"/><path d="M312 146H390"/><path d="M312 210H390"/><path d="M312 274H390"/>
+  </g>
+
+  <rect x="392" y="56" width="250" height="244" rx="14" fill="#2563EB"/>
+  <text class="w" x="517" y="96" text-anchor="middle">MONTE CARLO</text>
+  <text class="w" x="517" y="122" text-anchor="middle">10.000 simulações</text>
+  <text x="517" y="156" text-anchor="middle" style="font-family:Segoe UI,Arial,sans-serif;font-size:12.5px;fill:#DBEAFE">probabilidade =</text>
+  <text x="517" y="176" text-anchor="middle" style="font-family:Segoe UI,Arial,sans-serif;font-size:12.5px;fill:#DBEAFE">taxa × fase × matriz × prioridade</text>
+  <text x="517" y="204" text-anchor="middle" style="font-family:Segoe UI,Arial,sans-serif;font-size:12.5px;fill:#DBEAFE">limitada entre 2% e 95%</text>
+  <text x="517" y="240" text-anchor="middle" style="font-family:Segoe UI,Arial,sans-serif;font-size:12.5px;fill:#DBEAFE">a ordem usa a nota sem o teto,</text>
+  <text x="517" y="258" text-anchor="middle" style="font-family:Segoe UI,Arial,sans-serif;font-size:12.5px;fill:#DBEAFE">então ninguém empata em 95%</text>
+
+  <g stroke="#334155" stroke-width="2" fill="none" marker-end="url(#a)">
+    <path d="M644 110H720"/><path d="M644 178H720"/><path d="M644 246H720"/>
+  </g>
+  <text class="t h" x="728" y="40">O que o time ganha</text>
+  <rect class="bx" x="728" y="56" width="236" height="76" rx="10"/><text class="t h" x="744" y="80">Kanban ordenado</text><text class="t s" x="744" y="100">o cartão mais quente fica no topo</text><text class="t s" x="744" y="118">de cada coluna</text>
+  <rect class="bx" x="728" y="144" width="236" height="76" rx="10"/><text class="t h" x="744" y="168">Forecast Ponderado</text><text class="t s" x="744" y="188">só propostas ativas (Proposta</text><text class="t s" x="744" y="206">e Oferta), ticket × probabilidade</text>
+  <rect class="bx" x="728" y="232" width="236" height="76" rx="10"/><text class="t h" x="744" y="256">Potencial Funil</text><text class="t s" x="744" y="276">funil em andamento, fora do início</text><text class="t s" x="744" y="294">das propostas e dos perdidos</text>
+  <text class="t s" x="40" y="340">Todos os pesos são hipóteses de partida em cockpit_config.js e devem ser calibrados com 20 a 30 desfechos reais.</text>
+</svg>

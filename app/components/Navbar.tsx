@@ -76,18 +76,18 @@ export default function Navbar() {
                 <div className="flex justify-between items-center p-[24px_48px] max-md:p-[24px] pointer-events-auto">
                     
                     {/* Esquerda: Logo */}
-                    <div className="flex items-center cursor-pointer z-[102]">
+                    <a href="/" className="flex items-center cursor-pointer z-[102] no-underline">
                         <span className={`font-display tracking-tight text-[22px] transition-colors duration-400 ${isLight ? 'text-[#111111]' : 'text-white'}`}>
                             <span className="font-light">CF</span><span className="font-bold">CARREIRA</span>
                         </span>
-                    </div>
+                    </a>
 
                     {/* Centro: Menu Desktop */}
                     <nav className="absolute left-1/2 -translate-x-1/2 flex gap-[32px] max-md:hidden">
-                        <a href="#experimentos" className={`font-sans text-[18px] font-medium transition-colors duration-400 opacity-90 hover:opacity-100 ${isLight ? 'text-[#111111]' : 'text-white'}`}>Experimentos</a>
-                        <a href="#arquitetura" className={`font-sans text-[18px] font-medium transition-colors duration-400 opacity-90 hover:opacity-100 ${isLight ? 'text-[#111111]' : 'text-white'}`}>Arquitetura</a>
-                        <a href="#fundamentacao" className={`font-sans text-[18px] font-medium transition-colors duration-400 opacity-90 hover:opacity-100 ${isLight ? 'text-[#111111]' : 'text-white'}`}>Fundamentação</a>
-                        <a href="#sandbox" className={`font-sans text-[18px] font-medium transition-colors duration-400 opacity-90 hover:opacity-100 ${isLight ? 'text-[#111111]' : 'text-white'}`}>Sandbox</a>
+                        <a href="/#experimentos" className={`font-sans text-[18px] font-medium transition-colors duration-400 opacity-90 hover:opacity-100 ${isLight ? 'text-[#111111]' : 'text-white'}`}>Experimentos</a>
+                        <a href="/#arquitetura" className={`font-sans text-[18px] font-medium transition-colors duration-400 opacity-90 hover:opacity-100 ${isLight ? 'text-[#111111]' : 'text-white'}`}>Arquitetura</a>
+                        <a href="/#fundamentacao" className={`font-sans text-[18px] font-medium transition-colors duration-400 opacity-90 hover:opacity-100 ${isLight ? 'text-[#111111]' : 'text-white'}`}>Fundamentação</a>
+                        <a href="/#sandbox" className={`font-sans text-[18px] font-medium transition-colors duration-400 opacity-90 hover:opacity-100 ${isLight ? 'text-[#111111]' : 'text-white'}`}>Sandbox</a>
                     </nav>
 
                     {/* Direita: Redes Sociais e Hamburger */}
@@ -131,9 +131,9 @@ export default function Navbar() {
                         className="fixed inset-0 w-full h-full bg-[#0b0b0b] z-[999] flex flex-col p-[24px]"
                     >
                         <div className="flex justify-between items-center mb-[80px]">
-                            <div className="font-display tracking-tight text-[22px] text-white">
+                            <a href="/" onClick={handleLinkClick} className="font-display tracking-tight text-[22px] text-white no-underline">
                                 <span className="font-light">CF</span><span className="font-bold">CARREIRA</span>
-                            </div>
+                            </a>
                             <button 
                                 className="bg-transparent border-none text-white text-[32px] font-light cursor-pointer p-[8px] flex items-center justify-center"
                                 onClick={() => setMenuOpen(false)}
@@ -144,10 +144,10 @@ export default function Navbar() {
                         </div>
                         
                         <div className="flex flex-col gap-[32px]">
-                            <a href="#experimentos" onClick={handleLinkClick} className="font-sans text-[36px] font-medium text-white no-underline tracking-[-0.02em]">Experimentos</a>
-                            <a href="#arquitetura" onClick={handleLinkClick} className="font-sans text-[36px] font-medium text-white no-underline tracking-[-0.02em]">Arquitetura</a>
-                            <a href="#fundamentacao" onClick={handleLinkClick} className="font-sans text-[36px] font-medium text-white no-underline tracking-[-0.02em]">Fundamentação</a>
-                            <a href="#sandbox" onClick={handleLinkClick} className="font-sans text-[36px] font-medium text-white no-underline tracking-[-0.02em]">Sandbox</a>
+                            <a href="/#experimentos" onClick={handleLinkClick} className="font-sans text-[36px] font-medium text-white no-underline tracking-[-0.02em]">Experimentos</a>
+                            <a href="/#arquitetura" onClick={handleLinkClick} className="font-sans text-[36px] font-medium text-white no-underline tracking-[-0.02em]">Arquitetura</a>
+                            <a href="/#fundamentacao" onClick={handleLinkClick} className="font-sans text-[36px] font-medium text-white no-underline tracking-[-0.02em]">Fundamentação</a>
+                            <a href="/#sandbox" onClick={handleLinkClick} className="font-sans text-[36px] font-medium text-white no-underline tracking-[-0.02em]">Sandbox</a>
                         </div>
                     </motion.div>
                 )}

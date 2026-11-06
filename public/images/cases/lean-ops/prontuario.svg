@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 640" role="img" aria-label="Prontuário real de um lead da fila: anamnese, diagnóstico, indicação do portfólio e primeira mensagem">
+  <style>
+    .t{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#0B1220}
+    .h{font-weight:700;font-size:12.5px;fill:#1E3A8A;letter-spacing:.07em}
+    .s{font-size:13px;fill:#334155}
+    .m{font-size:12px;fill:#64748B;font-style:italic}
+  </style>
+  <rect width="1000" height="640" rx="14" fill="#F1F5F9"/>
+  <rect x="30" y="22" width="940" height="596" rx="14" fill="#fff" stroke="#CBD5E1" stroke-width="1.5"/>
+  <rect x="30" y="22" width="940" height="54" rx="14" fill="#0B1220"/>
+  <text x="52" y="55" style="font-family:Inter,Segoe UI,Arial,sans-serif;font-weight:700;font-size:16px;fill:#fff">Prontuário · Arkous Arquitetura · Valinhos, SP</text>
+  <rect x="760" y="36" width="190" height="26" rx="13" fill="#2563EB"/>
+  <text x="855" y="54" text-anchor="middle" style="font-family:Inter,Segoe UI,Arial,sans-serif;font-weight:700;font-size:12px;fill:#fff">Prioridade Alta · nota 64</text>
+
+  <text class="t h" x="52" y="106">ANAMNESE (O QUE O ESCRITÓRIO PUBLICA)</text>
+  <text class="t s" x="52" y="128">Escritório de arquitetura e construção, com projetos residenciais, comerciais e empreendimentos.</text>
+  <text class="t s" x="52" y="147">Obras de referência: Reserva do Itamaracá, Cond. Jd. Paulista II, Country Club, Portal do Lago, Vila Hípica.</text>
+  <text class="t m" x="52" y="166">Fonte: site do próprio escritório. Contatos (WhatsApp, e-mail, telefone) ficam no cartão e foram omitidos aqui.</text>
+
+  <text class="t h" x="52" y="200">DIAGNÓSTICO</text>
+  <text class="t s" x="52" y="222">Ponto forte: residências em condomínios de alto padrão de Valinhos; atua com cozinha, gourmet e marcenaria.</text>
+  <text class="t s" x="52" y="241">Ponto de atenção: nenhum confirmado nas fontes (a análise não completa lacunas com suposição).</text>
+  <text class="t s" x="52" y="260">Por que Alta: alto padrão em condomínios, conduz a obra (janela de aquisição) e tem obras de referência.</text>
+
+  <text class="t h" x="52" y="294">HIPÓTESES A VALIDAR NA CONVERSA</text>
+  <text class="t s" x="52" y="316">Os projetos em andamento têm área gourmet com adega ou Beer Center? O nicho já está previsto na marcenaria?</text>
+
+  <text class="t h" x="52" y="350">INDICAÇÃO DO PORTFÓLIO</text>
+  <text class="t s" x="52" y="372">Adega 72G Dual Zone · Beer Center 300L Dual Zone · Beer Center 300L Single Zone (com o link de cada produto).</text>
+  <text class="t s" x="52" y="391">Motivo: a pesquisa registra gourmet, cozinha, comercial, residencial e marcenaria. Argumento: Janela de aquisição.</text>
+
+  <text class="t h" x="52" y="425">PRIMEIRA MENSAGEM (2 PARÁGRAFOS, PRONTA NO CARTÃO)</text>
+  <rect x="52" y="435" width="896" height="164" rx="10" fill="#EFF6FF" stroke="#BFDBFE"/>
+  <text class="t s" x="68" y="458">1) Pesquisei e encontrei a Arkous Arquitetura, em Valinhos - e o que me chamou atenção foi a forte</text>
+  <text class="t s" x="68" y="477">presença em condomínios fechados, como Reserva do Itamaracá e Vila Hípica, com projetos residenciais,</text>
+  <text class="t s" x="68" y="496">comerciais e empreendimentos.</text>
+  <text class="t s" x="68" y="525">2) Sou da AUREN, fábrica de refrigeração de embutir de alto padrão em Jaguariúna. O cliente pode fechar o</text>
+  <text class="t s" x="68" y="544">pedido hoje e receber o aparelho só no fim da obra, com instalação sem custo. Posso te mostrar como funciona?</text>
+  <text class="t m" x="68" y="581">Antes do primeiro contato o operador já sabe quem é, o que dizer, o que perguntar e qual produto levar.</text>
+</svg>

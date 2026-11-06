@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 400" role="img" aria-label="Do volume bruto captado até os cerca de 700 leads aptos para a esteira comercial">
+  <style>
+    .t{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#0B1220}
+    .h{font-weight:700;font-size:15px}
+    .s{font-size:12.5px;fill:#475569}
+    .w{font-family:Inter,Segoe UI,Arial,sans-serif;font-weight:700;font-size:15px;fill:#fff}
+    .ws{font-family:Inter,Segoe UI,Arial,sans-serif;font-size:12.5px;fill:#DBEAFE}
+  </style>
+  <rect width="1000" height="400" rx="14" fill="#F1F5F9"/>
+  <text class="t h" x="30" y="38">Cada camada tira ruído e acrescenta contexto</text>
+
+  <polygon points="30,60 600,60 560,120 70,120" fill="#1E3A8A"/>
+  <text class="w" x="315" y="86" text-anchor="middle">Milhares de itens brutos</text>
+  <text class="ws" x="315" y="106" text-anchor="middle">resultados de mapas, guias e listas</text>
+
+  <polygon points="70,126 560,126 520,186 110,186" fill="#2563EB"/>
+  <text class="w" x="315" y="152" text-anchor="middle">Empresas reais, com site verificado</text>
+  <text class="ws" x="315" y="172" text-anchor="middle">fora: agências, perfis sociais, duplicados, marcas encerradas</text>
+
+  <polygon points="110,192 520,192 480,252 150,252" fill="#3B82F6"/>
+  <text class="w" x="315" y="218" text-anchor="middle">Contato público conferido na fonte</text>
+  <text class="ws" x="315" y="238" text-anchor="middle">WhatsApp, e-mail e telefone com a origem registrada</text>
+
+  <polygon points="150,258 480,258 440,318 190,318" fill="#60A5FA"/>
+  <text x="315" y="284" text-anchor="middle" style="font-family:Inter,Segoe UI,Arial,sans-serif;font-weight:700;font-size:15px;fill:#0B1220">Prontuário e prioridade</text>
+  <text x="315" y="304" text-anchor="middle" style="font-family:Inter,Segoe UI,Arial,sans-serif;font-size:12.5px;fill:#0B1220">bio, pontos fortes, modelos sugeridos, 1ª mensagem</text>
+
+  <polygon points="190,324 440,324 420,376 210,376" fill="#059669"/>
+  <text class="w" x="315" y="357" text-anchor="middle">~700 leads aptos</text>
+
+  <g>
+    <rect x="640" y="62" width="330" height="76" rx="12" fill="#fff" stroke="#CBD5E1"/>
+    <text class="t h" x="658" y="88">Descoberta</text>
+    <text class="t s" x="658" y="108">Só o 1º lote de arquitetura avaliou mais de</text>
+    <text class="t s" x="658" y="126">1.100 empresas; o 2º lote passou de 2.400 resultados</text>
+    <rect x="640" y="150" width="330" height="76" rx="12" fill="#fff" stroke="#CBD5E1"/>
+    <text class="t h" x="658" y="176">Tratamento</text>
+    <text class="t s" x="658" y="196">Repetidos fundidos, redes agrupadas,</text>
+    <text class="t s" x="658" y="214">55 sem canal de contato deixados de fora</text>
+    <rect x="640" y="238" width="330" height="76" rx="12" fill="#fff" stroke="#CBD5E1"/>
+    <text class="t h" x="658" y="264">Enriquecimento</text>
+    <text class="t s" x="658" y="284">Regras do mercado e da marca aplicadas a</text>
+    <text class="t s" x="658" y="302">cada linha, sem inventar o que não foi publicado</text>
+    <rect x="640" y="326" width="330" height="56" rx="12" fill="#ECFDF5" stroke="#6EE7B7"/>
+    <text class="t h" x="658" y="350">Resultado</text>
+    <text class="t s" x="658" y="368">608 arquitetos e designers + 89 food service</text>
+  </g>
+</svg>

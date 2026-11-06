@@ -7,7 +7,7 @@ import { FlaskConical } from 'lucide-react';
 
 export default function SplashScreen({ onComplete }: { onComplete: () => void }) {
     useEffect(() => {
-        const finishTimer = setTimeout(onComplete, 6000);
+        const finishTimer = setTimeout(onComplete, 5000);
         return () => clearTimeout(finishTimer);
     }, [onComplete]);
 

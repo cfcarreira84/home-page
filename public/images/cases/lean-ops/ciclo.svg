@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 300" role="img" aria-label="Ciclo do motor: captar, higienizar, carregar, trabalhar no Kanban e medir no Dashboard">
+  <style>
+    .t{font-family:Inter,Segoe UI,Arial,sans-serif;fill:#0B1220}
+    .h{font-weight:700;font-size:17px}
+    .s{font-size:12.5px;fill:#475569}
+    .n{font-weight:700;font-size:12px;fill:#fff}
+    .b{fill:#fff;stroke:#CBD5E1;stroke-width:1.5}
+  </style>
+  <defs>
+    <marker id="a" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#2563EB"/></marker>
+  </defs>
+  <rect width="1000" height="300" rx="14" fill="#F1F5F9"/>
+  <g>
+    <rect class="b" x="24" y="60" width="164" height="150" rx="12"/>
+    <circle cx="52" cy="60" r="15" fill="#2563EB"/><text class="t n" x="52" y="65" text-anchor="middle">1</text>
+    <text class="t h" x="106" y="104" text-anchor="middle">Captar</text>
+    <text class="t s" x="106" y="130" text-anchor="middle">/captacao-escritorios</text>
+    <text class="t s" x="106" y="152" text-anchor="middle">Acha empresas, confere</text>
+    <text class="t s" x="106" y="170" text-anchor="middle">site e contatos públicos</text>
+    <text class="t s" x="106" y="192" text-anchor="middle">Saída: lista MESTRE</text>
+  </g>
+  <g>
+    <rect class="b" x="224" y="60" width="164" height="150" rx="12"/>
+    <circle cx="252" cy="60" r="15" fill="#2563EB"/><text class="t n" x="252" y="65" text-anchor="middle">2</text>
+    <text class="t h" x="306" y="104" text-anchor="middle">Higienizar</text>
+    <text class="t s" x="306" y="130" text-anchor="middle">/higienizar-base-prospeccao</text>
+    <text class="t s" x="306" y="152" text-anchor="middle">Limpa, remove repetidos,</text>
+    <text class="t s" x="306" y="170" text-anchor="middle">prioriza, escreve a 1ª msg</text>
+    <text class="t s" x="306" y="192" text-anchor="middle">Saída: CSV de 32 colunas</text>
+  </g>
+  <g>
+    <rect class="b" x="424" y="60" width="164" height="150" rx="12"/>
+    <circle cx="452" cy="60" r="15" fill="#2563EB"/><text class="t n" x="452" y="65" text-anchor="middle">3</text>
+    <text class="t h" x="506" y="104" text-anchor="middle">Carregar</text>
+    <text class="t s" x="506" y="130" text-anchor="middle">/carga-leads</text>
+    <text class="t s" x="506" y="152" text-anchor="middle">Valida, faz backup,</text>
+    <text class="t s" x="506" y="170" text-anchor="middle">grava e confere</text>
+    <text class="t s" x="506" y="192" text-anchor="middle">Saída: Aguardando Contato</text>
+  </g>
+  <g>
+    <rect class="b" x="624" y="60" width="164" height="150" rx="12"/>
+    <circle cx="652" cy="60" r="15" fill="#2563EB"/><text class="t n" x="652" y="65" text-anchor="middle">4</text>
+    <text class="t h" x="706" y="104" text-anchor="middle">Trabalhar</text>
+    <text class="t s" x="706" y="130" text-anchor="middle">Cockpit Kanban</text>
+    <text class="t s" x="706" y="152" text-anchor="middle">Mensagens, IA sob demanda,</text>
+    <text class="t s" x="706" y="170" text-anchor="middle">matriz de discovery, notas</text>
+    <text class="t s" x="706" y="192" text-anchor="middle">Saída: negócios em fases</text>
+  </g>
+  <g>
+    <rect class="b" x="824" y="60" width="152" height="150" rx="12"/>
+    <circle cx="852" cy="60" r="15" fill="#2563EB"/><text class="t n" x="852" y="65" text-anchor="middle">5</text>
+    <text class="t h" x="900" y="104" text-anchor="middle">Medir</text>
+    <text class="t s" x="900" y="130" text-anchor="middle">Cockpit Dashboard</text>
+    <text class="t s" x="900" y="152" text-anchor="middle">Monte Carlo, Forecast,</text>
+    <text class="t s" x="900" y="170" text-anchor="middle">análise por período</text>
+    <text class="t s" x="900" y="192" text-anchor="middle">Saída: onde focar</text>
+  </g>
+  <g stroke="#2563EB" stroke-width="2.5" fill="none" marker-end="url(#a)">
+    <path d="M190 135H220"/><path d="M390 135H420"/><path d="M590 135H620"/><path d="M790 135H820"/>
+  </g>
+  <path d="M900 214V262H106V214" fill="none" stroke="#94A3B8" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#a)"/>
+  <text class="t s" x="500" y="282" text-anchor="middle">O que o Dashboard mostra decide o que captar e priorizar na próxima rodada</text>
+</svg>
