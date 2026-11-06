@@ -179,9 +179,8 @@ export const translations = {
                         title: "Resultados consistentes se sustentam em engenharia rigorosa. Veja a prova no detalhe.",
                         subtitle: "Abaixo está a prova material completa: contratos de 32 colunas, arquitetura serverless, simulação estocástica de Monte Carlo interativa e anatomia real dos prontuários. Explore o dossiê técnico detalhado ou inicie um diagnóstico preliminar para a sua operação.",
                         ctas: {
-                            primary: "Explorar Dossiê Técnico Completo ↓",
-                            whatsapp: "Falar com Carlos Felipe (WhatsApp)",
-                            sandbox: "Testar no AI Profiler (Sandbox)"
+                            primary: "Case Study Completo ↓",
+                            whatsapp: "Continuar no WhatsApp"
                         },
                         image: "/images/cases/lean-ops/cockpit/cockpit-kanban.jpg",
                         imageCaption: "Cockpit Comercial completo em produção: da captação ao forecast preditivo"
@@ -497,9 +496,8 @@ export const translations = {
                         title: "Consistent revenue performance rests on rigorous engineering. Explore the proof.",
                         subtitle: "Below is the complete technical evidence: 32-column data contracts, serverless architecture, interactive Monte Carlo simulation, and live dossiers. Explore the technical breakdown or start an executive diagnostic conversation.",
                         ctas: {
-                            primary: "Explore Full Technical Dossier ↓",
-                            whatsapp: "Contact Carlos Felipe (WhatsApp)",
-                            sandbox: "Test in AI Profiler (Sandbox)"
+                            primary: "Complete Case Study ↓",
+                            whatsapp: "Continue on WhatsApp"
                         },
                         image: "/images/cases/lean-ops/cockpit/cockpit-kanban.jpg",
                         imageCaption: "Full Commercial Cockpit in production: from discovery to predictive forecasting"
@@ -815,9 +813,8 @@ export const translations = {
                         title: "扎实持久的商业回报，永远建立在严苛可靠的技术工程之上。",
                         subtitle: "上方是面向决策层的核心要点概述。下方为您呈现完整的实证细节：32列数据规范合约、Serverless架构拓扑、交互式蒙特卡洛模拟工具与真实客户临床档案。欢迎深入查阅或预约战略诊断会话。",
                         ctas: {
-                            primary: "探索完整技术档案 ↓",
-                            whatsapp: "与 Carlos Felipe 沟通 (WhatsApp)",
-                            sandbox: "在 AI Profiler 中测试业务场景"
+                            primary: "完整案例研究 ↓",
+                            whatsapp: "在 WhatsApp 上继续"
                         },
                         image: "/images/cases/lean-ops/cockpit/cockpit-kanban.jpg",
                         imageCaption: "生产环境中运行的完整商业驾驶舱：从智能获客到加权预测闭环"
