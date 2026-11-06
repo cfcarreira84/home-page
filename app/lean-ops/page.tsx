@@ -3,25 +3,22 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import Link from 'next/link';
 import { 
-    Sparkles, 
-    ArrowUpRight, 
-    CheckCircle2, 
-    Layers, 
-    Cpu, 
-    TrendingUp, 
-    Database, 
     Maximize2, 
     X, 
+    CheckCircle2, 
     ShieldCheck, 
     ChevronRight,
-    MessageSquare,
-    Zap,
-    Target
+    Filter,
+    Calculator,
+    BarChart3,
+    ArrowRight,
+    Info,
+    Sparkles
 } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import AgentTerminal from '../components/AgentTerminal';
 
 const theme = { 
     bg: "#F5F3ED", 
@@ -32,10 +29,63 @@ const theme = {
 
 const kpis = [
     { value: "R$ 0", label: "Custo mensal de ferramentas", sub: "Arquitetura serverless e camadas gratuitas gerenciadas" },
-    { value: "milhares → ~700", label: "De itens brutos a leads aptos", sub: "Tratamento, sanitização e anamnese por lead" },
+    { value: "~700", label: "De itens brutos a leads aptos", sub: "Tratamento, sanitização e anamnese por lead" },
     { value: "~12 h", label: "Até as primeiras oportunidades", sub: "Geração de tração com histórico e notas no mesmo dia" },
     { value: "> R$ 100 mil", label: "Potencial ponderado no funil", sub: "Forecast via simulação probabilística de Monte Carlo" },
     { value: "R$ 0", label: "Custo de mídia por lead qualificado", sub: "Redução de R$ 25 a R$ 150 (histórico pago) para zero" },
+];
+
+const funilLayers = [
+    {
+        id: "descoberta",
+        level: "01",
+        name: "Descoberta Bruta",
+        volume: "Milhares de itens",
+        color: "from-blue-900 to-indigo-950",
+        badge: "Varredura Pública",
+        criteria: "Mapas, diretórios setoriais e listas abertas de arquitetura, design e redes gastronômicas.",
+        action: "Só o 1º lote de arquitetura avaliou mais de 1.100 empresas; o 2º lote ultrapassou 2.400 resultados brutos."
+    },
+    {
+        id: "tratamento",
+        level: "02",
+        name: "Higienização & Validação",
+        volume: "Empresas reais com site ativo",
+        color: "from-blue-800 to-indigo-900",
+        badge: "Filtro de Ruído",
+        criteria: "Eliminação de agências, perfis sociais avulsos, CNPJs baixados e marcas com atividades encerradas.",
+        action: "Repetidos fundidos, unidades de redes consolidadas em um decisor e 55 contatos inativos descartados."
+    },
+    {
+        id: "enriquecimento",
+        level: "03",
+        name: "Contatos Auditados",
+        volume: "Canais oficiais verificados",
+        color: "from-blue-700 to-blue-800",
+        badge: "Conferência na Fonte",
+        criteria: "Apenas contatos públicos (WhatsApp, e-mail institucional e telefone) com a URL de origem registrada.",
+        action: "Sanitização automática contra regras de conformidade e gravação de metadados em 32 colunas padronizadas."
+    },
+    {
+        id: "prontuario",
+        level: "04",
+        name: "Anamnese & Prontuário",
+        volume: "Análise clínica por IA",
+        color: "from-blue-600 to-blue-700",
+        badge: "Qualificação Profunda",
+        criteria: "Cruzamento do portfólio real do cliente com os 28 blocos de produtos da fábrica para gerar argumentos exclusivos.",
+        action: "Diagnóstico de pontos fortes, hipóteses de obra, até 3 produtos indicados e gancho de 1ª mensagem customizado."
+    },
+    {
+        id: "resultado",
+        level: "05",
+        name: "Leads Aptos para Abordagem",
+        volume: "~700 contas prontas",
+        color: "from-emerald-600 to-teal-700",
+        badge: "Alta Propensão B2B",
+        criteria: "Somente empresas que justificam o tempo e a atenção do operador humano comercial sênior.",
+        action: "608 escritórios de arquitetura e design de interiores + 89 redes selecionadas de food service e hospitalidade."
+    }
 ];
 
 const cicloEtapas = [
@@ -131,20 +181,12 @@ const camadasProntuario = [
     }
 ];
 
-const tabelaComparativa = [
-    { aspecto: "Conhecimento do Portfólio", generica: "Alucina especificações, erra medidas milimétricas e prazos", motor: "Base de 28 blocos estritos: só afirma o que está parametrizado" },
-    { aspecto: "Memória Contextual", generica: "Isolada, esquece interações passadas ou histórico de objeções", motor: "Lê últimas 20 mensagens, prontuário e notas de campo do operador" },
-    { aspecto: "Tom e Cultura de Marca", generica: "Cada operador obtém um tom diferente e genérico", motor: "Uma só persona unificada: o time soa como unidade de elite" },
-    { aspecto: "Veracidade dos Fatos", generica: "Cita clientes, projetos ou dados sem conferência", motor: "Regra anti-alucinação: todo dado externo é auditado contra a fonte" },
-    { aspecto: "Controle Orçamentário", generica: "Consumo descontrolado de tokens de APIs pagas", motor: "Acionamento apenas sob demanda do operador com rotação de 4 modelos gratuitos" }
-];
-
-const tabelaMidia = [
-    { parametro: "Tempo para ~700 Leads", midia: "23 a 47 semanas (média de 15 a 30 leads/semana)", motor: "1 dia útil (processamento em batch das listas qualificadas)" },
-    { parametro: "Custo de Aquisição", midia: "R$ 17.500 a R$ 105.000 em budget de mídia", motor: "R$ 0 em mídia e R$ 0 em ferramentas SaaS" },
-    { parametro: "Critério de Entrada", midia: "Qualquer usuário que clicou no anúncio pago", motor: "Somente leads que merecem o tempo do operador sênior" },
-    { parametro: "Potencial de Fechamento", midia: "Ticket médio padrão de inbound avulso", motor: "Projetos de alto padrão com ticket até 4x a 5x superior" },
-    { parametro: "Nível de Contexto", midia: "Formulário raso (Nome, e-mail e telefone)", motor: "Dossiê completo com prontuário clínico e abordagem pronta" }
+const monteCarloPhases = [
+    { phase: "Aguardando Contato", mult: "1.0x", prob: "12%", desc: "Lead na esteira com prontuário gerado, sem toque humano inicial.", forecast: "R$ 14.400" },
+    { phase: "Abordagem Realizada", mult: "1.2x", prob: "28%", desc: "Primeiro contato honesto enviado com referência direta ao portfólio.", forecast: "R$ 33.600" },
+    { phase: "Conversa em Andamento", mult: "1.5x", prob: "46%", desc: "Interlocutor respondeu, Smart Console sugerindo réplica técnica.", forecast: "R$ 55.200" },
+    { phase: "Interesse Confirmado", mult: "1.8x", prob: "74%", desc: "Demanda imediata por projeto residencial ou gastronômico mapeada.", forecast: "R$ 88.800" },
+    { phase: "Proposta / Fechamento", mult: "2.0x", prob: "91%", desc: "Especificação de nicho validada e negociação em estágio avançado.", forecast: "R$ 109.200" }
 ];
 
 const stackItens = [
@@ -158,6 +200,8 @@ const stackItens = [
 export default function LeanOpsPage() {
     const [selectedEtapa, setSelectedEtapa] = useState(0);
     const [selectedCamada, setSelectedCamada] = useState(0);
+    const [selectedFunilIndex, setSelectedFunilIndex] = useState(4);
+    const [selectedMcPhase, setSelectedMcPhase] = useState(3);
     const [modalSvg, setModalSvg] = useState<string | null>(null);
 
     return (
@@ -167,39 +211,30 @@ export default function LeanOpsPage() {
             <Navbar />
 
             {/* ================= 1. HERO SECTION (Dark Editorial) ================= */}
-            <section className="relative w-full min-h-[92vh] bg-[#0b0b0b] text-white flex flex-col justify-center items-center px-6 pt-32 pb-20 overflow-hidden">
+            <section className="relative w-full min-h-[94vh] bg-[#0b0b0b] text-white flex flex-col justify-center items-center px-6 pt-32 pb-20 overflow-hidden">
                 
-                {/* Background Video com Máscara Estilizada */}
-                <div className="absolute inset-0 -z-10 bg-black overflow-hidden pointer-events-none">
+                {/* Background Video Vívido e Sem Bloqueios */}
+                <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
                     <video
                         src="/footages/lean-ops-1080p-202608242219.webm"
                         autoPlay
                         loop
                         muted
                         playsInline
-                        className="w-full h-full object-cover opacity-35 scale-105"
+                        preload="auto"
+                        className="absolute inset-0 w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-b from-[#0b0b0b]/60 via-[#0b0b0b]/80 to-[#0b0b0b]" />
+                    <div className="absolute inset-0 bg-black/60" />
                 </div>
 
                 {/* Conteúdo Central do Hero */}
-                <div className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center">
+                <div className="relative z-10 max-w-6xl mx-auto flex flex-col items-center text-center">
                     
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-[12px] font-sans font-semibold uppercase tracking-[0.12em] text-[#E0F2FE] mb-8"
-                    >
-                        <Zap size={13} className="text-[#38BDF8]" />
-                        <span>Case Study · LeanOps · RevOps · MarTech</span>
-                    </motion.div>
-
                     <motion.h1
                         initial={{ opacity: 0, y: 25 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: 0.1 }}
-                        className="font-display font-medium text-[clamp(36px,6vw,76px)] leading-[1.08] tracking-[-0.03em] mb-6 max-w-4xl"
+                        transition={{ duration: 0.7 }}
+                        className="font-display font-medium text-[clamp(38px,6.2vw,78px)] leading-[1.08] tracking-[-0.03em] mb-6 max-w-5xl"
                     >
                         Do SaaS caro a um cockpit comercial com IA, <br className="max-md:hidden" />
                         <span className="font-light italic text-white/90">a custo zero.</span>
@@ -208,17 +243,16 @@ export default function LeanOpsPage() {
                     <motion.p
                         initial={{ opacity: 0, y: 25 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: 0.2 }}
-                        className="font-sans text-[clamp(16px,1.8vw,20px)] leading-[1.6] text-white/80 max-w-3xl mb-12"
+                        transition={{ duration: 0.7, delay: 0.15 }}
+                        className="font-sans text-[clamp(17px,1.9vw,21px)] leading-[1.5] text-white/85 max-w-[980px] mb-12"
                     >
-                        Como substituí a assinatura de um CRM por um motor próprio que capta, qualifica, 
-                        faz a anamnese clínica de cada lead, conversa no tom da marca e prevê receita — gerando oportunidades em menos de 12 horas.
+                        Como substituí a assinatura de um CRM por um motor próprio que capta, qualifica, faz a anamnese clínica de cada lead, conversa no tom da marca e prevê receita — gerando oportunidades em menos de 12 horas.
                     </motion.p>
 
                     <motion.div
                         initial={{ opacity: 0, y: 25 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.7, delay: 0.3 }}
+                        transition={{ duration: 0.7, delay: 0.25 }}
                         className="flex flex-wrap items-center justify-center gap-4"
                     >
                         <a 
@@ -242,15 +276,15 @@ export default function LeanOpsPage() {
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
+                    transition={{ duration: 0.8, delay: 0.35 }}
                     className="relative z-10 w-full max-w-6xl mt-20 grid grid-cols-2 md:grid-cols-5 gap-3 max-md:gap-2 px-2"
                 >
                     {kpis.map((kpi, idx) => (
                         <div 
                             key={idx}
-                            className={`p-5 rounded-2xl bg-white/[0.04] border border-white/10 backdrop-blur-md flex flex-col justify-between transition-all hover:bg-white/[0.08] ${idx === 4 ? 'col-span-2 md:col-span-1' : ''}`}
+                            className={`p-5 rounded-2xl bg-white/[0.05] border border-white/10 backdrop-blur-md flex flex-col justify-between transition-all hover:bg-white/[0.1] ${idx === 4 ? 'col-span-2 md:col-span-1' : ''}`}
                         >
-                            <span className="font-display font-bold text-[clamp(24px,2.2vw,32px)] text-white tracking-tight leading-none mb-2">
+                            <span className="font-display font-bold text-[clamp(26px,2.4vw,34px)] text-white tracking-tight leading-none mb-2">
                                 {kpi.value}
                             </span>
                             <div>
@@ -268,15 +302,44 @@ export default function LeanOpsPage() {
             </section>
 
             {/* ================= CORPO EDITORIAL (Light Section: #F5F3ED) ================= */}
-            <div className="light-section w-full bg-[#F5F3ED] text-[#111111] transition-colors duration-500 relative">
+            <div className="light-section w-full bg-[#F5F3ED] text-[#111111] transition-colors duration-500 relative overflow-hidden">
                 
-                {/* Elementos Decorativos Orgânicos */}
-                <div className="absolute top-20 right-[-100px] w-[400px] h-[400px] pointer-events-none opacity-20 mix-blend-multiply">
-                    <Image src={theme.shape1} alt="Shape" width={400} height={400} className="w-full h-full object-contain" />
-                </div>
-                <div className="absolute top-[40%] left-[-150px] w-[500px] h-[500px] pointer-events-none opacity-15 mix-blend-multiply">
-                    <Image src={theme.shape2} alt="Shape" width={500} height={500} className="w-full h-full object-contain" />
-                </div>
+                {/* Elementos Geográficos Dinâmicos e Giratórios em Toda a Página (Estilo Google Labs) */}
+                <motion.div
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 75, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-16 right-[-8vw] w-[540px] h-[540px] pointer-events-none opacity-20 mix-blend-multiply z-0"
+                >
+                    <Image src="/shapes/shape-cyan.svg" alt="Shape Cyan" fill className="object-contain" />
+                </motion.div>
+
+                <motion.div
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 85, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[28%] left-[-10vw] w-[600px] h-[600px] pointer-events-none opacity-15 mix-blend-multiply z-0"
+                >
+                    <Image src="/shapes/shape-orange.svg" alt="Shape Orange" fill className="object-contain" />
+                </motion.div>
+
+                <motion.div
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: 360 }}
+                    transition={{ duration: 95, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[52%] right-[-12vw] w-[650px] h-[650px] pointer-events-none opacity-15 mix-blend-multiply z-0"
+                >
+                    <Image src="/shapes/shape-emerald.svg" alt="Shape Emerald" fill className="object-contain" />
+                </motion.div>
+
+                <motion.div
+                    initial={{ rotate: 0 }}
+                    animate={{ rotate: -360 }}
+                    transition={{ duration: 90, repeat: Infinity, ease: "linear" }}
+                    className="absolute top-[76%] left-[-8vw] w-[580px] h-[580px] pointer-events-none opacity-20 mix-blend-multiply z-0"
+                >
+                    <Image src="/shapes/shape-magenta.svg" alt="Shape Magenta" fill className="object-contain" />
+                </motion.div>
 
                 {/* ================= 2. DIAGNÓSTICO & A TESE ================= */}
                 <section id="diagnostico" className="max-w-6xl mx-auto px-6 pt-28 pb-20 relative z-10">
@@ -361,7 +424,7 @@ export default function LeanOpsPage() {
 
                 </section>
 
-                {/* ================= 3. O CICLO EM 5 ETAPAS & FUNIL ================= */}
+                {/* ================= 3. O CICLO EM 5 ETAPAS & FUNIL REFORMULADO ================= */}
                 <section id="ciclo" className="max-w-6xl mx-auto px-6 py-20 border-t border-black/10 relative z-10">
                     
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -378,36 +441,125 @@ export default function LeanOpsPage() {
                         </p>
                     </div>
 
-                    {/* Diagrama Principal do Funil com Ação de Zoom */}
-                    <div className="mb-16 rounded-3xl bg-white p-6 md:p-8 border border-black/5 shadow-sm">
-                        <div className="flex items-center justify-between mb-4 pb-4 border-b border-black/5">
-                            <span className="font-sans text-[13px] font-semibold text-black/70">
-                                Diagrama 01: Funil de Captação e Tratamento de Dados
-                            </span>
+                    {/* Diagrama 01: Funil Reformulado em Componente Interativo com Ação de Expandir Preservada */}
+                    <div className="mb-16 rounded-3xl bg-white p-6 md:p-10 border border-black/5 shadow-sm">
+                        
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 pb-4 border-b border-black/5 gap-3">
+                            <div>
+                                <span className="font-sans text-[11px] font-bold text-black/40 uppercase tracking-widest block mb-1">
+                                    DIAGRAMA 01 // ARQUITETURA DE FILTRAGEM
+                                </span>
+                                <h3 className="font-display font-semibold text-[22px]">Funil de Captação e Tratamento em Camadas</h3>
+                            </div>
                             <button
                                 onClick={() => setModalSvg("/images/cases/lean-ops/funil-captacao.svg")}
-                                className="inline-flex items-center gap-1.5 text-[12px] font-medium text-black/60 hover:text-black transition-colors"
+                                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 text-[13px] font-medium text-black/80 hover:text-black transition-all cursor-pointer self-start sm:self-auto"
                             >
-                                <Maximize2 size={14} />
-                                <span>Expandir</span>
+                                <Maximize2 size={15} />
+                                <span>Expandir Imagem Original</span>
                             </button>
                         </div>
-                        <div className="w-full overflow-hidden flex items-center justify-center py-4 bg-[#F8FAFC] rounded-2xl">
-                            <Image 
-                                src="/images/cases/lean-ops/funil-captacao.svg" 
-                                alt="Funil de Captação e Tratamento" 
-                                width={900} 
-                                height={400} 
-                                className="w-full max-h-[380px] object-contain cursor-pointer"
-                                onClick={() => setModalSvg("/images/cases/lean-ops/funil-captacao.svg")}
-                            />
+
+                        {/* Visual Funil Interativo Moderno */}
+                        <div className="grid lg:grid-cols-12 gap-8 items-center">
+                            
+                            {/* Lado Esquerdo: As Fatias do Funil em Escada */}
+                            <div className="lg:col-span-7 flex flex-col gap-3">
+                                {funilLayers.map((layer, idx) => {
+                                    const isSelected = selectedFunilIndex === idx;
+                                    const widths = ["w-full", "w-[92%]", "w-[84%]", "w-[76%]", "w-[68%]"];
+                                    return (
+                                        <button
+                                            key={layer.id}
+                                            onClick={() => setSelectedFunilIndex(idx)}
+                                            className={`mx-auto ${widths[idx]} p-4 md:p-5 rounded-2xl text-left transition-all cursor-pointer relative overflow-hidden flex items-center justify-between border ${
+                                                isSelected 
+                                                    ? 'bg-[#111111] text-white border-black shadow-lg scale-[1.02]' 
+                                                    : 'bg-white hover:bg-black/[0.03] text-black border-black/10'
+                                            }`}
+                                        >
+                                            <div className="flex items-center gap-3.5">
+                                                <div className={`w-8 h-8 rounded-xl font-mono text-[13px] font-bold flex items-center justify-center shrink-0 ${
+                                                    isSelected ? 'bg-white/15 text-white' : 'bg-black/5 text-black/70'
+                                                }`}>
+                                                    {layer.level}
+                                                </div>
+                                                <div>
+                                                    <span className={`text-[11px] font-mono uppercase tracking-wider block ${
+                                                        isSelected ? 'text-white/60' : 'text-black/40'
+                                                    }`}>
+                                                        {layer.badge}
+                                                    </span>
+                                                    <h4 className="font-display font-semibold text-[16px] md:text-[17px] leading-tight">
+                                                        {layer.name}
+                                                    </h4>
+                                                </div>
+                                            </div>
+
+                                            <div className="text-right">
+                                                <span className={`font-mono font-bold text-[13px] md:text-[14px] ${
+                                                    isSelected ? 'text-emerald-400' : 'text-blue-700'
+                                                }`}>
+                                                    {layer.volume}
+                                                </span>
+                                            </div>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+
+                            {/* Lado Direito: Detalhamento Técnico da Camada Ativa */}
+                            <div className="lg:col-span-5">
+                                <AnimatePresence mode="wait">
+                                    <motion.div
+                                        key={selectedFunilIndex}
+                                        initial={{ opacity: 0, x: 10 }}
+                                        animate={{ opacity: 1, x: 0 }}
+                                        exit={{ opacity: 0, x: -10 }}
+                                        transition={{ duration: 0.25 }}
+                                        className="p-8 rounded-3xl bg-[#F8FAFC] border border-black/5 shadow-xs"
+                                    >
+                                        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-700 font-mono text-[12px] font-bold mb-4">
+                                            <span>CAMADA {funilLayers[selectedFunilIndex].level} DE 05</span>
+                                        </div>
+
+                                        <h4 className="font-display font-bold text-[24px] text-black mb-1">
+                                            {funilLayers[selectedFunilIndex].name}
+                                        </h4>
+                                        <span className="font-mono text-[13px] font-semibold text-blue-600 block mb-4">
+                                            {funilLayers[selectedFunilIndex].volume}
+                                        </span>
+
+                                        <div className="space-y-4 pt-4 border-t border-black/5">
+                                            <div>
+                                                <span className="text-[11px] font-bold text-black/40 uppercase tracking-widest block mb-1">
+                                                    Critério de Filtragem:
+                                                </span>
+                                                <p className="font-sans text-[14px] text-black/75 leading-relaxed">
+                                                    {funilLayers[selectedFunilIndex].criteria}
+                                                </p>
+                                            </div>
+
+                                            <div className="p-4 rounded-xl bg-white border border-black/5">
+                                                <span className="text-[11px] font-bold text-black/40 uppercase tracking-widest block mb-1">
+                                                    Ação Operacional Executada:
+                                                </span>
+                                                <p className="font-sans text-[13px] text-black/85 leading-relaxed">
+                                                    {funilLayers[selectedFunilIndex].action}
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </motion.div>
+                                </AnimatePresence>
+                            </div>
+
                         </div>
                     </div>
 
                     {/* Tabs Interativas das 5 Etapas do Ciclo */}
                     <div className="rounded-3xl bg-white p-6 md:p-10 border border-black/5 shadow-sm">
                         
-                        <div className="flex items-center justify-between mb-8 pb-4 border-b border-black/5">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 pb-4 border-b border-black/5 gap-3">
                             <div>
                                 <span className="font-sans text-[11px] font-bold text-black/40 uppercase tracking-widest block mb-1">
                                     INTERATIVIDADE // O MOTOR EM EXECUÇÃO
@@ -416,9 +568,9 @@ export default function LeanOpsPage() {
                             </div>
                             <button
                                 onClick={() => setModalSvg("/images/cases/lean-ops/ciclo.svg")}
-                                className="inline-flex items-center gap-1.5 text-[12px] font-medium text-black/60 hover:text-black transition-colors"
+                                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 text-[13px] font-medium text-black/80 hover:text-black transition-all cursor-pointer self-start sm:self-auto"
                             >
-                                <Maximize2 size={14} />
+                                <Maximize2 size={15} />
                                 <span>Ver Diagrama Completo</span>
                             </button>
                         </div>
@@ -521,7 +673,7 @@ export default function LeanOpsPage() {
 
                     {/* Exibição do Prontuário Real */}
                     <div className="mb-16 rounded-3xl bg-white p-6 md:p-8 border border-black/5 shadow-sm">
-                        <div className="flex items-center justify-between mb-4 pb-4 border-b border-black/5">
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 pb-4 border-b border-black/5 gap-3">
                             <div>
                                 <span className="font-sans text-[13px] font-semibold text-black/80 block">
                                     Diagrama 02: Prontuário Real de um Lead da Fila
@@ -532,9 +684,9 @@ export default function LeanOpsPage() {
                             </div>
                             <button
                                 onClick={() => setModalSvg("/images/cases/lean-ops/prontuario.svg")}
-                                className="inline-flex items-center gap-1.5 text-[12px] font-medium text-black/60 hover:text-black transition-colors"
+                                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 text-[13px] font-medium text-black/80 hover:text-black transition-all cursor-pointer self-start sm:self-auto"
                             >
-                                <Maximize2 size={14} />
+                                <Maximize2 size={15} />
                                 <span>Ver Prontuário Completo</span>
                             </button>
                         </div>
@@ -616,46 +768,9 @@ export default function LeanOpsPage() {
                         </div>
                     </div>
 
-                    {/* Tabela Comparativa: IA Genérica vs Este Motor */}
-                    <div className="rounded-3xl bg-white p-6 md:p-10 border border-black/5 shadow-sm overflow-hidden">
-                        <span className="font-sans text-[11px] font-bold text-black/40 uppercase tracking-widest block mb-2">
-                            BENCHMARK TÉCNICO
-                        </span>
-                        <h3 className="font-display font-semibold text-[22px] mb-6">
-                            IA genérica solta vs. Motor calibrado com lastro
-                        </h3>
-
-                        <div className="overflow-x-auto">
-                            <table className="w-full text-left border-collapse">
-                                <thead>
-                                    <tr className="border-b border-black/10 text-[12px] font-sans font-bold uppercase tracking-wider text-black/50">
-                                        <th className="py-4 px-4">Dimensão</th>
-                                        <th className="py-4 px-4 text-red-600/80">IA Genérica / Chat de Terceiros</th>
-                                        <th className="py-4 px-4 text-emerald-700">Este Motor Comercial</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-black/5 font-sans text-[14px]">
-                                    {tabelaComparativa.map((linha, idx) => (
-                                        <tr key={idx} className="hover:bg-black/[0.015] transition-colors">
-                                            <td className="py-4 px-4 font-semibold text-black/90">
-                                                {linha.aspecto}
-                                            </td>
-                                            <td className="py-4 px-4 text-black/60 bg-red-50/20">
-                                                {linha.generica}
-                                            </td>
-                                            <td className="py-4 px-4 text-black/90 font-medium bg-emerald-50/20">
-                                                {linha.motor}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
                 </section>
 
-                {/* ================= 5. MONTE CARLO & COMPARATIVO DE MÍDIA ================= */}
+                {/* ================= 5. MONTE CARLO & COMPARATIVO DE MÍDIA REFORMULADOS ================= */}
                 <section id="monte-carlo" className="max-w-6xl mx-auto px-6 py-20 border-t border-black/10 relative z-10">
                     
                     <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
@@ -672,109 +787,154 @@ export default function LeanOpsPage() {
                         </p>
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-8 mb-16">
+                    <div className="grid lg:grid-cols-2 gap-8 mb-16">
                         
-                        {/* Diagrama Monte Carlo */}
+                        {/* Simulação Estocástica de Monte Carlo - Componente Interativo */}
                         <div className="rounded-3xl bg-white p-6 md:p-8 border border-black/5 shadow-sm flex flex-col justify-between">
                             <div>
                                 <div className="flex items-center justify-between mb-4 pb-3 border-b border-black/5">
-                                    <span className="font-sans text-[13px] font-semibold text-black/80">
-                                        Simulação Estocástica de Monte Carlo
-                                    </span>
+                                    <div className="flex items-center gap-2">
+                                        <Calculator size={18} className="text-blue-600" />
+                                        <span className="font-sans text-[14px] font-semibold text-black/90">
+                                            Simulação Estocástica de Monte Carlo
+                                        </span>
+                                    </div>
                                     <button
                                         onClick={() => setModalSvg("/images/cases/lean-ops/funil-mmc.svg")}
-                                        className="text-black/60 hover:text-black transition-colors"
+                                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/5 hover:bg-black/10 text-[12px] font-medium text-black/70 hover:text-black transition-all cursor-pointer"
                                     >
-                                        <Maximize2 size={14} />
+                                        <Maximize2 size={13} />
+                                        <span>Original</span>
                                     </button>
                                 </div>
-                                <p className="font-sans text-[13px] text-black/60 mb-4">
-                                    Distribuição de probabilidades a partir da matriz de discovery e prioridade calculada do lead.
+                                <p className="font-sans text-[13px] text-black/60 mb-6 leading-relaxed">
+                                    Selecione a fase para visualizar a probabilidade ponderada e o forecast preditivo calculados pelo motor:
                                 </p>
+
+                                {/* Seletor de Fases do Funil */}
+                                <div className="space-y-2 mb-6">
+                                    {monteCarloPhases.map((phaseItem, pIdx) => {
+                                        const isPhaseActive = selectedMcPhase === pIdx;
+                                        return (
+                                            <button
+                                                key={pIdx}
+                                                onClick={() => setSelectedMcPhase(pIdx)}
+                                                className={`w-full p-3 rounded-xl text-left transition-all flex items-center justify-between border cursor-pointer ${
+                                                    isPhaseActive 
+                                                        ? 'bg-[#111111] text-white border-black shadow-xs' 
+                                                        : 'bg-[#F8FAFC] hover:bg-black/[0.04] text-black/80 border-black/5'
+                                                }`}
+                                            >
+                                                <div className="flex items-center gap-2.5">
+                                                    <span className={`w-2 h-2 rounded-full ${isPhaseActive ? 'bg-emerald-400' : 'bg-black/20'}`} />
+                                                    <span className="font-display font-medium text-[14px]">
+                                                        {phaseItem.phase}
+                                                    </span>
+                                                </div>
+                                                <span className={`font-mono font-bold text-[13px] ${isPhaseActive ? 'text-emerald-300' : 'text-blue-600'}`}>
+                                                    {phaseItem.prob}
+                                                </span>
+                                            </button>
+                                        );
+                                    })}
+                                </div>
                             </div>
-                            <div className="w-full py-4 bg-[#F8FAFC] rounded-2xl flex items-center justify-center">
-                                <Image 
-                                    src="/images/cases/lean-ops/funil-mmc.svg" 
-                                    alt="Simulação Monte Carlo" 
-                                    width={450} 
-                                    height={280} 
-                                    className="max-h-[260px] object-contain cursor-pointer"
-                                    onClick={() => setModalSvg("/images/cases/lean-ops/funil-mmc.svg")}
-                                />
+
+                            {/* Card de Saída da Simulação */}
+                            <div className="p-5 rounded-2xl bg-blue-50/70 border border-blue-100 flex items-center justify-between">
+                                <div>
+                                    <span className="text-[11px] font-mono uppercase tracking-wider text-blue-700 block">
+                                        Forecast Ponderado da Fase ({monteCarloPhases[selectedMcPhase].mult}):
+                                    </span>
+                                    <p className="font-sans text-[13px] text-blue-900/80">
+                                        {monteCarloPhases[selectedMcPhase].desc}
+                                    </p>
+                                </div>
+                                <span className="font-display font-bold text-[22px] text-blue-900 shrink-0 ml-4">
+                                    {monteCarloPhases[selectedMcPhase].forecast}
+                                </span>
                             </div>
                         </div>
 
-                        {/* Diagrama Comparativo Mídia Paga */}
+                        {/* Mídia Paga Histórica vs. Motor Próprio - Componente Visual Interativo */}
                         <div className="rounded-3xl bg-white p-6 md:p-8 border border-black/5 shadow-sm flex flex-col justify-between">
                             <div>
                                 <div className="flex items-center justify-between mb-4 pb-3 border-b border-black/5">
-                                    <span className="font-sans text-[13px] font-semibold text-black/80">
-                                        Mídia Paga Histórica vs. Motor Próprio
-                                    </span>
+                                    <div className="flex items-center gap-2">
+                                        <BarChart3 size={18} className="text-emerald-600" />
+                                        <span className="font-sans text-[14px] font-semibold text-black/90">
+                                            Mídia Paga Histórica vs. Motor Próprio
+                                        </span>
+                                    </div>
                                     <button
                                         onClick={() => setModalSvg("/images/cases/lean-ops/comparativo-midia.svg")}
-                                        className="text-black/60 hover:text-black transition-colors"
+                                        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-black/5 hover:bg-black/10 text-[12px] font-medium text-black/70 hover:text-black transition-all cursor-pointer"
                                     >
-                                        <Maximize2 size={14} />
+                                        <Maximize2 size={13} />
+                                        <span>Original</span>
                                     </button>
                                 </div>
-                                <p className="font-sans text-[13px] text-black/60 mb-4">
-                                    Comparativo de ordem de grandeza: semanas e verba de anúncios contra 1 dia útil de batch a custo zero.
+                                <p className="font-sans text-[13px] text-black/60 mb-6 leading-relaxed">
+                                    Comparativo de ordens de grandeza para posicionar ~700 leads aptos:
                                 </p>
+
+                                {/* Barras Visuais Comparativas */}
+                                <div className="space-y-5 mb-6">
+                                    {/* Métrica 1: Tempo */}
+                                    <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-black/5">
+                                        <div className="flex justify-between text-[12px] font-bold text-black/70 mb-2">
+                                            <span>TEMPO DE CAPTAÇÃO & QUALIFICAÇÃO</span>
+                                            <span className="text-emerald-600">99.6% Mais Rápido</span>
+                                        </div>
+                                        <div className="space-y-1.5 font-mono text-[11px]">
+                                            <div className="flex items-center justify-between text-black/60">
+                                                <span>Mídia paga (15 a 30 leads/sem.)</span>
+                                                <span className="font-bold">23 a 47 semanas</span>
+                                            </div>
+                                            <div className="w-full h-2.5 rounded-full bg-black/10 overflow-hidden">
+                                                <div className="w-[100%] h-full bg-red-400/80 rounded-full" />
+                                            </div>
+                                            <div className="flex items-center justify-between text-black/90 font-bold pt-1">
+                                                <span>Motor Lean Ops (Batch ativo)</span>
+                                                <span className="text-emerald-700">1 dia útil</span>
+                                            </div>
+                                            <div className="w-full h-2.5 rounded-full bg-black/10 overflow-hidden">
+                                                <div className="w-[5%] h-full bg-emerald-500 rounded-full" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Métrica 2: Custo */}
+                                    <div className="p-4 rounded-2xl bg-[#F8FAFC] border border-black/5">
+                                        <div className="flex justify-between text-[12px] font-bold text-black/70 mb-2">
+                                            <span>CUSTO FINANCEIRO DE AQUISIÇÃO</span>
+                                            <span className="text-emerald-600">Economia Total</span>
+                                        </div>
+                                        <div className="space-y-1.5 font-mono text-[11px]">
+                                            <div className="flex items-center justify-between text-black/60">
+                                                <span>Verba de anúncios (R$ 25 a R$ 150/lead)</span>
+                                                <span className="font-bold">R$ 17,5k a R$ 105k</span>
+                                            </div>
+                                            <div className="w-full h-2.5 rounded-full bg-black/10 overflow-hidden">
+                                                <div className="w-[100%] h-full bg-amber-500/80 rounded-full" />
+                                            </div>
+                                            <div className="flex items-center justify-between text-black/90 font-bold pt-1">
+                                                <span>Motor Lean Ops</span>
+                                                <span className="text-emerald-700">R$ 0 de mídia e R$ 0 de SaaS</span>
+                                            </div>
+                                            <div className="w-full h-2.5 rounded-full bg-black/10 overflow-hidden">
+                                                <div className="w-[2%] h-full bg-emerald-500 rounded-full" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div className="w-full py-4 bg-[#F8FAFC] rounded-2xl flex items-center justify-center">
-                                <Image 
-                                    src="/images/cases/lean-ops/comparativo-midia.svg" 
-                                    alt="Comparativo com Mídia Paga" 
-                                    width={450} 
-                                    height={280} 
-                                    className="max-h-[260px] object-contain cursor-pointer"
-                                    onClick={() => setModalSvg("/images/cases/lean-ops/comparativo-midia.svg")}
-                                />
+
+                            <div className="p-4 rounded-xl bg-black/[0.02] border border-black/5 text-[12px] text-black/60 leading-relaxed">
+                                * Paralelo de ordem de grandeza com base no histórico da operação e métricas reais de validação.
                             </div>
                         </div>
 
-                    </div>
-
-                    {/* Tabela de Impacto de Negócio */}
-                    <div className="rounded-3xl bg-white p-6 md:p-10 border border-black/5 shadow-sm">
-                        <span className="font-sans text-[11px] font-bold text-black/40 uppercase tracking-widest block mb-2">
-                            PARALELO DE ORDENS DE GRANDEZA
-                        </span>
-                        <h3 className="font-display font-semibold text-[22px] mb-6">
-                            Para colocar ~700 leads qualificados no pipeline
-                        </h3>
-
-                        <div className="overflow-x-auto">
-                            <table className="w-full text-left border-collapse">
-                                <thead>
-                                    <tr className="border-b border-black/10 text-[12px] font-sans font-bold uppercase tracking-wider text-black/50">
-                                        <th className="py-4 px-4">Métrica de Aquisição</th>
-                                        <th className="py-4 px-4 text-black/60">Mídia Paga (Histórico Anúncios)</th>
-                                        <th className="py-4 px-4 text-blue-700">Motor Lean Ops (Ativo)</th>
-                                    </tr>
-                                </thead>
-                                <tbody className="divide-y divide-black/5 font-sans text-[14px]">
-                                    {tabelaMidia.map((m, idx) => (
-                                        <tr key={idx} className="hover:bg-black/[0.015] transition-colors">
-                                            <td className="py-4 px-4 font-semibold text-black/90">
-                                                {m.parametro}
-                                            </td>
-                                            <td className="py-4 px-4 text-black/65">
-                                                {m.midia}
-                                            </td>
-                                            <td className="py-4 px-4 text-black/90 font-medium bg-blue-50/20">
-                                                {m.motor}
-                                            </td>
-                                        </tr>
-                                    ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div className="mt-6 p-4 rounded-2xl bg-black/[0.02] border border-black/5 text-[12px] text-black/60 leading-relaxed">
-                            <strong>Ressalva analítica:</strong> Comparativo baseado em métricas históricas da operação e estimativas conservadoras de tração. O ganho comprovado está na velocidade, na consistência de abordagem e no custo marginal zero.
-                        </div>
                     </div>
 
                 </section>
@@ -791,20 +951,26 @@ export default function LeanOpsPage() {
                         </h2>
                     </div>
 
-                    {/* Diagrama de Arquitetura */}
+                    {/* Diagrama de Arquitetura com Nota Técnica de Fluxo */}
                     <div className="mb-16 rounded-3xl bg-white p-6 md:p-8 border border-black/5 shadow-sm">
-                        <div className="flex items-center justify-between mb-4 pb-4 border-b border-black/5">
-                            <span className="font-sans text-[13px] font-semibold text-black/80">
-                                Diagrama 03: Arquitetura Técnica do Cockpit Comercial
-                            </span>
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-4 pb-4 border-b border-black/5 gap-3">
+                            <div>
+                                <span className="font-sans text-[13px] font-semibold text-black/80 block">
+                                    Diagrama 03: Arquitetura Técnica do Cockpit Comercial
+                                </span>
+                                <span className="font-sans text-[12px] text-black/50">
+                                    Controle de privilégios e fronteiras de execução
+                                </span>
+                            </div>
                             <button
                                 onClick={() => setModalSvg("/images/cases/lean-ops/arquitetura.svg")}
-                                className="inline-flex items-center gap-1.5 text-[12px] font-medium text-black/60 hover:text-black transition-colors"
+                                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-black/5 hover:bg-black/10 text-[13px] font-medium text-black/80 hover:text-black transition-all cursor-pointer self-start sm:self-auto"
                             >
-                                <Maximize2 size={14} />
+                                <Maximize2 size={15} />
                                 <span>Ver Arquitetura Completa</span>
                             </button>
                         </div>
+
                         <div className="w-full overflow-hidden flex items-center justify-center py-4 bg-[#F8FAFC] rounded-2xl">
                             <Image 
                                 src="/images/cases/lean-ops/arquitetura.svg" 
@@ -814,6 +980,14 @@ export default function LeanOpsPage() {
                                 className="w-full max-h-[380px] object-contain cursor-pointer"
                                 onClick={() => setModalSvg("/images/cases/lean-ops/arquitetura.svg")}
                             />
+                        </div>
+
+                        {/* Nota de Engenharia Explicativa sobre o Fluxo Direcional */}
+                        <div className="mt-4 p-4 rounded-xl bg-blue-50/60 border border-blue-100 flex items-start gap-3 text-[12px] text-blue-900 leading-relaxed">
+                            <Info size={16} className="text-blue-700 shrink-0 mt-0.5" />
+                            <span>
+                                <strong>Nota Técnica de Engenharia:</strong> As setas do diagrama mapeiam estritamente o <strong>fluxo de iniciação de requisições e a fronteira de privilégios</strong> (quem aciona quem e onde residem as chaves sensíveis). O tráfego de dados de retorno flui bidirecionalmente em mão dupla via respostas HTTP/REST e conexões WebSocket em tempo real gerenciadas pelo Supabase.
+                            </span>
                         </div>
                     </div>
 
@@ -881,51 +1055,27 @@ export default function LeanOpsPage() {
 
                 </section>
 
-                {/* ================= 7. FECHAMENTO DE CONVERSÃO EXECUTIVO ================= */}
-                <section className="max-w-6xl mx-auto px-6 pt-10 pb-28 relative z-10">
-                    <div className="p-10 md:p-16 rounded-3xl bg-gradient-to-br from-[#18181B] via-[#09090B] to-[#18181B] text-white border border-white/10 shadow-2xl flex flex-col items-center text-center relative overflow-hidden">
-                        
-                        {/* Brilho sutil */}
-                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-blue-500/10 blur-[100px] pointer-events-none" />
-
-                        <div className="relative z-10 max-w-2xl">
-                            <span className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/10 text-white/80 text-[11px] font-sans font-bold tracking-widest uppercase mb-6 border border-white/10">
-                                PRÓXIMO PASSO EXECUTIVO
-                            </span>
-
-                            <h2 className="font-display font-medium text-[clamp(32px,4.5vw,52px)] leading-[1.12] tracking-tight mb-6">
-                                Menos abstração.<br />Mais tração.
-                            </h2>
-
-                            <p className="font-sans text-[clamp(15px,1.6vw,18px)] text-white/75 leading-relaxed mb-10">
+                {/* ================= 7. PRÓXIMO PASSO EXECUTIVO (SANDBOX FUNCIONAL COM WHATSAPP) ================= */}
+                <section className="relative z-10 w-full pt-10 pb-16">
+                    <AgentTerminal
+                        id="sandbox-case"
+                        theme={theme}
+                        hideChips={true}
+                        customBadge="PRÓXIMO PASSO EXECUTIVO"
+                        customTitle={
+                            <>
+                                Menos abstração.<br />
+                                Mais tração.
+                            </>
+                        }
+                        customSubtitle={
+                            <p className="font-sans font-normal text-[clamp(18px,2vw,24px)] leading-[1.5] text-[#111111]">
                                 Quer estruturar uma máquina enxuta de qualificação B2B e orquestração de IA personalizada para a sua realidade comercial?
                             </p>
-
-                            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                                <a
-                                    href="/#sandbox"
-                                    className="w-full sm:w-auto px-8 py-4 rounded-full bg-white text-black font-sans font-semibold text-[15px] hover:bg-neutral-200 transition-all flex items-center justify-center gap-2.5 shadow-lg group"
-                                >
-                                    <Sparkles size={17} className="text-[#111111] group-hover:rotate-12 transition-transform" />
-                                    <span>Diagnosticar Meu Desafio</span>
-                                </a>
-
-                                <a
-                                    href="https://wa.me/5511994787501?text=Ol%C3%A1%2C%20Carlos!%20Li%20o%20case%20study%20de%20Lean%20Ops%20e%20gostaria%20de%20conversar%20sobre%20um%20desafio%20comercial."
-                                    target="_blank"
-                                    rel="noreferrer"
-                                    className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 font-sans font-semibold text-[15px] transition-all flex items-center justify-center gap-2"
-                                >
-                                    <MessageSquare size={17} />
-                                    <span>Conversar no WhatsApp</span>
-                                </a>
-                            </div>
-
-                            <p className="font-sans text-[12px] text-white/40 mt-6">
-                                Resposta direta sem intermediários ou formulários burocráticos.
-                            </p>
-                        </div>
-                    </div>
+                        }
+                        customPlaceholder="Descreva o seu modelo comercial, ticket médio, gargalo de prospecção ou escopo da sua empresa para receber um diagnóstico preliminar com IA..."
+                        showWhatsAppButton={true}
+                    />
                 </section>
 
                 {/* Footer Institucional Idêntico */}
@@ -933,7 +1083,7 @@ export default function LeanOpsPage() {
 
             </div>
 
-            {/* Modal para Visualização em Tela Cheia de Diagramas */}
+            {/* Modal para Visualização em Tela Cheia de Diagramas Originais */}
             <AnimatePresence>
                 {modalSvg && (
                     <motion.div
@@ -952,11 +1102,11 @@ export default function LeanOpsPage() {
                         >
                             <div className="flex items-center justify-between pb-4 border-b border-black/10 mb-4">
                                 <span className="font-display font-semibold text-[16px] text-black">
-                                    Diagrama Técnico em Alta Resolução
+                                    Diagrama Técnico em Alta Resolução (Original)
                                 </span>
                                 <button
                                     onClick={() => setModalSvg(null)}
-                                    className="w-9 h-9 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-black/70 hover:text-black transition-colors"
+                                    className="w-9 h-9 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-black/70 hover:text-black transition-colors cursor-pointer"
                                 >
                                     <X size={18} />
                                 </button>

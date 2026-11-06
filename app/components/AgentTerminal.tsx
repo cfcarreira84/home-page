@@ -10,6 +10,14 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjsLi
 
 interface AgentTerminalProps {
     theme?: { bg: string, text: string, shape1: string, shape2: string };
+    hideChips?: boolean;
+    customPlaceholder?: string;
+    customBadge?: string;
+    customTitle?: React.ReactNode;
+    customSubtitle?: React.ReactNode;
+    showWhatsAppButton?: boolean;
+    id?: string;
+    className?: string;
 }
 
 const promptChips = [
@@ -19,8 +27,18 @@ const promptChips = [
     { id: 4, label: "EFICIÊNCIA LEAN", text: "Como você estruturou a operação de 15 pessoas para entregar como 50?" }
 ];
 
-export default function AgentTerminal({ theme }: AgentTerminalProps) {
-    const defaultPlaceholder = "Descreva o gargalo da sua operação, cole a descrição de uma vaga ou pergunte sobre cases e marcas atendidas...";
+export default function AgentTerminal({ 
+    theme, 
+    hideChips = false, 
+    customPlaceholder,
+    customBadge,
+    customTitle,
+    customSubtitle,
+    showWhatsAppButton = false,
+    id = "sandbox",
+    className = ""
+}: AgentTerminalProps) {
+    const defaultPlaceholder = customPlaceholder || "Descreva o gargalo da sua operação, cole a descrição de uma vaga ou pergunte sobre cases e marcas atendidas...";
     const [scopeText, setScopeText] = useState('');
     const [activeChipId, setActiveChipId] = useState<number | null>(null);
     const [placeholder, setPlaceholder] = useState(defaultPlaceholder);
@@ -168,50 +186,56 @@ export default function AgentTerminal({ theme }: AgentTerminalProps) {
     };
 
     return (
-        <section id="sandbox" className="relative w-full py-[80px] px-[4vw] pb-[160px] max-md:pb-[100px] max-md:px-0 flex flex-col items-center light-section transition-colors duration-500" style={{ backgroundColor: theme?.bg || '#F5F3ED' }}>
+        <section id={id} className={`relative w-full py-[80px] px-[4vw] pb-[160px] max-md:pb-[100px] max-md:px-0 flex flex-col items-center light-section transition-colors duration-500 ${className}`} style={{ backgroundColor: theme?.bg || '#F5F3ED' }}>
 
             <div className="max-w-[900px] w-full text-center mx-auto mb-[48px] max-md:px-[6vw]">
                 <p className="font-sans text-[13px] font-bold text-[#111111] uppercase tracking-[0.05em] mb-[32px]">
-                    EXPERIMENT 05 // INTERACTIVE AGENT
+                    {customBadge || "EXPERIMENT 05 // INTERACTIVE AGENT"}
                 </p>
                 <h2 className="font-display font-medium text-[clamp(36px,4.5vw,56px)] leading-[1.1] tracking-[-0.02em] text-[#111111] mb-[32px]">
-                    Conecte seu Desafio à Minha Trajetória
+                    {customTitle || "Conecte seu Desafio à Minha Trajetória"}
                 </h2>
-                <p className="font-sans font-normal text-[clamp(20px,2.2vw,26px)] leading-[1.4] text-[#111111] max-md:text-[18px]">
-                    Insira o escopo de um projeto, o descritivo de uma posição executiva ou pergunte sobre cases e marcas
-                    atendidas. O sistema cruza sua necessidade com meu histórico profissional em tempo real, gerando um
-                    diagnóstico contextualizado e uma visão sob medida da minha experiência para a sua demanda.
-                </p>
+                <div className="font-sans font-normal text-[clamp(20px,2.2vw,26px)] leading-[1.4] text-[#111111] max-md:text-[18px]">
+                    {customSubtitle || (
+                        <p>
+                            Insira o escopo de um projeto, o descritivo de uma posição executiva ou pergunte sobre cases e marcas
+                            atendidas. O sistema cruza sua necessidade com meu histórico profissional em tempo real, gerando um
+                            diagnóstico contextualizado e uma visão sob medida da minha experiência para a sua demanda.
+                        </p>
+                    )}
+                </div>
             </div>
 
             {/* Prompt Bar (Chips) */}
-            <AnimatePresence>
-                {status === 'idle' && (
-                    <motion.div
-                        initial={{ opacity: 0, filter: 'blur(10px)', height: 0, overflow: 'hidden', marginBottom: 0 }}
-                        animate={{ opacity: 1, filter: 'blur(0px)', height: 'auto', marginBottom: 40 }}
-                        exit={{ opacity: 0, filter: 'blur(10px)', height: 0, overflow: 'hidden', marginBottom: 0 }}
-                        transition={{ duration: 0.4 }}
-                        className="flex flex-wrap justify-center gap-[12px] max-w-[1000px] w-full max-md:flex-nowrap max-md:overflow-x-auto max-md:px-[6vw] max-md:justify-start max-md:scrollbar-hide max-md:pb-2" style={{ WebkitOverflowScrolling: 'touch' }}
-                    >
-                        {promptChips.map((chip) => (
-                            <button
-                                key={chip.id}
-                                onClick={() => handleChipClick(chip.id, chip.text)}
-                                style={
-                                    activeChipId === chip.id
-                                        ? { backgroundColor: theme?.text || '#111111', color: '#fff', borderColor: theme?.text || '#111111' }
-                                        : { color: '#111111', borderColor: '#111111' }
-                                }
-                                className={`shrink-0 rounded-[100px] text-[16px] max-md:text-[13px] max-md:px-[20px] max-md:py-[10px] font-medium uppercase transition-all duration-200 border px-[24px] py-[12px] ${activeChipId !== chip.id ? 'bg-transparent hover:bg-black/5' : ''
-                                    }`}
-                            >
-                                {chip.label}
-                            </button>
-                        ))}
-                    </motion.div>
-                )}
-            </AnimatePresence>
+            {!hideChips && (
+                <AnimatePresence>
+                    {status === 'idle' && (
+                        <motion.div
+                            initial={{ opacity: 0, filter: 'blur(10px)', height: 0, overflow: 'hidden', marginBottom: 0 }}
+                            animate={{ opacity: 1, filter: 'blur(0px)', height: 'auto', marginBottom: 40 }}
+                            exit={{ opacity: 0, filter: 'blur(10px)', height: 0, overflow: 'hidden', marginBottom: 0 }}
+                            transition={{ duration: 0.4 }}
+                            className="flex flex-wrap justify-center gap-[12px] max-w-[1000px] w-full max-md:flex-nowrap max-md:overflow-x-auto max-md:px-[6vw] max-md:justify-start max-md:scrollbar-hide max-md:pb-2" style={{ WebkitOverflowScrolling: 'touch' }}
+                        >
+                            {promptChips.map((chip) => (
+                                <button
+                                    key={chip.id}
+                                    onClick={() => handleChipClick(chip.id, chip.text)}
+                                    style={
+                                        activeChipId === chip.id
+                                            ? { backgroundColor: theme?.text || '#111111', color: '#fff', borderColor: theme?.text || '#111111' }
+                                            : { color: '#111111', borderColor: '#111111' }
+                                    }
+                                    className={`shrink-0 rounded-[100px] text-[16px] max-md:text-[13px] max-md:px-[20px] max-md:py-[10px] font-medium uppercase transition-all duration-200 border px-[24px] py-[12px] ${activeChipId !== chip.id ? 'bg-transparent hover:bg-black/5' : ''
+                                        }`}
+                                >
+                                    {chip.label}
+                                </button>
+                            ))}
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            )}
 
             {/* Sandbox Terminal */}
             <motion.div layout className="w-full max-w-[900px] bg-white/40 backdrop-blur-[32px] border border-white/70 rounded-[24px] max-md:rounded-[16px] max-md:w-[calc(100%-12vw)] shadow-[0_12px_40px_rgba(0,0,0,0.06)] flex flex-col overflow-hidden relative z-10 min-h-[420px] max-md:min-h-[340px]">
@@ -271,18 +295,32 @@ export default function AgentTerminal({ theme }: AgentTerminalProps) {
                                     </button>
                                 </div>
 
-                                <button
-                                    onClick={handleRunSimulation}
-                                    title="Iniciar AI Profiler"
-                                    disabled={(!scopeText && activeChipId === null) || isExtracting}
-                                    style={(scopeText || activeChipId !== null) ? { backgroundColor: theme?.text, color: '#fff', borderColor: 'transparent' } : {}}
-                                    className={`bg-[#111111] text-white w-14 h-14 rounded-full flex items-center justify-center transition-all ${(!scopeText && activeChipId === null) || isExtracting
-                                            ? 'opacity-50 cursor-not-allowed'
-                                            : 'hover:opacity-85 hover:scale-[1.05] cursor-pointer shadow-lg'
-                                        }`}
-                                >
-                                    <Sparkles size={24} />
-                                </button>
+                                <div className="flex items-center gap-3">
+                                    {showWhatsAppButton && (
+                                        <a
+                                            href="https://wa.me/5511994787501?text=Ol%C3%A1%2C%20Carlos!%20Li%20o%20case%20study%20de%20Lean%20Ops%20e%20gostaria%20de%20conversar%20sobre%20um%20desafio%20comercial."
+                                            target="_blank"
+                                            rel="noreferrer"
+                                            title="Conversar no WhatsApp"
+                                            className="w-14 h-14 rounded-full bg-white text-[#111111] border border-black/15 flex items-center justify-center transition-all hover:bg-black/5 hover:scale-[1.05] cursor-pointer shadow-sm"
+                                        >
+                                            <MessageCircle size={24} />
+                                        </a>
+                                    )}
+
+                                    <button
+                                        onClick={handleRunSimulation}
+                                        title="Iniciar AI Profiler"
+                                        disabled={(!scopeText && activeChipId === null) || isExtracting}
+                                        style={(scopeText || activeChipId !== null) ? { backgroundColor: theme?.text, color: '#fff', borderColor: 'transparent' } : {}}
+                                        className={`bg-[#111111] text-white w-14 h-14 rounded-full flex items-center justify-center transition-all ${(!scopeText && activeChipId === null) || isExtracting
+                                                ? 'opacity-50 cursor-not-allowed'
+                                                : 'hover:opacity-85 hover:scale-[1.05] cursor-pointer shadow-lg'
+                                            }`}
+                                    >
+                                        <Sparkles size={24} />
+                                    </button>
+                                </div>
                             </div>
                         </motion.div>
                     )}

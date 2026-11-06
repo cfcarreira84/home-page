@@ -27,3 +27,4 @@ export default function LeanOpsLayout({
 }) {
   return <>{children}</>;
 }
+

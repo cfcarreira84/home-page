@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import Navbar from './components/Navbar';
@@ -15,15 +15,32 @@ const AgentTerminal = dynamic(() => import('./components/AgentTerminal'), { ssr:
 const Footer = dynamic(() => import('./components/Footer'), { ssr: false });
 
 export default function Home() {
-  const [showSplash, setShowSplash] = useState(true);
+  const [showSplash, setShowSplash] = useState(false);
   const [activeFilter, setActiveFilter] = useState("ALL");
   const theme = categoryTheme[activeFilter];
+
+  useEffect(() => {
+    // Só exibe a splashscreen se ainda não tiver sido exibida na sessão atual
+    if (typeof window !== 'undefined') {
+      const splashShown = sessionStorage.getItem('splash_shown');
+      if (!splashShown) {
+        setShowSplash(true);
+      }
+    }
+  }, []);
+
+  const handleSplashComplete = () => {
+    if (typeof window !== 'undefined') {
+      sessionStorage.setItem('splash_shown', 'true');
+    }
+    setShowSplash(false);
+  };
 
   return (
     <main className="min-h-screen relative bg-cosmos-base overflow-x-hidden">
       <AnimatePresence mode="wait">
         {showSplash && (
-          <SplashScreen key="splash" onComplete={() => setShowSplash(false)} />
+          <SplashScreen key="splash" onComplete={handleSplashComplete} />
         )}
       </AnimatePresence>
 
