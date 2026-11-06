@@ -16,9 +16,11 @@ import {
     Info,
     Sparkles
 } from 'lucide-react';
+import dynamic from 'next/dynamic';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import AgentTerminal from '../components/AgentTerminal';
+
+const AgentTerminal = dynamic(() => import('../components/AgentTerminal'), { ssr: false });
 
 const theme = { 
     bg: "#F5F3ED", 
